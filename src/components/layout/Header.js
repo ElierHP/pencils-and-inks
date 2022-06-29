@@ -3,26 +3,26 @@ import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import Link from "next/link";
 import Container from "../ui/Container";
-import { GoSearch } from "react-icons/go";
 import { GrCart } from "react-icons/gr";
+import { HiMenu } from "react-icons/hi";
+import Searchbar from "../Searchbar";
 
 export default function Header() {
   return (
     <header>
       <Container>
         <Wrapper>
+          <HamburgerIcon>
+            <HiMenu size={40} />
+          </HamburgerIcon>
+
           {/* Logo */}
           <Link href="/">
             <Logo>{"Pencils&Inks"}</Logo>
           </Link>
 
           {/* Search Bar */}
-          <SearchContainer>
-            <SearchBar type="text" placeholder="Search..." />
-            <SearchIcon>
-              <GoSearch size={25} color={theme.colors.light} />
-            </SearchIcon>
-          </SearchContainer>
+          <Searchbar />
 
           {/* Shopping Cart */}
           <Cart>
@@ -53,37 +53,24 @@ export default function Header() {
 
 // Styles
 const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
   align-items: center;
+  grid-template-columns: 1fr 7fr 1fr;
   padding-top: 2rem;
+  grid-gap: 5rem;
+`;
+
+// Hamburger Menu
+const HamburgerIcon = styled.div`
+  display: block;
+  ${theme.mq()[1]} {
+    display: none;
+  }
 `;
 
 const Logo = styled.a`
   font-size: ${theme.fontSizes.large}rem;
   font-weight: ${theme.fontWeights.bold};
-`;
-
-// Search
-const SearchContainer = styled.div`
-  display: flex;
-  height: 50px;
-`;
-
-const SearchBar = styled.input`
-  padding: 0 1rem;
-  border: 2px solid ${theme.colors.gray};
-  width: 700px;
-  border-radius: 3px;
-`;
-
-const SearchIcon = styled.div`
-  padding: 0 1.5rem;
-  background: ${theme.colors.primary};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 3px;
 `;
 
 // Shopping Cart
