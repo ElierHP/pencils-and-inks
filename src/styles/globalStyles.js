@@ -9,6 +9,10 @@ export default function GlobalStyles() {
           font-size: 62.5%;
         }
         ,
+        ul {
+          padding: 0;
+        }
+        ,
         h1,
         h2,
         h3,

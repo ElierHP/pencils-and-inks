@@ -5,9 +5,14 @@ import Link from "next/link";
 import Container from "../ui/Container";
 import { GrCart } from "react-icons/gr";
 import { HiMenu } from "react-icons/hi";
+import { IoIosArrowDown } from "react-icons/io";
 import Searchbar from "../Searchbar";
 
 export default function Header() {
+  const handleLinkHover = () => {
+    console.log("Hovering Link");
+  };
+
   return (
     <header>
       <Container>
@@ -30,22 +35,39 @@ export default function Header() {
             Cart
           </Cart>
         </Wrapper>
-        <nav>
-          <ul>
-            <li>Home</li>
+        <Navbar>
+          <NavUl>
             <li>
-              Pencils
-              <ul>
-                <li>Graphite Pencils</li>
-                <li>Color Pencils</li>
-                <li>Mechanical Pencils</li>
-              </ul>
+              <Link href="/">Home</Link>
             </li>
-            <li>Papers</li>
-            <li>Inks</li>
-            <li>My Account</li>
-          </ul>
-        </nav>
+            <NavLi onMouseEnter={handleLinkHover}>
+              <Link href="/pencils">Pencils</Link>
+              <IoIosArrowDown size={17} />
+              <PencilNav>
+                <li>
+                  <Link href="/pencils/graphite-pencils">Graphite Pencils</Link>
+                </li>
+                <li>
+                  <Link href="/pencils/color-pencils">Color Pencils</Link>
+                </li>
+                <li>
+                  <Link href="/pencils/mechanical-pencils">
+                    Mechanical Pencils
+                  </Link>
+                </li>
+              </PencilNav>
+            </NavLi>
+            <li>
+              <Link href="/papers">Papers</Link>
+            </li>
+            <li>
+              <Link href="/inks">Inks</Link>
+            </li>
+            <li>
+              <Link href="/profile">My Account</Link>
+            </li>
+          </NavUl>
+        </Navbar>
       </Container>
     </header>
   );
@@ -56,7 +78,8 @@ const Wrapper = styled.div`
   display: grid;
   align-items: center;
   grid-template-columns: 1fr 7fr 1fr;
-  padding-top: 2rem;
+  padding: 2rem;
+  padding-bottom: 3rem;
   grid-gap: 5rem;
 `;
 
@@ -71,6 +94,7 @@ const HamburgerIcon = styled.div`
 const Logo = styled.a`
   font-size: ${theme.fontSizes.large}rem;
   font-weight: ${theme.fontWeights.bold};
+  cursor: pointer;
 `;
 
 // Shopping Cart
@@ -79,4 +103,32 @@ const Cart = styled.div`
   align-items: center;
   gap: 1rem;
   font-weight: ${theme.fontWeights.bold};
+  cursor: pointer;
+`;
+
+// Navbar
+const Navbar = styled.nav``;
+
+const NavUl = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10rem;
+  font-weight: ${theme.fontWeights.bold};
+`;
+
+const NavLi = styled.li`
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
+
+const PencilNav = styled.ul`
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  position: absolute;
+  top: 4rem;
+  width: 200px;
+  padding: 1rem;
 `;

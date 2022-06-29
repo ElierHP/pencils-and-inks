@@ -38,4 +38,5 @@ const SearchIcon = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 3px;
+  cursor: pointer;
 `;
