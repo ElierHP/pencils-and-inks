@@ -17,10 +17,13 @@ export default function Searchbar() {
 // Styles
 // Search
 const SearchBarMain = styled.div`
-  display: none;
+  display: flex;
   height: 50px;
+  order: 3;
+  grid-column: 1 / span1;
   ${theme.mq()[1]} {
-    display: flex;
+    order: 2;
+    grid-column: initial;
   }
 `;
 

@@ -32,7 +32,7 @@ export default function Header() {
           {/* Shopping Cart */}
           <Cart>
             <GrCart size={35} />
-            Cart
+            <CartTitle>Cart</CartTitle>
           </Cart>
         </Wrapper>
         <Navbar>
@@ -78,14 +78,19 @@ const Wrapper = styled.div`
   display: grid;
   align-items: center;
   grid-template-columns: 1fr 7fr 1fr;
-  padding: 2rem;
+  padding: 1rem 0;
   padding-bottom: 3rem;
-  grid-gap: 5rem;
+  grid-gap: 2rem;
+  ${theme.mq()[1]} {
+    grid-gap: 5rem;
+    padding: 2rem;
+  }
 `;
 
 // Hamburger Menu
 const HamburgerIcon = styled.div`
-  display: block;
+  display: flex;
+  align-items: center;
   ${theme.mq()[1]} {
     display: none;
   }
@@ -95,6 +100,7 @@ const Logo = styled.a`
   font-size: ${theme.fontSizes.large}rem;
   font-weight: ${theme.fontWeights.bold};
   cursor: pointer;
+  order: 1;
 `;
 
 // Shopping Cart
@@ -104,17 +110,33 @@ const Cart = styled.div`
   gap: 1rem;
   font-weight: ${theme.fontWeights.bold};
   cursor: pointer;
+  order: 2;
+  margin-left: auto;
+  ${theme.mq()[1]} {
+    order: 3;
+  }
+`;
+
+const CartTitle = styled.span`
+  display: none;
+  ${theme.mq()[1]} {
+    display: block;
+  }
 `;
 
 // Navbar
 const Navbar = styled.nav``;
 
 const NavUl = styled.ul`
-  display: flex;
+  display: none;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10rem;
+  padding: 0;
   font-weight: ${theme.fontWeights.bold};
+  ${theme.mq()[1]} {
+    display: flex;
+    padding: 0 10rem;
+  }
 `;
 
 const NavLi = styled.li`

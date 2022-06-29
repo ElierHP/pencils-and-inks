@@ -19,7 +19,8 @@ export default function GlobalStyles() {
         p,
         a,
         div,
-        li {
+        li,
+        ul {
           font-family: ${theme.fonts.body};
           font-size: ${theme.fontSizes.medium}rem;
           letter-spacing: ${theme.letterSpacing.body}px;
