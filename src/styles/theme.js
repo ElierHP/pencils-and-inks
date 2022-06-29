@@ -6,7 +6,7 @@ const theme = {
   fontSizes: {
     small: 1.4,
     medium: 1.6,
-    large: 2.1,
+    large: 2.4,
     mobileHeading: 4,
     heading: 3.2,
     largeHeading: 6,
@@ -26,9 +26,10 @@ const theme = {
     heading: 2,
   },
   colors: {
-    primary: "#48ACE3",
+    primary: "#BA4343",
     dark: "black",
     light: "white",
+    gray: "#dcdcdc",
     hover: "#FFD685",
     btnHover: "#E7AD56",
   },
