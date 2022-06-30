@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { IoIosArrowDown } from "react-icons/io";
-import { IoClose } from "react-icons/io5";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import Link from "next/link";
+import { IoIosArrowDown } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 
 export default function Navbar({ isOpen, setIsOpen }) {
   const [showPencils, setShowPencils] = useState(false);
@@ -13,9 +13,13 @@ export default function Navbar({ isOpen, setIsOpen }) {
 
   return (
     <Nav isOpen={isOpen}>
-      {/* Close Mobile Navbar */}
+      {/* Closes Mobile Menu */}
       <CloseIcon>
-        <IoClose size={35} onClick={() => setIsOpen(false)} />
+        <IoClose
+          size={30}
+          color={theme.colors.darkNeutral}
+          onClick={() => setIsOpen(false)}
+        />
       </CloseIcon>
 
       {/* Navbar Links*/}
@@ -26,12 +30,14 @@ export default function Navbar({ isOpen, setIsOpen }) {
         </li>
 
         {/* Pencils Link */}
-        <NavLi
+        <li
           onMouseEnter={() => setShowPencils(true)}
           onMouseLeave={() => setShowPencils(false)}
         >
-          <Link href="/pencils">Pencils</Link>
-          <IoIosArrowDown size={17} />
+          <LinkContainer>
+            <Link href="/pencils">Pencils</Link>
+            <DownArrow size={17} color={theme.colors.darkNeutral} />
+          </LinkContainer>
 
           {/* Pencils sub-links */}
           <SubNav showNav={showPencils}>
@@ -45,15 +51,17 @@ export default function Navbar({ isOpen, setIsOpen }) {
               <Link href="/pencils/mechanical-pencils">Mechanical Pencils</Link>
             </li>
           </SubNav>
-        </NavLi>
+        </li>
 
         {/* Papers Link */}
-        <NavLi
+        <li
           onMouseEnter={() => setShowPapers(true)}
           onMouseLeave={() => setShowPapers(false)}
         >
-          <Link href="/papers">Papers</Link>
-          <IoIosArrowDown size={17} />
+          <LinkContainer>
+            <Link href="/papers">Papers</Link>
+            <DownArrow size={17} color={theme.colors.darkNeutral} />
+          </LinkContainer>
 
           {/* Papers sub-links */}
           <SubNav showNav={showPapers}>
@@ -64,15 +72,17 @@ export default function Navbar({ isOpen, setIsOpen }) {
               <Link href="/papers/sketchbooks">Sketchbooks</Link>
             </li>
           </SubNav>
-        </NavLi>
+        </li>
 
         {/* Ink Links */}
-        <NavLi
+        <li
           onMouseEnter={() => setShowInks(true)}
           onMouseLeave={() => setShowInks(false)}
         >
-          <Link href="/inks">Inks</Link>
-          <IoIosArrowDown size={17} />
+          <LinkContainer>
+            <Link href="/inks">Inks</Link>
+            <DownArrow size={17} color={theme.colors.darkNeutral} />
+          </LinkContainer>
 
           {/* Inks sub-links */}
           <SubNav showNav={showInks}>
@@ -83,15 +93,17 @@ export default function Navbar({ isOpen, setIsOpen }) {
               <Link href="/inks/inking-pens">Inking Pens</Link>
             </li>
           </SubNav>
-        </NavLi>
+        </li>
 
         {/* Account Links */}
-        <NavLi
+        <li
           onMouseEnter={() => setShowAccount(true)}
           onMouseLeave={() => setShowAccount(false)}
         >
-          <Link href="/profile">My Account</Link>
-          <IoIosArrowDown size={17} />
+          <LinkContainer>
+            <Link href="/profile">My Account</Link>
+            <DownArrow size={17} color={theme.colors.darkNeutral} />
+          </LinkContainer>
 
           {/* Account sub-links */}
           <SubNav showNav={showAccount}>
@@ -105,7 +117,7 @@ export default function Navbar({ isOpen, setIsOpen }) {
               <Link href="/register">New Account</Link>
             </li>
           </SubNav>
-        </NavLi>
+        </li>
       </NavUl>
     </Nav>
   );
@@ -130,10 +142,12 @@ const Nav = styled.nav`
   height: 100vh;
   background: ${theme.colors.light};
   padding: 3rem;
+  width: 50%;
   ${theme.mq()[1]} {
     display: block;
     position: relative;
     height: initial;
+    width: initial;
     padding: 0;
   }
 `;
@@ -154,10 +168,18 @@ const NavUl = styled.ul`
   }
 `;
 
-const NavLi = styled.li`
+// Aligns arrow icon with the links
+const LinkContainer = styled.div`
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: space-between;
+  ${theme.mq()[1]} {
+    justify-content: center;
+  }
+`;
+
+const DownArrow = styled(IoIosArrowDown)`
+  cursor: pointer;
 `;
 
 // Navbar with all the sub-links
@@ -165,9 +187,17 @@ const SubNav = styled.ul`
   display: ${(props) => (props.showNav ? "flex" : "none")};
   flex-direction: column;
   gap: 1rem;
-  position: absolute;
-  top: 2rem;
-  width: 200px;
-  padding: 2rem 1rem;
-  background: ${theme.colors.light};
+  padding: 1rem;
+  background: ${theme.colors.lightNeutral};
+  border-radius: 5px;
+  margin-top: 0.5rem;
+  font-weight: ${theme.fontWeights.body};
+  ${theme.mq()[1]} {
+    position: absolute;
+    top: 2rem;
+    width: 200px;
+    padding: 2rem 1rem;
+    background: ${theme.colors.light};
+    margin-top: 0;
+  }
 `;

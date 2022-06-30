@@ -28,7 +28,7 @@ const SearchBarMain = styled.div`
 
 const SearchInput = styled.input`
   padding: 0 1rem;
-  border: 2px solid ${theme.colors.gray};
+  border: 2px solid ${theme.colors.neutral};
   width: 100%;
   border-radius: 3px;
 `;
