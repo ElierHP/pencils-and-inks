@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import Link from "next/link";
 import Container from "../ui/Container";
-import { GrCart } from "react-icons/gr";
 import { HiMenu } from "react-icons/hi";
 import { IoIosArrowDown } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 import Searchbar from "../Searchbar";
+import ShoppingCart from "../ShoppingCart";
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
   const handleLinkHover = () => {
     console.log("Hovering Link");
   };
@@ -17,9 +19,9 @@ export default function Header() {
     <header>
       <Container>
         <Wrapper>
-          <HamburgerIcon>
+          <MenuIcon onClick={() => setIsOpen(!isOpen)}>
             <HiMenu size={40} />
-          </HamburgerIcon>
+          </MenuIcon>
 
           {/* Logo */}
           <Link href="/">
@@ -30,12 +32,16 @@ export default function Header() {
           <Searchbar />
 
           {/* Shopping Cart */}
-          <Cart>
-            <GrCart size={35} />
-            <CartTitle>Cart</CartTitle>
-          </Cart>
+          <ShoppingCart />
         </Wrapper>
-        <Navbar>
+
+        {/* Navbar Menu */}
+        <Navbar isOpen={isOpen}>
+          {/* Close Mobile Navbar */}
+          <CloseIcon>
+            <IoClose size={35} onClick={() => setIsOpen(!isOpen)} />
+          </CloseIcon>
+          {/* Navbar Links*/}
           <NavUl>
             <li>
               <Link href="/">Home</Link>
@@ -88,7 +94,7 @@ const Wrapper = styled.div`
 `;
 
 // Hamburger Menu
-const HamburgerIcon = styled.div`
+const MenuIcon = styled.div`
   display: flex;
   align-items: center;
   ${theme.mq()[1]} {
@@ -103,39 +109,44 @@ const Logo = styled.a`
   order: 1;
 `;
 
-// Shopping Cart
-const Cart = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-weight: ${theme.fontWeights.bold};
-  cursor: pointer;
-  order: 2;
-  margin-left: auto;
+// Navbar
+const CloseIcon = styled.div`
+  text-align: right;
+  display: block;
   ${theme.mq()[1]} {
-    order: 3;
+    display: none;
   }
 `;
 
-const CartTitle = styled.span`
-  display: none;
+const Navbar = styled.nav`
+  display: ${(props) => (props.isOpen ? "block" : "none")};
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background: ${theme.colors.light};
+  padding: 3rem;
   ${theme.mq()[1]} {
     display: block;
+    position: relative;
+    height: initial;
+    padding: 0;
   }
 `;
 
-// Navbar
-const Navbar = styled.nav``;
-
 const NavUl = styled.ul`
-  display: none;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0;
+  display: flex;
+  align-items: left;
+  flex-direction: column;
   font-weight: ${theme.fontWeights.bold};
+  gap: 3rem;
   ${theme.mq()[1]} {
-    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 0 10rem;
+    flex-direction: row;
+    position: relative;
+    gap: 0;
   }
 `;
 

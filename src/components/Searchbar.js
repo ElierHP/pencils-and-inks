@@ -15,12 +15,11 @@ export default function Searchbar() {
 }
 
 // Styles
-// Search
 const SearchBarMain = styled.div`
   display: flex;
   height: 50px;
   order: 3;
-  grid-column: 1 / span1;
+  grid-column: 1 / span3;
   ${theme.mq()[1]} {
     order: 2;
     grid-column: initial;
