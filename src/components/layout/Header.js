@@ -49,6 +49,7 @@ const Wrapper = styled.div`
   padding: 1rem 0;
   padding-bottom: 3rem;
   grid-gap: 2rem;
+  position: relative;
   ${theme.mq()[1]} {
     grid-gap: 5rem;
     padding: 2rem;
@@ -59,7 +60,6 @@ const Logo = styled.a`
   font-size: ${theme.fontSizes.large}rem;
   font-weight: ${theme.fontWeights.bold};
   cursor: pointer;
-  order: 1;
 `;
 
 // Mobile Menu

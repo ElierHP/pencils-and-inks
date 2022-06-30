@@ -19,10 +19,10 @@ const Cart = styled.div`
   gap: 1rem;
   font-weight: ${theme.fontWeights.bold};
   cursor: pointer;
-  order: 2;
   margin-left: auto;
   margin-right: -1.7rem;
   ${theme.mq()[1]} {
+    /* Order was used to swap placements between cart and searchbar. */
     order: 3;
   }
 `;

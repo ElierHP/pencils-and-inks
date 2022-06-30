@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import styled from "@emotion/styled";
@@ -6,9 +6,10 @@ import theme from "../../styles/theme";
 import Link from "next/link";
 
 export default function Navbar({ isOpen, setIsOpen }) {
-  const handleLinkHover = () => {
-    console.log("Hovering Link");
-  };
+  const [showPencils, setShowPencils] = useState(false);
+  const [showPapers, setShowPapers] = useState(false);
+  const [showInks, setShowInks] = useState(false);
+  const [showAccount, setShowAccount] = useState(false);
 
   return (
     <Nav isOpen={isOpen}>
@@ -16,15 +17,24 @@ export default function Navbar({ isOpen, setIsOpen }) {
       <CloseIcon>
         <IoClose size={35} onClick={() => setIsOpen(false)} />
       </CloseIcon>
+
       {/* Navbar Links*/}
       <NavUl>
+        {/* Home Page Link */}
         <li>
           <Link href="/">Home</Link>
         </li>
-        <NavLi onMouseEnter={handleLinkHover}>
+
+        {/* Pencils Link */}
+        <NavLi
+          onMouseEnter={() => setShowPencils(true)}
+          onMouseLeave={() => setShowPencils(false)}
+        >
           <Link href="/pencils">Pencils</Link>
           <IoIosArrowDown size={17} />
-          <PencilNav>
+
+          {/* Pencils sub-links */}
+          <SubNav showNav={showPencils}>
             <li>
               <Link href="/pencils/graphite-pencils">Graphite Pencils</Link>
             </li>
@@ -34,23 +44,76 @@ export default function Navbar({ isOpen, setIsOpen }) {
             <li>
               <Link href="/pencils/mechanical-pencils">Mechanical Pencils</Link>
             </li>
-          </PencilNav>
+          </SubNav>
         </NavLi>
-        <li>
+
+        {/* Papers Link */}
+        <NavLi
+          onMouseEnter={() => setShowPapers(true)}
+          onMouseLeave={() => setShowPapers(false)}
+        >
           <Link href="/papers">Papers</Link>
-        </li>
-        <li>
+          <IoIosArrowDown size={17} />
+
+          {/* Papers sub-links */}
+          <SubNav showNav={showPapers}>
+            <li>
+              <Link href="/papers/sketch-paper">Sketch Paper</Link>
+            </li>
+            <li>
+              <Link href="/papers/sketchbooks">Sketchbooks</Link>
+            </li>
+          </SubNav>
+        </NavLi>
+
+        {/* Ink Links */}
+        <NavLi
+          onMouseEnter={() => setShowInks(true)}
+          onMouseLeave={() => setShowInks(false)}
+        >
           <Link href="/inks">Inks</Link>
-        </li>
-        <li>
+          <IoIosArrowDown size={17} />
+
+          {/* Inks sub-links */}
+          <SubNav showNav={showInks}>
+            <li>
+              <Link href="/inks/artist-inks">Artist Inks</Link>
+            </li>
+            <li>
+              <Link href="/inks/inking-pens">Inking Pens</Link>
+            </li>
+          </SubNav>
+        </NavLi>
+
+        {/* Account Links */}
+        <NavLi
+          onMouseEnter={() => setShowAccount(true)}
+          onMouseLeave={() => setShowAccount(false)}
+        >
           <Link href="/profile">My Account</Link>
-        </li>
+          <IoIosArrowDown size={17} />
+
+          {/* Account sub-links */}
+          <SubNav showNav={showAccount}>
+            <li>
+              <Link href="/profile">View Profile</Link>
+            </li>
+            <li>
+              <Link href="/login">Login</Link>
+            </li>
+            <li>
+              <Link href="/register">New Account</Link>
+            </li>
+          </SubNav>
+        </NavLi>
       </NavUl>
     </Nav>
   );
 }
 
 // Styles
+
+// X icon that closes mobile menu
 const CloseIcon = styled.div`
   text-align: right;
   display: block;
@@ -97,12 +160,14 @@ const NavLi = styled.li`
   position: relative;
 `;
 
-const PencilNav = styled.ul`
-  display: none;
+// Navbar with all the sub-links
+const SubNav = styled.ul`
+  display: ${(props) => (props.showNav ? "flex" : "none")};
   flex-direction: column;
   gap: 1rem;
   position: absolute;
-  top: 4rem;
+  top: 2rem;
   width: 200px;
-  padding: 1rem;
+  padding: 2rem 1rem;
+  background: ${theme.colors.light};
 `;

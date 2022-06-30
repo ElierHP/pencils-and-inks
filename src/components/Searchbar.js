@@ -18,10 +18,10 @@ export default function Searchbar() {
 const SearchBarMain = styled.div`
   display: flex;
   height: 50px;
+  /* Order was used to swap placements between searchbar and cart. */
   order: 3;
   grid-column: 1 / span3;
   ${theme.mq()[1]} {
-    order: 2;
     grid-column: initial;
   }
 `;
