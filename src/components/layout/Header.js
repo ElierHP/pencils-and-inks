@@ -43,6 +43,8 @@ export default function Header() {
 // Styles
 const MainHeader = styled.header`
   background: ${theme.colors.light};
+  position: relative;
+  z-index: 10;
 `;
 const Wrapper = styled.div`
   display: grid;
