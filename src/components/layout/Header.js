@@ -4,7 +4,6 @@ import theme from "../../styles/theme";
 import Link from "next/link";
 import Container from "../ui/Container";
 import { HiMenu } from "react-icons/hi";
-
 import Searchbar from "../Searchbar";
 import ShoppingCart from "../ShoppingCart";
 import Navbar from "./Navbar";

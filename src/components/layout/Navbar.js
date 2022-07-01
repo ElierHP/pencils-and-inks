@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
-import Link from "next/link";
-import { IoIosArrowDown } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
-import SubNav from "./SubNav";
 import {
-  pencilPageData,
-  paperPageData,
-  inksPageData,
-  accountPageData,
-} from "./data/linkData";
+  pencilNavData,
+  paperNavData,
+  inksNavData,
+  accountNavData,
+} from "./data/navData";
+import NavLi from "./NavLi";
 
 export default function Navbar({ isOpen, setIsOpen }) {
   const [showPencils, setShowPencils] = useState(false);
@@ -30,70 +28,29 @@ export default function Navbar({ isOpen, setIsOpen }) {
             onClick={() => setIsOpen(false)}
           />
         </CloseIcon>
+
         {/* Home Page Link */}
-        <NavLi>
-          <Link href="/">Home</Link>
-        </NavLi>
+        <NavLi data={{ name: "Home" }} isSubNav={false} />
 
-        {/* Pencils Link */}
+        {/* Pencils Links */}
         <NavLi
-          onMouseEnter={() => setShowPencils(true)}
-          onMouseLeave={() => setShowPencils(false)}
-          onClick={() => setShowPencils(!showPencils)}
-        >
-          <LinkContainer>
-            <Link href="/pencils">Pencils</Link>
-            <DownArrow size={17} color={theme.colors.neutralDark} />
-          </LinkContainer>
+          data={pencilNavData}
+          show={showPencils}
+          setShow={setShowPencils}
+        />
 
-          {/* Pencils sub-links */}
-          <SubNav showNav={showPencils} data={pencilPageData} />
-        </NavLi>
-
-        {/* Papers Link */}
-        <NavLi
-          onMouseEnter={() => setShowPapers(true)}
-          onMouseLeave={() => setShowPapers(false)}
-          onClick={() => setShowPapers(!showPapers)}
-        >
-          <LinkContainer>
-            <Link href="/papers">Papers</Link>
-            <DownArrow size={17} color={theme.colors.neutralDark} />
-          </LinkContainer>
-
-          {/* Papers sub-links */}
-          <SubNav showNav={showPapers} data={paperPageData} />
-        </NavLi>
+        {/* Papers Links */}
+        <NavLi data={paperNavData} show={showPapers} setShow={setShowPapers} />
 
         {/* Ink Links */}
-        <NavLi
-          onMouseEnter={() => setShowInks(true)}
-          onMouseLeave={() => setShowInks(false)}
-          onClick={() => setShowInks(!showInks)}
-        >
-          <LinkContainer>
-            <Link href="/inks">Inks</Link>
-            <DownArrow size={17} color={theme.colors.neutralDark} />
-          </LinkContainer>
-
-          {/* Inks sub-links */}
-          <SubNav showNav={showInks} data={inksPageData} />
-        </NavLi>
+        <NavLi data={inksNavData} show={showInks} setShow={setShowInks} />
 
         {/* Account Links */}
         <NavLi
-          onMouseEnter={() => setShowAccount(true)}
-          onMouseLeave={() => setShowAccount(false)}
-          onClick={() => setShowAccount(!showAccount)}
-        >
-          <LinkContainer>
-            <Link href="/profile">My Account</Link>
-            <DownArrow size={17} color={theme.colors.neutralDark} />
-          </LinkContainer>
-
-          {/* Account sub-links */}
-          <SubNav showNav={showAccount} data={accountPageData} />
-        </NavLi>
+          data={accountNavData}
+          show={showAccount}
+          setShow={setShowAccount}
+        />
       </NavUl>
     </Nav>
   );
@@ -155,28 +112,4 @@ const NavUl = styled.ul`
     position: relative;
     gap: 0;
   }
-`;
-
-const NavLi = styled.li`
-  padding: 1rem 0;
-  cursor: pointer;
-`;
-
-// Aligns arrow icon with the links
-const LinkContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  /* Z-index to place LinksContainer infront of SubNav */
-  position: relative;
-  z-index: 2;
-
-  ${theme.mq()[2]} {
-    justify-content: center;
-  }
-`;
-
-const DownArrow = styled(IoIosArrowDown)`
-  cursor: pointer;
 `;
