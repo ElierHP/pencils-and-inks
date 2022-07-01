@@ -21,7 +21,7 @@ const SearchBarMain = styled.div`
   /* Order was used to swap placements between searchbar and cart. */
   order: 3;
   grid-column: 1 / span3;
-  ${theme.mq()[1]} {
+  ${theme.mq()[2]} {
     grid-column: initial;
   }
 `;

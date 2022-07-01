@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import { keyframes } from "@emotion/react";
 import theme from "../../styles/theme";
 import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
@@ -14,17 +13,16 @@ export default function Navbar({ isOpen, setIsOpen }) {
 
   return (
     <Nav isOpen={isOpen}>
-      {/* Closes Mobile Menu */}
-      <CloseIcon>
-        <IoClose
-          size={30}
-          color={theme.colors.neutralDark}
-          onClick={() => setIsOpen(false)}
-        />
-      </CloseIcon>
-
       {/* Navbar Links*/}
       <NavUl>
+        {/* Closes Mobile Menu */}
+        <CloseIcon>
+          <IoClose
+            size={30}
+            color={theme.colors.neutralDark}
+            onClick={() => setIsOpen(false)}
+          />
+        </CloseIcon>
         {/* Home Page Link */}
         <NavLi>
           <Link href="/">Home</Link>
@@ -129,40 +127,43 @@ export default function Navbar({ isOpen, setIsOpen }) {
 }
 
 // Styles
-// Animations
-const slideDown = keyframes`
-  from {
-    transform: translateY(-40px);
-  }
-  to {
-    transform: translateY(0);
-  }
-`;
 
 // X icon that closes mobile menu
 const CloseIcon = styled.div`
   text-align: right;
   display: block;
-  ${theme.mq()[1]} {
+  ${theme.mq()[2]} {
     display: none;
   }
 `;
 
 const Nav = styled.nav`
-  display: ${(props) => (props.isOpen ? "block" : "none")};
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   width: 50%;
   background: ${theme.colors.light};
-  padding: 1rem 2rem;
+  padding: 2rem;
+
+  /* Animations */
+  transform: ${(props) =>
+    props.isOpen ? "translateX(0)" : "translateX(-400px)"};
+  transition: ${theme.transition.secondary};
+
   ${theme.mq()[1]} {
+    transform: ${(props) =>
+      props.isOpen ? "translateX(0)" : "translateX(-600px)"};
+    width: 30%;
+  }
+
+  ${theme.mq()[2]} {
     display: block;
     position: relative;
     height: initial;
     width: initial;
     padding: 0;
+    transform: translateX(0);
   }
 `;
 
@@ -172,7 +173,8 @@ const NavUl = styled.ul`
   flex-direction: column;
   font-weight: ${theme.fontWeights.bold};
   gap: 3rem;
-  ${theme.mq()[1]} {
+
+  ${theme.mq()[2]} {
     justify-content: space-between;
     align-items: center;
     padding: 0 10rem;
@@ -197,7 +199,7 @@ const LinkContainer = styled.div`
   position: relative;
   z-index: 2;
 
-  ${theme.mq()[1]} {
+  ${theme.mq()[2]} {
     justify-content: center;
   }
 `;
@@ -208,7 +210,7 @@ const DownArrow = styled(IoIosArrowDown)`
 
 // Navbar with all the sub-links
 const SubNav = styled.ul`
-  display: ${(props) => (props.showNav ? "flex" : "none")};
+  display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
@@ -217,7 +219,15 @@ const SubNav = styled.ul`
   margin-top: 0.5rem;
   font-weight: ${theme.fontWeights.body};
 
-  ${theme.mq()[1]} {
+  /* Animations */
+  position: ${(props) => (props.showNav ? "relative" : "absolute")};
+  visibility: ${(props) => (props.showNav ? "visible" : "hidden")};
+  transform: ${(props) =>
+    props.showNav ? "translateY(0)" : "translateY(-20px)"};
+
+  transition: all 0.1s ease-in-out;
+
+  ${theme.mq()[2]} {
     position: absolute;
     top: 3rem;
     width: 200px;
@@ -225,10 +235,10 @@ const SubNav = styled.ul`
     margin-top: 0;
     background: ${theme.colors.light};
 
-    /* Animation Styles */
+    /* Animations */
     transform: ${(props) =>
-      props.showNav ? "translateY(0)" : "translateY(-40px)"};
-    animation-name: ${(props) => props.showNav && slideDown};
-    animation-duration: 0.3s;
+      props.showNav ? "translateY(0)" : "translateY(-30px)"};
+    visibility: ${(props) => (props.showNav ? "visible" : "hidden")};
+    transition: ${theme.transition.primary};
   }
 `;

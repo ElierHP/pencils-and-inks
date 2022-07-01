@@ -69,7 +69,7 @@ const Logo = styled.a`
 const MenuIcon = styled.div`
   display: flex;
   align-items: center;
-  ${theme.mq()[1]} {
+  ${theme.mq()[2]} {
     display: none;
   }
 `;

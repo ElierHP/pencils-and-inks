@@ -21,7 +21,7 @@ const Cart = styled.div`
   cursor: pointer;
   margin-left: auto;
   margin-right: -1.7rem;
-  ${theme.mq()[1]} {
+  ${theme.mq()[2]} {
     /* Order was used to swap placements between cart and searchbar. */
     order: 3;
   }
@@ -29,7 +29,7 @@ const Cart = styled.div`
 
 const CartTitle = styled.span`
   display: none;
-  ${theme.mq()[1]} {
+  ${theme.mq()[2]} {
     display: block;
   }
 `;
