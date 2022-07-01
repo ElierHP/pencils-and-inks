@@ -13,7 +13,7 @@ export default function Header() {
   // State for the mobile sidebar menu. If true, sidebar displays.
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <header>
+    <MainHeader>
       <Container>
         <Wrapper>
           {/* Mobile Menu Icon. If clicked, it displays sidebar. */}
@@ -37,11 +37,14 @@ export default function Header() {
         {/* Props handle whether the mobile sidebar is open or closed. */}
         <Navbar isOpen={isOpen} setIsOpen={setIsOpen} />
       </Container>
-    </header>
+    </MainHeader>
   );
 }
 
 // Styles
+const MainHeader = styled.header`
+  background: ${theme.colors.light};
+`;
 const Wrapper = styled.div`
   display: grid;
   align-items: center;

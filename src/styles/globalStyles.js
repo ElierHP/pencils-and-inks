@@ -9,10 +9,6 @@ export default function GlobalStyles() {
           font-size: 62.5%;
         }
         ,
-        ul {
-          padding: 0;
-        }
-        ,
         h1,
         h2,
         h3,
@@ -20,7 +16,11 @@ export default function GlobalStyles() {
         a,
         div,
         li,
-        ul {
+        ul,
+        input,
+        form,
+        button,
+        span {
           font-family: ${theme.fonts.body};
           font-size: ${theme.fontSizes.medium}rem;
           letter-spacing: ${theme.letterSpacing.body}px;
@@ -29,6 +29,8 @@ export default function GlobalStyles() {
           text-decoration: none;
           list-style: none;
           box-sizing: border-box;
+          padding: 0;
+          margin: 0;
         }
         ,
         h1 {
