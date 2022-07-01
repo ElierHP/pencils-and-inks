@@ -4,6 +4,13 @@ import theme from "../../styles/theme";
 import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
+import SubNav from "./SubNav";
+import {
+  pencilPageData,
+  paperPageData,
+  inksPageData,
+  accountPageData,
+} from "./data/linkData";
 
 export default function Navbar({ isOpen, setIsOpen }) {
   const [showPencils, setShowPencils] = useState(false);
@@ -40,17 +47,7 @@ export default function Navbar({ isOpen, setIsOpen }) {
           </LinkContainer>
 
           {/* Pencils sub-links */}
-          <SubNav showNav={showPencils}>
-            <li>
-              <Link href="/pencils/graphite-pencils">Graphite Pencils</Link>
-            </li>
-            <li>
-              <Link href="/pencils/color-pencils">Color Pencils</Link>
-            </li>
-            <li>
-              <Link href="/pencils/mechanical-pencils">Mechanical Pencils</Link>
-            </li>
-          </SubNav>
+          <SubNav showNav={showPencils} data={pencilPageData} />
         </NavLi>
 
         {/* Papers Link */}
@@ -65,14 +62,7 @@ export default function Navbar({ isOpen, setIsOpen }) {
           </LinkContainer>
 
           {/* Papers sub-links */}
-          <SubNav showNav={showPapers}>
-            <li>
-              <Link href="/papers/sketch-paper">Sketch Paper</Link>
-            </li>
-            <li>
-              <Link href="/papers/sketchbooks">Sketchbooks</Link>
-            </li>
-          </SubNav>
+          <SubNav showNav={showPapers} data={paperPageData} />
         </NavLi>
 
         {/* Ink Links */}
@@ -87,14 +77,7 @@ export default function Navbar({ isOpen, setIsOpen }) {
           </LinkContainer>
 
           {/* Inks sub-links */}
-          <SubNav showNav={showInks}>
-            <li>
-              <Link href="/inks/artist-inks">Artist Inks</Link>
-            </li>
-            <li>
-              <Link href="/inks/inking-pens">Inking Pens</Link>
-            </li>
-          </SubNav>
+          <SubNav showNav={showInks} data={inksPageData} />
         </NavLi>
 
         {/* Account Links */}
@@ -109,17 +92,7 @@ export default function Navbar({ isOpen, setIsOpen }) {
           </LinkContainer>
 
           {/* Account sub-links */}
-          <SubNav showNav={showAccount}>
-            <li>
-              <Link href="/profile">View Profile</Link>
-            </li>
-            <li>
-              <Link href="/login">Login</Link>
-            </li>
-            <li>
-              <Link href="/register">New Account</Link>
-            </li>
-          </SubNav>
+          <SubNav showNav={showAccount} data={accountPageData} />
         </NavLi>
       </NavUl>
     </Nav>
@@ -206,39 +179,4 @@ const LinkContainer = styled.div`
 
 const DownArrow = styled(IoIosArrowDown)`
   cursor: pointer;
-`;
-
-// Navbar with all the sub-links
-const SubNav = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-  background: ${theme.colors.neutralLight};
-  border-radius: 5px;
-  margin-top: 0.5rem;
-  font-weight: ${theme.fontWeights.body};
-
-  /* Animations */
-  position: ${(props) => (props.showNav ? "relative" : "absolute")};
-  visibility: ${(props) => (props.showNav ? "visible" : "hidden")};
-  transform: ${(props) =>
-    props.showNav ? "translateY(0)" : "translateY(-20px)"};
-
-  transition: all 0.1s ease-in-out;
-
-  ${theme.mq()[2]} {
-    position: absolute;
-    top: 3rem;
-    width: 200px;
-    padding: 2rem 1rem;
-    margin-top: 0;
-    background: ${theme.colors.light};
-
-    /* Animations */
-    transform: ${(props) =>
-      props.showNav ? "translateY(0)" : "translateY(-30px)"};
-    visibility: ${(props) => (props.showNav ? "visible" : "hidden")};
-    transition: ${theme.transition.primary};
-  }
 `;
