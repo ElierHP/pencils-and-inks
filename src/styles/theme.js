@@ -1,5 +1,4 @@
 const theme = {
-  space: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 16, 32, 64, 128, 256, 512],
   fonts: {
     body: "montserrat, sans-serif",
   },
@@ -33,6 +32,9 @@ const theme = {
     neutralDark: "#6F6F6F",
     hover: "#FFD685",
     btnHover: "#E7AD56",
+  },
+  space: {
+    section: 5,
   },
   transition: {
     primary: "all 0.3s ease-in-out",
