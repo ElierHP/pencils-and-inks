@@ -61,9 +61,12 @@ const Wrapper = styled.div`
 `;
 
 const Logo = styled.a`
-  font-size: ${theme.fontSizes.large}rem;
+  font-size: 2rem;
   font-weight: ${theme.fontWeights.bold};
   cursor: pointer;
+  ${theme.mq()[1]} {
+    font-size: ${theme.fontSizes.large}rem;
+  }
 `;
 
 // Mobile Menu

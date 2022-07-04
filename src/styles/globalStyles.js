@@ -34,7 +34,7 @@ export default function GlobalStyles() {
         }
         ,
         h1 {
-          font-size: ${theme.fontSizes.mobileHeading}rem;
+          font-size: ${theme.fontSizes.heading}rem;
           margin-top: 0;
           margin-bottom: 2rem;
           line-height: ${theme.lineHeights.heading};

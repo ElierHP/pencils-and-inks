@@ -6,7 +6,7 @@ import { GrCart } from "react-icons/gr";
 export default function ShoppingCart() {
   return (
     <Cart>
-      <GrCart size={35} />
+      <CartIcon />
       <CartTitle>Cart</CartTitle>
     </Cart>
   );
@@ -27,6 +27,12 @@ const Cart = styled.div`
   }
 `;
 
+const CartIcon = styled(GrCart)`
+  font-size: 30px;
+  ${theme.mq()[1]} {
+    font-size: 35px;
+  }
+`;
 const CartTitle = styled.span`
   display: none;
   ${theme.mq()[2]} {
