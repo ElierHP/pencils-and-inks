@@ -41,7 +41,7 @@ export default function Category() {
         <List>
           {categoryData.map((product) => (
             <Link key={product.key} href={product.url}>
-              <ListItem>
+              <li>
                 <ImageContainer>
                   <Image
                     alt={product.title}
@@ -53,7 +53,7 @@ export default function Category() {
                   />
                 </ImageContainer>
                 <Paragraph>{product.title}</Paragraph>
-              </ListItem>
+              </li>
             </Link>
           ))}
         </List>
@@ -83,19 +83,14 @@ const List = styled.ul`
   }
 `;
 
-const ListItem = styled.li`
+const ImageContainer = styled.div`
+  position: relative;
   width: 150px;
   height: 150px;
   ${theme.mq()[3]} {
     width: 250px;
     height: 250px;
   }
-`;
-
-const ImageContainer = styled.div`
-  position: relative;
-  height: 100%;
-  width: 100%;
 `;
 
 const Paragraph = styled.p`

@@ -36,27 +36,38 @@ export default function NewItems() {
         <Title>Latest Products</Title>
         <List>
           {latest.map((product) => (
-            <Link key={product.id} href="/">
-              <ListItem>
-                <ImageContainer>
-                  <Image
-                    alt={product.title}
-                    src={product.images.split(",")[0]}
-                    layout="fill"
-                    objectFit="cover"
-                    quality={100}
-                    priority={true}
-                  />
-                </ImageContainer>
+            <ListItem>
+              {/* Clicking links to product page. */}
+              <Link key={product.id} href="/">
+                <div>
+                  <ImageContainer>
+                    <Image
+                      alt={product.title}
+                      src={product.images.split(",")[0]}
+                      layout="fill"
+                      objectFit="cover"
+                      quality={100}
+                      priority={true}
+                    />
+                  </ImageContainer>
 
-                <p>{product.title}</p>
-                <Price>${product.price}</Price>
+                  <ProductTitle>{product.title}</ProductTitle>
+                  <Price>${product.price}</Price>
+                </div>
+              </Link>
+
+              {/* Button - Clicking adds to shopping cart. */}
+              <div>
                 <Button>Add To Cart</Button>
-              </ListItem>
-            </Link>
+              </div>
+            </ListItem>
           ))}
         </List>
+
+        {/* Loading Display */}
         {isLoading && <LoadingMsg>Loading products... please wait.</LoadingMsg>}
+
+        {/* Error Display */}
         {isError && <ErrorMsg>Error: Couldn't load products.</ErrorMsg>}
       </Container>
     </Section>
@@ -76,6 +87,7 @@ const Title = styled.h2`
 const List = styled.ul`
   display: flex;
   justify-content: center;
+
   cursor: pointer;
   flex-wrap: wrap;
   gap: 3rem;
@@ -85,6 +97,13 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const ImageContainer = styled.div`
+  position: relative;
   width: 150px;
   height: 150px;
   ${theme.mq()[3]} {
@@ -93,16 +112,17 @@ const ListItem = styled.li`
   }
 `;
 
-const ImageContainer = styled.div`
-  position: relative;
-  height: 100%;
-  width: 100%;
+const ProductTitle = styled.p`
+  width: 15ch;
+  ${theme.mq()[3]} {
+    width: 20ch;
+  }
 `;
 
 const Price = styled.p`
   font-weight: ${theme.fontWeights.bold};
   font-size: 2rem;
-  padding: 0.5rem 0;
+  padding: 1rem 0;
 `;
 
 const ErrorMsg = styled.p`
