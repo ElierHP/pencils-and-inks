@@ -48,6 +48,7 @@ export default function NewItems() {
                     priority={true}
                   />
                 </ImageContainer>
+
                 <p>{product.title}</p>
                 <Price>${product.price}</Price>
                 <Button>Add To Cart</Button>
@@ -101,6 +102,7 @@ const ImageContainer = styled.div`
 const Price = styled.p`
   font-weight: ${theme.fontWeights.bold};
   font-size: 2rem;
+  padding: 0.5rem 0;
 `;
 
 const ErrorMsg = styled.p`

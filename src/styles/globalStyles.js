@@ -34,6 +34,11 @@ export default function GlobalStyles() {
           margin: 0;
         }
         ,
+        h1,
+        h2,
+        h3 {
+          font-weight: ${theme.fontWeights.bold};
+        }
         h1 {
           font-size: ${theme.fontSizes.heading}rem;
           margin-top: 0;
