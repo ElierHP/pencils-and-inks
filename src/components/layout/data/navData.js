@@ -1,24 +1,25 @@
+import { v4 as uuidv4 } from "uuid";
+
 export const pencilNavData = {
   mainNav: {
     name: "Pencils",
     url: "/pencils",
-    key: 0,
   },
   subNav: [
     {
       name: "Graphite Pencils",
       url: "/pencils/graphite-pencils",
-      key: 10,
+      key: uuidv4(),
     },
     {
       name: "Color Pencils",
       url: "/pencils/color-pencils",
-      key: 11,
+      key: uuidv4(),
     },
     {
       name: "Mechanical Pencils",
       url: "/pencils/mechanical-pencils",
-      key: 12,
+      key: uuidv4(),
     },
   ],
 };
@@ -27,18 +28,17 @@ export const paperNavData = {
   mainNav: {
     name: "Papers",
     url: "/papers",
-    key: 3,
   },
   subNav: [
     {
       name: "Sketch Paper",
       url: "/papers/sketch-paper",
-      key: 13,
+      key: uuidv4(),
     },
     {
       name: "Sketchbooks",
       url: "/papers/sketchbooks",
-      key: 14,
+      key: uuidv4(),
     },
   ],
 };
@@ -47,18 +47,17 @@ export const inksNavData = {
   mainNav: {
     name: "Inks",
     url: "/inks",
-    key: 5,
   },
   subNav: [
     {
       name: "Artist Inks",
       url: "/inks/artist-inks",
-      key: 15,
+      key: uuidv4(),
     },
     {
       name: "Inking Pens",
       url: "/inks/inking-pens",
-      key: 16,
+      key: uuidv4(),
     },
   ],
 };
@@ -67,23 +66,22 @@ export const accountNavData = {
   mainNav: {
     name: "Account",
     url: "/profile",
-    key: 6,
   },
   subNav: [
     {
       name: "View Profile",
       url: "/profile",
-      key: 17,
+      key: uuidv4(),
     },
     {
       name: "Login",
       url: "/login",
-      key: 18,
+      key: uuidv4(),
     },
     {
       name: "New Account",
       url: "/register",
-      key: 19,
+      key: uuidv4(),
     },
   ],
 };

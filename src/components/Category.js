@@ -4,31 +4,32 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 import theme from "../styles/theme";
 import Container from "./ui/Container";
+import { v4 as uuidv4 } from "uuid";
 
 const categoryData = [
   {
     title: "Featured",
     url: "/featured",
     img: "https://images.ctfassets.net/f1fikihmjtrp/31Dkj7MHIh4Rx28iaTXiMY/0b9e72dd920a6aaf86155cfc55bf6fd3/82410-1012-M-4ww.jpg?q=80&w=400",
-    key: 0,
+    key: uuidv4(),
   },
   {
     title: "Pencils",
     url: "/pencils",
     img: "https://images.ctfassets.net/f1fikihmjtrp/31Dkj7MHIh4Rx28iaTXiMY/0b9e72dd920a6aaf86155cfc55bf6fd3/82410-1012-M-4ww.jpg?q=80&w=400",
-    key: 100,
+    key: uuidv4(),
   },
   {
     title: "Papers",
     url: "/papers",
     img: "https://images.ctfassets.net/f1fikihmjtrp/31Dkj7MHIh4Rx28iaTXiMY/0b9e72dd920a6aaf86155cfc55bf6fd3/82410-1012-M-4ww.jpg?q=80&w=400",
-    key: 200,
+    key: uuidv4(),
   },
   {
     title: "Inks",
     url: "/inks",
     img: "https://images.ctfassets.net/f1fikihmjtrp/31Dkj7MHIh4Rx28iaTXiMY/0b9e72dd920a6aaf86155cfc55bf6fd3/82410-1012-M-4ww.jpg?q=80&w=400",
-    key: 300,
+    key: uuidv4(),
   },
 ];
 
@@ -77,14 +78,17 @@ const List = styled.ul`
   cursor: pointer;
   flex-wrap: wrap;
   gap: 3rem;
+  ${theme.mq()[1]} {
+    justify-content: space-between;
+  }
 `;
 
 const ListItem = styled.li`
   width: 150px;
   height: 150px;
-  ${theme.mq()[2]} {
-    width: 200px;
-    height: 200px;
+  ${theme.mq()[3]} {
+    width: 250px;
+    height: 250px;
   }
 `;
 
