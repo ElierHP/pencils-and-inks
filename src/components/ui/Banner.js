@@ -11,7 +11,9 @@ export default function Banner() {
         <Paragraph>
           Top quality products to unleash your inner creativity!
         </Paragraph>
-        <Button href="/pencils">View Products</Button>
+        <Button href="/pencils" isLink={true}>
+          View Products
+        </Button>
       </Section>
 
       <BackgroundImage>

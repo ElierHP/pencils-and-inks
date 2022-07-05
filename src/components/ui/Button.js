@@ -3,21 +3,30 @@ import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import Link from "next/link";
 
-export default function Button({ children, href }) {
+export default function Button({ children, href, isLink }) {
   return (
-    <Btn>
-      <Link href={href}>
-        <A>{children}</A>
-      </Link>
-    </Btn>
+    <>
+      {isLink ? (
+        <Btn>
+          <Link href={href}>
+            <A>{children}</A>
+          </Link>
+        </Btn>
+      ) : (
+        <Btn>
+          <Text>{children}</Text>
+        </Btn>
+      )}
+    </>
   );
 }
 
 // Styles
 const Btn = styled.div`
+  display: inline-block;
   background: ${theme.colors.primary};
   color: ${theme.colors.light};
-  padding: 1rem 2rem;
+  padding: 0.5rem 1.5rem;
   border-radius: 2px;
   cursor: pointer;
   transition: all ease-in-out 0.3s;
@@ -27,5 +36,9 @@ const Btn = styled.div`
 `;
 
 const A = styled.a`
+  color: inherit;
+`;
+
+const Text = styled.p`
   color: inherit;
 `;

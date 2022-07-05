@@ -23,6 +23,7 @@ export default function GlobalStyles() {
         span {
           font-family: ${theme.fonts.body};
           font-size: ${theme.fontSizes.medium}rem;
+          font-weight: ${theme.fontWeights.body};
           letter-spacing: ${theme.letterSpacing.body}px;
           line-height: ${theme.lineHeights.body};
           color: ${theme.colors.dark};

@@ -32,6 +32,8 @@ const theme = {
     neutralDark: "#6F6F6F",
     hover: "#FFD685",
     btnHover: "#E7AD56",
+    error: "#E02626",
+    warning: "#B87E27",
   },
   space: {
     section: 5,
