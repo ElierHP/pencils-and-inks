@@ -36,9 +36,9 @@ export default function NewItems() {
         <Title>Latest Products</Title>
         <List>
           {latest.map((product) => (
-            <ListItem>
+            <ListItem key={product.id}>
               {/* Clicking links to product page. */}
-              <Link key={product.id} href="/">
+              <Link href="/">
                 <div>
                   <ImageContainer>
                     <Image
