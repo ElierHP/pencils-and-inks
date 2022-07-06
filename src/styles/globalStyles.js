@@ -50,7 +50,7 @@ export default function GlobalStyles() {
         }
         ,
         h2 {
-          font-size: ${theme.fontSizes.heading}rem;
+          font-size: ${theme.fontSizes.large}rem;
           margin-bottom: 1rem;
         }
         ,

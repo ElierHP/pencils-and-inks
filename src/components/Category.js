@@ -48,8 +48,6 @@ export default function Category() {
                     src={product.img}
                     layout="fill"
                     objectFit="cover"
-                    quality={100}
-                    priority={true}
                   />
                 </ImageContainer>
                 <Paragraph>{product.title}</Paragraph>

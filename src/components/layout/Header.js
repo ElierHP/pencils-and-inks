@@ -7,6 +7,7 @@ import { HiMenu } from "react-icons/hi";
 import Searchbar from "../Searchbar";
 import ShoppingCart from "../ShoppingCart";
 import Navbar from "./Navbar";
+import Logo from "../ui/Logo";
 
 export default function Header() {
   // State for the mobile sidebar menu. If true, sidebar displays.
@@ -21,9 +22,7 @@ export default function Header() {
           </MenuIcon>
 
           {/* Logo */}
-          <Link href="/">
-            <Logo>{"Pencils&Inks"}</Logo>
-          </Link>
+          <Logo size={2} href={"/"} />
 
           {/* Search Bar */}
           <Searchbar />
@@ -57,15 +56,6 @@ const Wrapper = styled.div`
   ${theme.mq()[1]} {
     grid-gap: 5rem;
     padding: 2rem;
-  }
-`;
-
-const Logo = styled.a`
-  font-size: 2rem;
-  font-weight: ${theme.fontWeights.bold};
-  cursor: pointer;
-  ${theme.mq()[1]} {
-    font-size: ${theme.fontSizes.large}rem;
   }
 `;
 

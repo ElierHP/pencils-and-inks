@@ -40,16 +40,14 @@ export default function NewItems() {
               {/* Clicking links to product page. */}
               <Link href="/">
                 <div>
-                  <ImageContainer>
+                  <ProductImage>
                     <Image
                       alt={product.title}
                       src={product.images.split(",")[0]}
                       layout="fill"
                       objectFit="cover"
-                      quality={100}
-                      priority={true}
                     />
-                  </ImageContainer>
+                  </ProductImage>
 
                   <ProductTitle>{product.title}</ProductTitle>
                   <Price>${product.price}</Price>
@@ -102,7 +100,7 @@ const ListItem = styled.li`
   justify-content: space-between;
 `;
 
-const ImageContainer = styled.div`
+const ProductImage = styled.div`
   position: relative;
   width: 150px;
   height: 150px;
@@ -113,7 +111,7 @@ const ImageContainer = styled.div`
 `;
 
 const ProductTitle = styled.p`
-  width: 15ch;
+  width: 150px;
   ${theme.mq()[3]} {
     width: 20ch;
   }

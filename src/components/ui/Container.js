@@ -9,10 +9,7 @@ export default function Container({ children }) {
 // Styles
 
 const MainContainer = styled.div`
-  max-width: 1200px;
+  max-width: 1400px;
   margin: auto;
-  padding: 0 1rem;
-  ${theme.mq()[1]} {
-    padding: 0 2rem;
-  }
+  padding: 0 2rem;
 `;

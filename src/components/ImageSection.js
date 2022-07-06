@@ -17,8 +17,6 @@ export default function ImageSection() {
                 src={"/city-drawing.jpg"}
                 layout="fill"
                 objectFit="cover"
-                quality={100}
-                priority={true}
               />
             </MainImage>
           </Link>

@@ -2,12 +2,13 @@ import React from "react";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import Button from "./Button";
+import Logo from "./Logo";
 
 export default function Banner() {
   return (
     <Main>
       <Section>
-        <Heading>{"Pencils&Inks"}</Heading>
+        <Logo size={3.5} href={"/products"} />
         <Paragraph>
           Top quality products to unleash your inner creativity!
         </Paragraph>
