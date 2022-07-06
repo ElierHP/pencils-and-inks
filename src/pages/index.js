@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Category from "../components/Category";
+import ImageSection from "../components/ImageSection";
 import Layout from "../components/layout/Layout";
 import NewItems from "../components/NewItems";
 import Banner from "../components/ui/Banner";
@@ -18,6 +19,7 @@ export default function Home() {
       <Banner />
       <Category />
       <NewItems />
+      <ImageSection />
     </Layout>
   );
 }

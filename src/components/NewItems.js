@@ -127,8 +127,10 @@ const Price = styled.p`
 
 const ErrorMsg = styled.p`
   color: ${theme.colors.error};
+  text-align: center;
 `;
 
 const LoadingMsg = styled.p`
   color: ${theme.colors.warning};
+  text-align: center;
 `;
