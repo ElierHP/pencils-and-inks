@@ -50,10 +50,6 @@ const Section = styled.section`
   padding: 0 2rem;
 `;
 
-const Heading = styled.h1`
-  margin: 0;
-`;
-
 const Paragraph = styled.p`
   text-align: center;
 `;

@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 import theme from "../styles/theme";
 import Container from "./ui/Container";
+import Section from "./ui/Section";
 import { v4 as uuidv4 } from "uuid";
 
 const categoryData = [
@@ -61,11 +62,6 @@ export default function Category() {
 }
 
 // Styles
-const Section = styled.section`
-  text-align: center;
-  padding: ${theme.space.section}rem 0;
-`;
-
 const Title = styled.h2`
   margin-bottom: 4rem;
 `;

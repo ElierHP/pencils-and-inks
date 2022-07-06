@@ -3,6 +3,7 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import theme from "../styles/theme";
+import Section from "./ui/Section";
 import Container from "./ui/Container";
 
 export default function ImageSection() {
@@ -53,10 +54,6 @@ export default function ImageSection() {
 }
 
 // Styles
-const Section = styled.section`
-  padding: ${theme.space.section}rem 0;
-`;
-
 const Wrapper = styled.div`
   display: flex;
   gap: 1rem;

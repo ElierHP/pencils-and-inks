@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import axios from "axios";
 import Image from "next/image";
 import theme from "../styles/theme";
+import Section from "./ui/Section";
 import Container from "./ui/Container";
 import Button from "./ui/Button";
 
@@ -73,10 +74,6 @@ export default function NewItems() {
 }
 
 // Styles
-const Section = styled.section`
-  padding: ${theme.space.section}rem 0;
-`;
-
 const Title = styled.h2`
   text-align: center;
   margin-bottom: 4rem;
