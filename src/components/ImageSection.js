@@ -83,7 +83,7 @@ const ImageGroup = styled.div`
   flex-direction: row;
   gap: 1rem;
   width: 100%;
-  height: 300px;
+  height: 150px;
   cursor: pointer;
   ${theme.mq()[0]} {
     flex-direction: column;
@@ -99,5 +99,8 @@ const ImageGroup = styled.div`
 const ImageContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 50%;
+  height: 100%;
+  ${theme.mq()[0]} {
+    height: 50%;
+  }
 `;

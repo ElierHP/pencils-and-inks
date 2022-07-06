@@ -26,8 +26,8 @@ const Btn = styled.div`
   display: inline-block;
   background: ${theme.colors.primary};
   color: ${theme.colors.light};
-  padding: 0.5rem 1.5rem;
-  border-radius: 2px;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
   cursor: pointer;
   transition: all ease-in-out 0.3s;
   &:hover {

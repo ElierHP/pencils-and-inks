@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import { GoSearch } from "react-icons/go";
+import SearchInput from "./ui/TextInput";
 
 export default function Searchbar() {
   return (
@@ -24,13 +25,6 @@ const SearchBarMain = styled.div`
   ${theme.mq()[2]} {
     grid-column: initial;
   }
-`;
-
-const SearchInput = styled.input`
-  padding: 0 1rem;
-  border: 2px solid ${theme.colors.neutral};
-  width: 100%;
-  border-radius: 3px;
 `;
 
 const SearchIcon = styled.div`
