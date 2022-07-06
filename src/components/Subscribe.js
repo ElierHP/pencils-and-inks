@@ -2,21 +2,19 @@ import React from "react";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import { FaMailBulk } from "react-icons/fa";
-import Section from "./ui/Section";
-import Button from "./ui/Button";
-import SearchInput from "./ui/TextInput";
+import { Section, Button, TextInput } from "./ui";
 
 export default function Subscribe() {
   return (
     <Section>
       <Wrapper>
         <FaMailBulk size={80} color={theme.colors.neutralDark} />
-        <h2>Let's Keep In Touch!</h2>
+        <Heading>Let's Keep In Touch!</Heading>
         <p>
           Subscribe to receive special offers, giveaways, and exclusive deals.
         </p>
         <EmailInput>
-          <SearchInput type="email" placeholder={"Email address."} />
+          <TextInput type="email" placeholder={"Email address..."} />
           <Button>Subscribe</Button>
         </EmailInput>
       </Wrapper>
@@ -32,6 +30,10 @@ const Wrapper = styled.div`
   text-align: center;
   padding: 0 2rem;
   gap: 2rem;
+`;
+
+const Heading = styled.h2`
+  margin: 0;
 `;
 
 const EmailInput = styled.div`

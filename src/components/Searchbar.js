@@ -2,12 +2,12 @@ import React from "react";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import { GoSearch } from "react-icons/go";
-import SearchInput from "./ui/TextInput";
+import { TextInput } from "./ui";
 
 export default function Searchbar() {
   return (
     <SearchBarMain>
-      <SearchInput type="text" placeholder="Search..." />
+      <TextInput type="text" placeholder="Search..." />
       <SearchIcon>
         <GoSearch size={25} color={theme.colors.light} />
       </SearchIcon>

@@ -4,9 +4,7 @@ import styled from "@emotion/styled";
 import axios from "axios";
 import Image from "next/image";
 import theme from "../styles/theme";
-import Section from "./ui/Section";
-import Container from "./ui/Container";
-import Button from "./ui/Button";
+import { Section, Container, Button } from "./ui";
 
 export default function NewItems() {
   const [latest, setLatest] = useState([]);

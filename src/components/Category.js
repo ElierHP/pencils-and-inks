@@ -3,8 +3,7 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import theme from "../styles/theme";
-import Container from "./ui/Container";
-import Section from "./ui/Section";
+import { Section, Container } from "./ui";
 import { v4 as uuidv4 } from "uuid";
 
 const categoryData = [

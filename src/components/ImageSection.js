@@ -3,8 +3,7 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import theme from "../styles/theme";
-import Section from "./ui/Section";
-import Container from "./ui/Container";
+import { Section, Container } from "./ui";
 
 export default function ImageSection() {
   return (

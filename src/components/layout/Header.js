@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
-import Container from "../ui/Container";
+import { Container, Logo } from "../ui";
 import { HiMenu } from "react-icons/hi";
 import Searchbar from "../Searchbar";
 import ShoppingCart from "../ShoppingCart";
 import Navbar from "./Navbar";
-import Logo from "../ui/Logo";
 
 export default function Header() {
   // State for the mobile sidebar menu. If true, sidebar displays.
