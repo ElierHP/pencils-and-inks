@@ -63,6 +63,7 @@ export default function Category() {
 // Styles
 const Title = styled.h2`
   margin-bottom: 4rem;
+  text-align: center;
 `;
 
 const List = styled.ul`

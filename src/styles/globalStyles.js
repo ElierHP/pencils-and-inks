@@ -55,7 +55,8 @@ export default function GlobalStyles() {
         }
         ,
         h3 {
-          font-size: ${theme.fontSizes.large}rem;
+          font-size: ${theme.fontSizes.mediumLarge}rem;
+          margin-bottom: 1rem;
         }
       `}
     />
