@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import Link from "next/link";
 
-export default function Logo({ href, size }) {
+export default function Logo({ href, size, isLink = true }) {
   // Styles
   const Text = styled.a`
     font-weight: ${theme.fontWeights.bold};
@@ -20,8 +20,14 @@ export default function Logo({ href, size }) {
   `;
 
   return (
-    <Link href={href}>
-      <Text>{"Pencils&Inks"}</Text>
-    </Link>
+    <>
+      {isLink ? (
+        <Link href={href}>
+          <Text>{"Pencils&Inks"}</Text>
+        </Link>
+      ) : (
+        <Text>{"Pencils&Inks"}</Text>
+      )}
+    </>
   );
 }

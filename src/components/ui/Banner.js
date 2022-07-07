@@ -12,7 +12,7 @@ export default function Banner() {
         <Paragraph>
           Top quality products to unleash your inner creativity!
         </Paragraph>
-        <Button href="/pencils" isLink={true}>
+        <Button href="/products" isLink={true}>
           View Products
         </Button>
       </Section>

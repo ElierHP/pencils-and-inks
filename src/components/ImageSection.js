@@ -3,15 +3,18 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import theme from "../styles/theme";
-import { Section, Container } from "./ui";
+import { Section, Container, Logo } from "./ui";
 
 export default function ImageSection() {
   return (
     <Section>
       <Container>
         <Wrapper>
-          <Link href="/">
+          <Link href="/about">
             <MainImage>
+              <LogoContainer>
+                <Logo isLink={false} size={2} />
+              </LogoContainer>
               <Image
                 alt={"city-drawing"}
                 src={"/city-drawing.jpg"}
@@ -21,8 +24,9 @@ export default function ImageSection() {
             </MainImage>
           </Link>
           <ImageGroup>
-            <Link href="/">
+            <Link href="/pencils/graphite-pencils">
               <ImageContainer>
+                <Title>Drawing</Title>
                 <Image
                   alt={"bird-drawing"}
                   src={"/bird-drawing.jpg"}
@@ -33,8 +37,9 @@ export default function ImageSection() {
                 />
               </ImageContainer>
             </Link>
-            <Link href="/">
+            <Link href="/papers/sketchbooks">
               <ImageContainer>
+                <Title>Sketchbook</Title>
                 <Image
                   alt={"flower-drawing"}
                   src={"/flower-drawing.jpg"}
@@ -77,6 +82,14 @@ const MainImage = styled.div`
   }
 `;
 
+const LogoContainer = styled.div`
+  position: absolute;
+  top: 2rem;
+  width: 100%;
+  text-align: center;
+  z-index: 1;
+`;
+
 const ImageGroup = styled.div`
   display: flex;
   flex-direction: row;
@@ -101,5 +114,22 @@ const ImageContainer = styled.div`
   height: 100%;
   ${theme.mq()[0]} {
     height: 50%;
+  }
+`;
+
+const Title = styled.a`
+  position: absolute;
+  top: 2rem;
+  width: 100%;
+  z-index: 1;
+  font-weight: ${theme.fontWeights.bold};
+  text-align: center;
+  transition: ${theme.transition.primary};
+  &:hover {
+    color: ${theme.colors.hover};
+  }
+  ${theme.mq()[0]} {
+    text-align: left;
+    left: 2rem;
   }
 `;
