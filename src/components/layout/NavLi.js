@@ -17,7 +17,9 @@ export default function NavLi({ data, show, setShow, isSubNav = true }) {
           onClick={() => setShow(!show)}
         >
           <LinkContainer>
-            <Link href={data.mainNav.url}>{data.mainNav.name}</Link>
+            <Link href={data.mainNav.url}>
+              <A>{data.mainNav.name}</A>
+            </Link>
             <DownArrow size={17} color={theme.colors.neutralDark} />
           </LinkContainer>
 
@@ -27,7 +29,9 @@ export default function NavLi({ data, show, setShow, isSubNav = true }) {
       ) : (
         // Else if there is no sub-nav, render simple link.
         <Li>
-          <Link href="/">{data.name}</Link>
+          <Link href="/">
+            <A>{data.name}</A>
+          </Link>
         </Li>
       )}
     </>
@@ -52,6 +56,13 @@ const LinkContainer = styled.div`
 
   ${theme.mq()[2]} {
     justify-content: center;
+  }
+`;
+
+const A = styled.a`
+  transition: ${theme.transition.primary};
+  &:hover {
+    color: ${theme.colors.hover};
   }
 `;
 

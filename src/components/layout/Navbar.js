@@ -22,11 +22,7 @@ export default function Navbar({ isOpen, setIsOpen }) {
       <NavUl>
         {/* Closes Mobile Menu */}
         <CloseIcon>
-          <IoClose
-            size={30}
-            color={theme.colors.neutralDark}
-            onClick={() => setIsOpen(false)}
-          />
+          <IoClose size={30} color="inherit" onClick={() => setIsOpen(false)} />
         </CloseIcon>
 
         {/* Home Page Link */}
@@ -62,6 +58,11 @@ export default function Navbar({ isOpen, setIsOpen }) {
 const CloseIcon = styled.div`
   text-align: right;
   display: block;
+  transition: ${theme.transition.primary};
+  color: ${theme.colors.neutralDark};
+  &:hover {
+    color: ${theme.colors.btnHover};
+  }
   ${theme.mq()[2]} {
     display: none;
   }

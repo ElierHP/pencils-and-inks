@@ -61,6 +61,10 @@ const Wrapper = styled.div`
 const MenuIcon = styled.div`
   display: flex;
   align-items: center;
+  transition: ${theme.transition.primary};
+  &:hover {
+    color: ${theme.colors.btnHover};
+  }
   ${theme.mq()[2]} {
     display: none;
   }

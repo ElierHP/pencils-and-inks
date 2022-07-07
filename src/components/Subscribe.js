@@ -40,8 +40,10 @@ const EmailInput = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  height: 40px;
   ${theme.mq()[1]} {
     max-width: 400px;
     flex-direction: row;
+    height: "initial";
   }
 `;

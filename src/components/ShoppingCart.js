@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
-import { GrCart } from "react-icons/gr";
+import { CgShoppingCart } from "react-icons/cg";
 
 export default function ShoppingCart() {
   return (
@@ -27,14 +27,21 @@ const Cart = styled.div`
   }
 `;
 
-const CartIcon = styled(GrCart)`
+const CartIcon = styled(CgShoppingCart)`
   font-size: 30px;
+  transition: ${theme.transition.primary};
+  &:hover {
+    color: ${theme.colors.hover};
+    transform: rotate(-8deg);
+  }
+
   ${theme.mq()[1]} {
-    font-size: 35px;
+    font-size: 40px;
   }
 `;
 const CartTitle = styled.span`
   display: none;
+  color: inherit;
   ${theme.mq()[2]} {
     display: block;
   }

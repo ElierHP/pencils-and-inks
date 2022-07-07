@@ -29,9 +29,9 @@ const Btn = styled.div`
   padding: 0.8rem 1.5rem;
   border-radius: 4px;
   cursor: pointer;
-  transition: all ease-in-out 0.3s;
+  transition: ${theme.transition.primary};
   &:hover {
-    background: ${theme.colors.dark};
+    background: ${theme.colors.btnHover};
   }
 `;
 

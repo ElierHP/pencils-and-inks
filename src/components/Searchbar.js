@@ -35,4 +35,8 @@ const SearchIcon = styled.div`
   justify-content: center;
   border-radius: 3px;
   cursor: pointer;
+  transition: ${theme.transition.primary};
+  &:hover {
+    background: ${theme.colors.btnHover};
+  }
 `;

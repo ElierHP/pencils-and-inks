@@ -70,7 +70,7 @@ const MainImage = styled.div`
   cursor: pointer;
   ${theme.mq()[0]} {
     height: 350px;
-    width: 60%;
+    width: 65%;
   }
   ${theme.mq()[1]} {
     height: 550px;
@@ -87,7 +87,7 @@ const ImageGroup = styled.div`
   ${theme.mq()[0]} {
     flex-direction: column;
     height: 350px;
-    width: 40%;
+    width: 35%;
     gap: 3rem;
   }
   ${theme.mq()[1]} {
