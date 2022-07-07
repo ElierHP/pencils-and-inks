@@ -18,14 +18,16 @@ export default function Footer() {
             <h3>Business Info</h3>
             <List>
               <li>
-                <a href={"mailto:info@pencils&inks.com"}>
+                <A href={"mailto:info@pencils&inks.com"}>
                   {"info@pencils&inks.com"}
-                </a>
+                </A>
               </li>
               <li>1800-544-2364</li>
               <li>Open 24/7</li>
               <li>
-                <Link href="/about">About Us</Link>
+                <Link href="/about">
+                  <A>About Us</A>
+                </Link>
               </li>
             </List>
           </Info>
@@ -35,16 +37,24 @@ export default function Footer() {
             <h3>Quick Links</h3>
             <List>
               <li>
-                <Link href="/">Home</Link>
+                <Link href="/">
+                  <A>Home</A>
+                </Link>
               </li>
               <li>
-                <Link href="/pencils">Pencils</Link>
+                <Link href="/pencils">
+                  <A>Pencils</A>
+                </Link>
               </li>
               <li>
-                <Link href="/papers">Papers</Link>
+                <Link href="/papers">
+                  <A>Papers</A>
+                </Link>
               </li>
               <li>
-                <Link href="/inks">Inks</Link>
+                <Link href="/inks">
+                  <A>Inks</A>
+                </Link>
               </li>
             </List>
           </div>
@@ -99,5 +109,13 @@ const List = styled.ul`
   column-gap: 5rem;
   ${theme.mq()[2]} {
     grid-template-columns: 1fr 1fr;
+  }
+`;
+
+const A = styled.a`
+  transition: ${theme.transition.primary};
+  cursor: pointer;
+  &:hover {
+    color: ${theme.colors.hover};
   }
 `;
