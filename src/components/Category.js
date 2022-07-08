@@ -72,7 +72,7 @@ const List = styled.ul`
   cursor: pointer;
   flex-wrap: wrap;
   gap: 3rem;
-  ${theme.mq()[1]} {
+  ${theme.mq()[0]} {
     justify-content: space-between;
   }
 `;
