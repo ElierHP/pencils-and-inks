@@ -9,7 +9,7 @@ export default function SubNav({ showNav, data }) {
       {data.map((item) => (
         <li key={item.key}>
           <Link href={item.url}>
-            <A>{item.name}</A>
+            <a>{item.name}</a>
           </Link>
         </li>
       ))}
@@ -49,12 +49,5 @@ const Nav = styled.ul`
       props.showNav ? "translateY(0)" : "translateY(-30px)"};
     visibility: ${(props) => (props.showNav ? "visible" : "hidden")};
     transition: ${theme.transition.primary};
-  }
-`;
-
-const A = styled.a`
-  transition: ${theme.transition.hover};
-  &:hover {
-    color: ${theme.colors.primary};
   }
 `;

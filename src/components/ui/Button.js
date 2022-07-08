@@ -13,32 +13,22 @@ export default function Button({ children, href, isLink }) {
           </Link>
         </Btn>
       ) : (
-        <Btn>
-          <Text>{children}</Text>
-        </Btn>
+        <Btn>{children}</Btn>
       )}
     </>
   );
 }
 
 // Styles
-const Btn = styled.div`
-  display: inline-block;
+const Btn = styled.button`
   background: ${theme.colors.primary};
   color: ${theme.colors.light};
   padding: 0.8rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: ${theme.transition.primary};
-  &:hover {
-    background: ${theme.colors.btnHover};
-  }
 `;
 
 const A = styled.a`
   color: inherit;
-`;
-
-const Text = styled.p`
-  color: inherit;
+  &:hover {
+    color: ${theme.colors.light};
+  }
 `;

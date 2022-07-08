@@ -81,7 +81,7 @@ const ImageContainer = styled.div`
   position: relative;
   width: 150px;
   height: 150px;
-  ${theme.mq()[3]} {
+  ${theme.mq()[2]} {
     width: 250px;
     height: 250px;
   }

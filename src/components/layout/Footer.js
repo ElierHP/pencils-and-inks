@@ -18,15 +18,15 @@ export default function Footer() {
             <h3>Business Info</h3>
             <List>
               <li>
-                <A href={"mailto:info@pencils&inks.com"}>
+                <a href={"mailto:info@pencils&inks.com"}>
                   {"info@pencils&inks.com"}
-                </A>
+                </a>
               </li>
               <li>1800-544-2364</li>
               <li>Open 24/7</li>
               <li>
                 <Link href="/about">
-                  <A>About Us</A>
+                  <a>About Us</a>
                 </Link>
               </li>
             </List>
@@ -38,22 +38,22 @@ export default function Footer() {
             <List>
               <li>
                 <Link href="/">
-                  <A>Home</A>
+                  <a>Home</a>
                 </Link>
               </li>
               <li>
                 <Link href="/pencils">
-                  <A>Pencils</A>
+                  <a>Pencils</a>
                 </Link>
               </li>
               <li>
                 <Link href="/papers">
-                  <A>Papers</A>
+                  <a>Papers</a>
                 </Link>
               </li>
               <li>
                 <Link href="/inks">
-                  <A>Inks</A>
+                  <a>Inks</a>
                 </Link>
               </li>
             </List>
@@ -66,10 +66,10 @@ export default function Footer() {
 
 // Styles
 const MainFooter = styled.footer`
-  padding: ${theme.space.section}rem;
-  padding-top: 4rem;
-  ${theme.mq()[1]} {
-    padding-top: 8rem;
+  padding: 1rem;
+  padding-top: 8rem;
+  ${theme.mq()[0]} {
+    padding: ${theme.space.section}rem;
   }
 `;
 
@@ -109,13 +109,5 @@ const List = styled.ul`
   column-gap: 5rem;
   ${theme.mq()[2]} {
     grid-template-columns: 1fr 1fr;
-  }
-`;
-
-const A = styled.a`
-  transition: ${theme.transition.primary};
-  cursor: pointer;
-  &:hover {
-    color: ${theme.colors.hover};
   }
 `;

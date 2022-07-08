@@ -80,11 +80,10 @@ const Title = styled.h2`
 const List = styled.ul`
   display: flex;
   justify-content: center;
-
   cursor: pointer;
   flex-wrap: wrap;
   gap: 3rem;
-  ${theme.mq()[1]} {
+  ${theme.mq()[0]} {
     justify-content: space-between;
   }
 `;
@@ -99,7 +98,7 @@ const ProductImage = styled.div`
   position: relative;
   width: 150px;
   height: 150px;
-  ${theme.mq()[3]} {
+  ${theme.mq()[2]} {
     width: 250px;
     height: 250px;
   }

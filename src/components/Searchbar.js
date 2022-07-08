@@ -27,16 +27,10 @@ const SearchBarMain = styled.div`
   }
 `;
 
-const SearchIcon = styled.div`
+const SearchIcon = styled.button`
   padding: 0 1.5rem;
   background: ${theme.colors.primary};
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: ${theme.transition.primary};
-  &:hover {
-    background: ${theme.colors.btnHover};
-  }
 `;
