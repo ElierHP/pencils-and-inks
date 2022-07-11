@@ -6,10 +6,11 @@ import Image from "next/image";
 import theme from "../styles/theme";
 import { Section, Container, Button } from "./ui";
 import { useQuery } from "react-query";
+import { BASE_URL } from "../utils/api";
 
 export default function NewItems() {
   const getProducts = async () =>
-    await axios.get("http://localhost:3000/latest").then((res) => res.data);
+    await axios.get(`${BASE_URL}/latest`).then((res) => res.data);
 
   // Queries, initial data is an empty array.
   const {

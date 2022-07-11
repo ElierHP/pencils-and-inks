@@ -2,12 +2,13 @@ import React from "react";
 import Layout from "../components/layout/Layout";
 import axios from "axios";
 import { useQuery } from "react-query";
+import { BASE_URL } from "../utils/api";
 
 export default function Featured() {
   const getProducts = async () => {
     // Get request for all products
     const data = await axios
-      .get("http://localhost:3000/products")
+      .get(`${BASE_URL}/products`)
       .then((res) => res.data);
 
     // Filter out featured products

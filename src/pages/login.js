@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Layout from "../components/layout/Layout";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { BASE_URL } from "../utils/api";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -14,7 +15,7 @@ export default function Login() {
     try {
       // Send login request to server
       const res = await axios.post(
-        "http://localhost:3000/login",
+        `${BASE_URL}/login`,
         {
           email,
           password,
