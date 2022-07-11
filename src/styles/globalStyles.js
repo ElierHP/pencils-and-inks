@@ -68,9 +68,6 @@ export default function GlobalStyles() {
         ,
         h1 {
           font-size: ${theme.fontSizes.heading}rem;
-          ${theme.mq()[1]} {
-            font-size: ${theme.fontSizes.largeHeading}rem;
-          }
         }
         ,
         h2 {

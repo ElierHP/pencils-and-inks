@@ -8,7 +8,6 @@ const theme = {
     mediumLarge: 1.8,
     large: 2.4,
     heading: 3.2,
-    largeHeading: 6,
   },
   fontWeights: {
     thin: 300,
