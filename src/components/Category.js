@@ -10,7 +10,7 @@ const categoryData = [
   {
     title: "Featured",
     url: "/featured",
-    img: "https://images.ctfassets.net/f1fikihmjtrp/31Dkj7MHIh4Rx28iaTXiMY/0b9e72dd920a6aaf86155cfc55bf6fd3/82410-1012-M-4ww.jpg?q=80&w=400",
+    img: "https://images.ctfassets.net/f1fikihmjtrp/daEveLcumJzS5BXPLXoNj/9a17feb6cb64d46d77e6e0eaf311cf4f/20852-group-3ww-l.jpg?q=80&w=400",
     key: uuidv4(),
   },
   {
@@ -22,13 +22,13 @@ const categoryData = [
   {
     title: "Papers",
     url: "/papers",
-    img: "https://images.ctfassets.net/f1fikihmjtrp/31Dkj7MHIh4Rx28iaTXiMY/0b9e72dd920a6aaf86155cfc55bf6fd3/82410-1012-M-4ww.jpg?q=80&w=400",
+    img: "https://cdn.shopify.com/s/files/1/1903/8473/products/drawing-pad-18x24-2-pack_Q7TTjjJW_648x700.jpg?v=1652889216",
     key: uuidv4(),
   },
   {
     title: "Inks",
     url: "/inks",
-    img: "https://images.ctfassets.net/f1fikihmjtrp/31Dkj7MHIh4Rx28iaTXiMY/0b9e72dd920a6aaf86155cfc55bf6fd3/82410-1012-M-4ww.jpg?q=80&w=400",
+    img: "https://cdn.shopify.com/s/files/1/1903/8473/products/roller-ball-pens-set-of-20-pcs-black-0-5mm-point_uCqBEJY3_1275x1459.jpg?v=1652891108",
     key: uuidv4(),
   },
 ];
