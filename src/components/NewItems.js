@@ -1,40 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import axios from "axios";
 import Image from "next/image";
 import theme from "../styles/theme";
 import { Section, Container, Button } from "./ui";
+import { useQuery } from "react-query";
 
 export default function NewItems() {
-  const [latest, setLatest] = useState([]);
-  const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const getProducts = async () =>
+    await axios.get("http://localhost:3000/latest").then((res) => res.data);
 
-  //   Get the 4 newest products from server.
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const data = await axios
-          .get("http://localhost:3000/latest")
-          .then((res) => res.data);
-
-        // Set products to latest
-        setLatest(data);
-      } catch (error) {
-        setIsError(true);
-      }
-      setIsLoading(false);
-    };
-    getProducts();
-  }, []);
+  // Queries, initial data is an empty array.
+  const {
+    data: products,
+    isLoading,
+    isError,
+  } = useQuery("products", getProducts, { initialData: [] });
 
   return (
     <Section>
       <Container>
         <Title>Latest Products</Title>
         <List>
-          {latest.map((product) => (
+          {products.map((product) => (
             <ListItem key={product.id}>
               {/* Clicking links to product page. */}
               <Link href="/">

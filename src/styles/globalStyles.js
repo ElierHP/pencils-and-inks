@@ -65,6 +65,7 @@ export default function GlobalStyles() {
           line-height: ${theme.lineHeights.heading};
           margin: 1rem 0;
         }
+        ,
         h1 {
           font-size: ${theme.fontSizes.heading}rem;
           ${theme.mq()[1]} {
