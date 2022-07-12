@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Layout from "../components/layout/Layout";
 import axios from "axios";
 import { Container, FormButton, TextInput } from "../components/ui";
@@ -11,6 +12,7 @@ import theme from "../styles/theme";
 import Link from "next/link";
 
 export default function Login() {
+  const [loginError, setLoginError] = useState(false);
   const router = useRouter();
 
   const {
@@ -22,14 +24,20 @@ export default function Login() {
   });
 
   const LoginUser = async (data) => {
-    // Send login request to server
-    const res = await axios.post(`${BASE_URL}/login`, data, {
-      withCredentials: true,
-    });
+    try {
+      // Send login request to server
+      const res = await axios.post(
+        `${BASE_URL}/login`,
+        { session: data },
+        {
+          withCredentials: true,
+        }
+      );
 
-    // Redirect to home page if successful
-    if (res.status === 200) {
-      router.push("/");
+      // Redirect to home page if successful
+      if (res.status === 200) router.push("/");
+    } catch (error) {
+      setLoginError(true);
     }
   };
 
@@ -45,7 +53,11 @@ export default function Login() {
       <Section>
         <Container>
           <Title>Login</Title>
+
           <Form onSubmit={handleSubmit(onSubmit)}>
+            {loginError && (
+              <LoginErrorMsg>Incorrect Email or Password.</LoginErrorMsg>
+            )}
             {/* Email Input */}
             <InputContainer>
               <TextInput
@@ -59,8 +71,9 @@ export default function Login() {
               {errors.email && (
                 <ErrorMsg>{formatMessage(errors.email)}</ErrorMsg>
               )}
-              {/* Password Input */}
             </InputContainer>
+
+            {/* Password Input */}
             <InputContainer>
               <TextInput
                 type="password"
@@ -76,7 +89,7 @@ export default function Login() {
             </InputContainer>
 
             {/* Submit Button */}
-            <FormButton type="submit" text={"Log in"} />
+            <FormButton type="submit" text="Sign in" />
 
             {/* Links to Register and Password Recovery. */}
             <Links>
@@ -103,6 +116,10 @@ const Title = styled.h1`
   text-align: center;
   margin-bottom: 4rem;
   margin-top: 0;
+`;
+
+const LoginErrorMsg = styled.p`
+  color: ${theme.colors.error};
 `;
 
 const Form = styled.form`
