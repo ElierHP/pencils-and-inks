@@ -4,5 +4,6 @@ import Container from "./Container";
 import Logo from "./Logo";
 import Section from "./Section";
 import TextInput from "./TextInput";
+import FormButton from "./FormButton";
 
-export { Banner, Button, Container, Logo, Section, TextInput };
+export { Banner, Button, Container, Logo, Section, TextInput, FormButton };

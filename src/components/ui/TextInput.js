@@ -2,8 +2,20 @@ import React from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 
-export default function TextInput({ type, placeholder }) {
-  return <Input type={type} placeholder={placeholder} />;
+export default function TextInput({
+  type,
+  placeholder,
+  autoComplete,
+  register,
+}) {
+  return (
+    <Input
+      type={type}
+      placeholder={placeholder}
+      {...register}
+      autoComplete={autoComplete}
+    />
+  );
 }
 
 // Styles
