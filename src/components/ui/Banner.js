@@ -6,8 +6,8 @@ import Logo from "./Logo";
 
 export default function Banner() {
   return (
-    <Main>
-      <Section>
+    <Section>
+      <Wrapper>
         <Logo size={3.5} href={"/products"} />
         <Paragraph>
           Top quality products to unleash your inner creativity!
@@ -15,7 +15,7 @@ export default function Banner() {
         <Button href="/products" isLink={true}>
           View Products
         </Button>
-      </Section>
+      </Wrapper>
 
       <BackgroundImage>
         <Image
@@ -27,12 +27,12 @@ export default function Banner() {
           priority={true}
         />
       </BackgroundImage>
-    </Main>
+    </Section>
   );
 }
 
 // Styles
-const Main = styled.main`
+const Section = styled.section`
   position: relative;
   display: flex;
   justify-content: center;
@@ -40,7 +40,7 @@ const Main = styled.main`
   height: 400px;
 `;
 
-const Section = styled.section`
+const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;

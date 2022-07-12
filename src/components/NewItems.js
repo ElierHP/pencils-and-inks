@@ -12,50 +12,58 @@ export default function NewItems() {
   const getProducts = async () =>
     await axios.get(`${BASE_URL}/latest`).then((res) => res.data);
 
-  // Queries, initial data is an empty array.
+  // Queries
   const {
     data: products,
     isLoading,
     isError,
-  } = useQuery("products", getProducts, { initialData: [] });
+  } = useQuery("products", getProducts);
 
   return (
     <Section>
       <Container>
         <Title>Latest Products</Title>
-        <List>
-          {products.map((product) => (
-            <ListItem key={product.id}>
-              {/* Clicking links to product page. */}
-              <Link href="/">
+
+        {/* Display List, if there's no loading or error. */}
+        {!isLoading && !isError ? (
+          <List>
+            {products.map((product) => (
+              <ListItem key={product.id}>
+                {/* Clicking links to product page. */}
+                <Link href="/">
+                  <div>
+                    <ProductImage>
+                      <Image
+                        alt={product.title}
+                        src={product.images.split(",")[0]}
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    </ProductImage>
+
+                    <ProductTitle>{product.title}</ProductTitle>
+                    <Price>${product.price}</Price>
+                  </div>
+                </Link>
+
+                {/* Button - Clicking adds to shopping cart. */}
                 <div>
-                  <ProductImage>
-                    <Image
-                      alt={product.title}
-                      src={product.images.split(",")[0]}
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </ProductImage>
-
-                  <ProductTitle>{product.title}</ProductTitle>
-                  <Price>${product.price}</Price>
+                  <Button>Add To Cart</Button>
                 </div>
-              </Link>
+              </ListItem>
+            ))}
+          </List>
+        ) : (
+          <>
+            {/* Loading Display */}
+            {isLoading && (
+              <LoadingMsg>Loading products... please wait.</LoadingMsg>
+            )}
 
-              {/* Button - Clicking adds to shopping cart. */}
-              <div>
-                <Button>Add To Cart</Button>
-              </div>
-            </ListItem>
-          ))}
-        </List>
-
-        {/* Loading Display */}
-        {isLoading && <LoadingMsg>Loading products... please wait.</LoadingMsg>}
-
-        {/* Error Display */}
-        {isError && <ErrorMsg>Error: Couldn't load products.</ErrorMsg>}
+            {/* Error Display */}
+            {isError && <ErrorMsg>Error: Couldn't load products.</ErrorMsg>}
+          </>
+        )}
       </Container>
     </Section>
   );
