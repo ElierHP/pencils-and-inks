@@ -41,6 +41,7 @@ const theme = {
   transition: {
     primary: "all 0.3s ease-in-out",
     secondary: "all 0.5s ease-in-out",
+    color: "color 0.3s ease-in-out",
   },
   breakpoints: [576, 768, 992, 1200],
   mq() {

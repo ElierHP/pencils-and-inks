@@ -39,7 +39,7 @@ export default function GlobalStyles() {
           text-decoration: none;
           color: ${theme.colors.dark};
           font-weight: ${theme.fontWeights.body};
-          transition: ${theme.transition.primary};
+          transition: ${theme.transition.color};
           &:hover {
             color: ${theme.colors.hover};
           }

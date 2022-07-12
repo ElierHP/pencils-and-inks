@@ -14,7 +14,7 @@ export default function NavLi({ data, show, setShow, isSubNav = true }) {
           // Handles the display of the sub-nav menus
           onMouseEnter={() => setShow(true)}
           onMouseLeave={() => setShow(false)}
-          onClick={() => setShow(!show)}
+          onTouchStart={() => setShow(!show)}
         >
           <LinkContainer>
             <Link href={data.mainNav.url}>
