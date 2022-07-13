@@ -51,9 +51,9 @@ const Wrapper = styled.div`
   padding-bottom: 3rem;
   grid-gap: 2rem;
   position: relative;
-  ${theme.mq()[1]} {
+  ${theme.mq()[2]} {
     grid-gap: 5rem;
-    padding: 2rem;
+    padding: 2rem 0;
   }
 `;
 

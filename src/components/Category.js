@@ -71,7 +71,6 @@ const List = styled.ul`
   justify-content: center;
   cursor: pointer;
   flex-wrap: wrap;
-  gap: 3rem;
   ${theme.mq()[0]} {
     justify-content: space-between;
   }

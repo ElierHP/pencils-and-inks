@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Layout from "../components/layout/Layout";
 import axios from "axios";
 import { Container, FormButton, TextInput } from "../components/ui";
@@ -10,8 +10,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import Link from "next/link";
+import { User } from "../context/UserProvider";
 
 export default function Login() {
+  //User Context
+  const [, setUser] = useContext(User);
+
   const [loginError, setLoginError] = useState(false);
   const router = useRouter();
 
@@ -35,7 +39,10 @@ export default function Login() {
       );
 
       // Redirect to home page if successful
-      if (res.status === 200) router.push("/");
+      if (res.status === 200) {
+        setUser(res.data);
+        router.push("/");
+      }
     } catch (error) {
       setLoginError(true);
     }
