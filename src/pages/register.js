@@ -1,21 +1,16 @@
-import { useState, useContext } from "react";
 import Layout from "../components/layout/Layout";
 import { Container, FormButton, TextInput } from "../components/ui";
-import { useRouter } from "next/router";
 import { userSchema } from "../validations/user";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import Link from "next/link";
-import { createUser } from "../utils/api/users";
-import { User } from "../context/UserProvider";
 import formatMessage from "../utils/formatMessage";
+import useAccount from "../hooks/useAccount";
 
 export default function Register() {
-  const [, setUser] = useContext(User);
-  const [registerError, setRegisterError] = useState(false);
-  const router = useRouter();
+  const [registerUser, registerError] = useAccount();
 
   const {
     register,
@@ -25,8 +20,7 @@ export default function Register() {
     resolver: yupResolver(userSchema),
   });
 
-  const onSubmit = (data) =>
-    createUser({ ...data, role: "member" }, setUser, setRegisterError, router);
+  const onSubmit = (data) => registerUser({ ...data, role: "member" });
 
   return (
     <Layout>

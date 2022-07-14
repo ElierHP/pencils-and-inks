@@ -7,10 +7,10 @@ import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import Link from "next/link";
 import formatMessage from "../utils/formatMessage";
-import { useLogin } from "../hooks/users";
+import useAccount from "../hooks/useAccount";
 
 export default function Login() {
-  const [login, loginError] = useLogin();
+  const [login, loginError] = useAccount();
 
   const {
     register,
@@ -20,7 +20,7 @@ export default function Login() {
     resolver: yupResolver(userSchema),
   });
 
-  const onSubmit = (data) => login(data);
+  const onSubmit = (data) => login(data, "login");
 
   return (
     <Layout>

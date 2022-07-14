@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import Link from "next/link";
-import { useLogout } from "../../hooks/users";
+import { logout } from "../../utils/api/users";
+import { useRouter } from "next/router";
+import { User } from "../../context/UserProvider";
 
 export default function SubNav({ showNav, data }) {
-  const logout = useLogout();
+  const [, setUser] = useContext(User);
+  const router = useRouter();
 
   return (
     <Nav showNav={showNav}>
@@ -16,7 +19,7 @@ export default function SubNav({ showNav, data }) {
               <a>{item.name}</a>
             </Link>
           ) : (
-            <a onClick={() => logout()}>Logout</a>
+            <a onClick={() => logout(setUser, router)}>Logout</a>
           )}
         </li>
       ))}

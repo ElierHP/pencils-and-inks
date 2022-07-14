@@ -13,17 +13,11 @@ export const getUser = async (setUser) => {
   }
 };
 
-// Create new account
-export const createUser = async (data, setUser, setRegisterError) => {
-  try {
-    // Send register request to server
-    const res = await axios.post(`${BASE_URL}/users`, { user: data });
-
-    // Redirect to home page if successful
-    if (res.status === 201) {
-      setUser(res.data);
-    }
-  } catch (error) {
-    setRegisterError(true);
+// Logout
+export const logout = async (setUser, router) => {
+  const res = await axios.delete(`${BASE_URL}/logout`);
+  if (res.status === 204) {
+    setUser(null);
+    router.push("/");
   }
 };

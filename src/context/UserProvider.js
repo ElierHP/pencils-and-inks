@@ -5,11 +5,28 @@ export const User = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const serverRequest = () => getUser(setUser);
+    const serverRequest = async () => {
+      try {
+        await getUser(setUser);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
+    };
+
     serverRequest();
   }, []);
 
-  return <User.Provider value={[user, setUser]}>{children}</User.Provider>;
+  return (
+    <>
+      {loading ? (
+        <div>LOADING</div>
+      ) : (
+        <User.Provider value={[user, setUser]}>{children}</User.Provider>
+      )}
+    </>
+  );
 };
