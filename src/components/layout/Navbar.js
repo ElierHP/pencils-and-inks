@@ -60,6 +60,7 @@ const CloseIcon = styled.div`
   display: block;
   transition: ${theme.transition.primary};
   color: ${theme.colors.neutralDark};
+  cursor: pointer;
   &:hover {
     color: ${theme.colors.btnHover};
   }

@@ -8,15 +8,17 @@ import { User } from "../../context/UserProvider";
 
 export default function NavLi({ data, show, setShow, isSubNav = true }) {
   const [user] = useContext(User);
+
   return (
     <>
       {isSubNav ? (
         // If the li has a sub-nav, render this.
         <Li
           // Handles the display of the sub-nav menus
-          onMouseEnter={() => setShow(true)}
-          onMouseLeave={() => setShow(false)}
-          onTouchStart={() => setShow(!show)}
+          onMouseEnter={() => window.innerWidth >= 992 && setShow(true)}
+          onMouseLeave={() => window.innerWidth >= 992 && setShow(false)}
+          // Event for Tablet & Mobile.
+          onClick={() => window.innerWidth < 992 && setShow(!show)}
         >
           <LinkContainer>
             <Link href={data.mainNav.url}>

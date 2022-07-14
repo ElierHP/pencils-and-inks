@@ -62,6 +62,7 @@ const MenuIcon = styled.div`
   display: flex;
   align-items: center;
   transition: ${theme.transition.primary};
+  cursor: pointer;
   &:hover {
     color: ${theme.colors.btnHover};
   }
