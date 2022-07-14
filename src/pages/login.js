@@ -1,21 +1,17 @@
-import { useState, useContext } from "react";
 import Layout from "../components/layout/Layout";
 import { Container, FormButton, TextInput } from "../components/ui";
-import { useRouter } from "next/router";
 import { userSchema } from "../validations/user";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import Link from "next/link";
-import { User } from "../context/UserProvider";
-import { loginUser } from "../utils/api/users";
 import formatMessage from "../utils/formatMessage";
+import { useLogin } from "../hooks/users";
 
 export default function Login() {
-  const [, setUser] = useContext(User);
-  const [loginError, setLoginError] = useState(false);
-  const router = useRouter();
+  const [login, loginError] = useLogin();
+
   const {
     register,
     handleSubmit,
@@ -24,7 +20,7 @@ export default function Login() {
     resolver: yupResolver(userSchema),
   });
 
-  const onSubmit = (data) => loginUser(data, setUser, setLoginError, router);
+  const onSubmit = (data) => login(data);
 
   return (
     <Layout>

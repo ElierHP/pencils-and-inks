@@ -1,6 +1,6 @@
+import { useContext, useEffect } from "react";
 import Layout from "../components/layout/Layout";
 import { Container } from "../components/ui";
-import { useContext } from "react";
 import { User } from "../context/UserProvider";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
@@ -9,7 +9,12 @@ export default function Profile() {
   const [user] = useContext(User);
   const router = useRouter();
 
-  if (user === null) router.push("/login");
+  useEffect(() => {
+    if (user === null) {
+      router.push("/login");
+    }
+  }, []);
+
   return (
     <>
       {user !== null && (

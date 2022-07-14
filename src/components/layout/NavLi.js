@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import Link from "next/link";
 import SubNav from "./SubNav";
 import { IoIosArrowDown } from "react-icons/io";
+import { User } from "../../context/UserProvider";
 
 export default function NavLi({ data, show, setShow, isSubNav = true }) {
+  const [user] = useContext(User);
   return (
     <>
       {isSubNav ? (
@@ -23,8 +25,14 @@ export default function NavLi({ data, show, setShow, isSubNav = true }) {
             <DownArrow size={17} color={theme.colors.neutralDark} />
           </LinkContainer>
 
-          {/* Pencils sub-links */}
-          <SubNav showNav={show} data={data.subNav} />
+          {/* Sub-links */}
+          {data.mainNav.name === "Account" && user !== null ? (
+            // If user is logged in, render a different subnav
+            <SubNav showNav={show} data={data.isLoggedIn} />
+          ) : (
+            //  Else render the regular subNav
+            <SubNav showNav={show} data={data.subNav} />
+          )}
         </Li>
       ) : (
         // Else if there is no sub-nav, render simple link.

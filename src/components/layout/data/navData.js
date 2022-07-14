@@ -69,11 +69,6 @@ export const accountNavData = {
   },
   subNav: [
     {
-      name: "View Profile",
-      url: "/profile",
-      key: uuidv4(),
-    },
-    {
       name: "Login",
       url: "/login",
       key: uuidv4(),
@@ -81,6 +76,18 @@ export const accountNavData = {
     {
       name: "New Account",
       url: "/register",
+      key: uuidv4(),
+    },
+  ],
+  isLoggedIn: [
+    {
+      name: "View Profile",
+      url: "/profile",
+      key: uuidv4(),
+    },
+    {
+      name: "Logout",
+      url: "/",
       key: uuidv4(),
     },
   ],

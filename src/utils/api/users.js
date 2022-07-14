@@ -13,24 +13,8 @@ export const getUser = async (setUser) => {
   }
 };
 
-// User Login
-export const loginUser = async (data, setUser, setLoginError, router) => {
-  try {
-    // Send login request to server
-    const res = await axios.post(`${BASE_URL}/login`, { session: data });
-
-    // Redirect to home page if successful
-    if (res.status === 200) {
-      setUser(res.data);
-      router.push("/");
-    }
-  } catch (error) {
-    setLoginError(true);
-  }
-};
-
 // Create new account
-export const createUser = async (data, setUser, setRegisterError, router) => {
+export const createUser = async (data, setUser, setRegisterError) => {
   try {
     // Send register request to server
     const res = await axios.post(`${BASE_URL}/users`, { user: data });
@@ -38,7 +22,6 @@ export const createUser = async (data, setUser, setRegisterError, router) => {
     // Redirect to home page if successful
     if (res.status === 201) {
       setUser(res.data);
-      router.push("/");
     }
   } catch (error) {
     setRegisterError(true);

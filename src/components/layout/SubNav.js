@@ -1,33 +1,22 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import Link from "next/link";
-import { User } from "../../context/UserProvider";
+import { useLogout } from "../../hooks/users";
 
 export default function SubNav({ showNav, data }) {
-  const [user] = useContext(User);
+  const logout = useLogout();
 
   return (
     <Nav showNav={showNav}>
       {data.map((item) => (
         <li key={item.key}>
-          {item.name !== "Login" ? (
+          {item.name !== "Logout" ? (
             <Link href={item.url}>
               <a>{item.name}</a>
             </Link>
           ) : (
-            // Check if user is logged in.
-            <>
-              {user === null ? (
-                // Display a Login Link if logged in.
-                <Link href={item.url}>
-                  <a>{item.name}</a>
-                </Link>
-              ) : (
-                // Display Logout if not logged in.
-                "Logout"
-              )}
-            </>
+            <a onClick={() => logout()}>Logout</a>
           )}
         </li>
       ))}
