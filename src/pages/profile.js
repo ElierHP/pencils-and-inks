@@ -1,22 +1,28 @@
 import Layout from "../components/layout/Layout";
 import { Container } from "../components/ui";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { User } from "../context/UserProvider";
 import styled from "@emotion/styled";
-import theme from "../styles/theme";
+import { useRouter } from "next/router";
 
 export default function Profile() {
-  const [user, setUser] = useContext(User);
+  const [user] = useContext(User);
+  const router = useRouter();
 
+  if (user === null) router.push("/login");
   return (
-    <Layout>
-      <Container>
-        <Section>
-          <Title>My Profile</Title>
-          <p>Email: {user && user.email}</p>
-        </Section>
-      </Container>
-    </Layout>
+    <>
+      {user !== null && (
+        <Layout>
+          <Container>
+            <Section>
+              <Title>My Profile</Title>
+              <p>Email: {user && user.email}</p>
+            </Section>
+          </Container>
+        </Layout>
+      )}
+    </>
   );
 }
 

@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Layout from "../components/layout/Layout";
-import axios from "axios";
 import { Container, FormButton, TextInput } from "../components/ui";
 import { useRouter } from "next/router";
-import { BASE_URL } from "../utils/api";
 import { userSchema } from "../validations/user";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import Link from "next/link";
+import { createUser } from "../utils/api/users";
+import { User } from "../context/UserProvider";
+import formatMessage from "../utils/formatMessage";
 
 export default function Register() {
+  const [, setUser] = useContext(User);
   const [registerError, setRegisterError] = useState(false);
   const router = useRouter();
 
@@ -23,30 +25,8 @@ export default function Register() {
     resolver: yupResolver(userSchema),
   });
 
-  const CreateUser = async (data) => {
-    try {
-      // Send register request to server
-      const res = await axios.post(
-        `${BASE_URL}/users`,
-        { user: data },
-        {
-          withCredentials: true,
-        }
-      );
-
-      // Redirect to home page if successful
-      if (res.status === 201) router.push("/");
-    } catch (error) {
-      setRegisterError(true);
-    }
-  };
-
-  const onSubmit = (data) => CreateUser({ ...data, role: "member" });
-
-  // Error message starts with an uppercase letter and ends with a period.
-  // Pass in errors.password or errors.email
-  const formatMessage = (errors) =>
-    `${errors.message.charAt(0).toUpperCase() + errors.message.slice(1)}.`;
+  const onSubmit = (data) =>
+    createUser({ ...data, role: "member" }, setUser, setRegisterError, router);
 
   return (
     <Layout>

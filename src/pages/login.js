@@ -1,9 +1,7 @@
 import { useState, useContext } from "react";
 import Layout from "../components/layout/Layout";
-import axios from "axios";
 import { Container, FormButton, TextInput } from "../components/ui";
 import { useRouter } from "next/router";
-import { BASE_URL } from "../utils/api";
 import { userSchema } from "../validations/user";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,14 +9,13 @@ import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import Link from "next/link";
 import { User } from "../context/UserProvider";
+import { loginUser } from "../utils/api/users";
+import formatMessage from "../utils/formatMessage";
 
 export default function Login() {
-  //User Context
   const [, setUser] = useContext(User);
-
   const [loginError, setLoginError] = useState(false);
   const router = useRouter();
-
   const {
     register,
     handleSubmit,
@@ -27,33 +24,7 @@ export default function Login() {
     resolver: yupResolver(userSchema),
   });
 
-  const LoginUser = async (data) => {
-    try {
-      // Send login request to server
-      const res = await axios.post(
-        `${BASE_URL}/login`,
-        { session: data },
-        {
-          withCredentials: true,
-        }
-      );
-
-      // Redirect to home page if successful
-      if (res.status === 200) {
-        setUser(res.data);
-        router.push("/");
-      }
-    } catch (error) {
-      setLoginError(true);
-    }
-  };
-
-  const onSubmit = (data) => LoginUser(data);
-
-  // Error message starts with an uppercase letter and ends with a period.
-  // Pass in errors.password or errors.email
-  const formatMessage = (errors) =>
-    `${errors.message.charAt(0).toUpperCase() + errors.message.slice(1)}.`;
+  const onSubmit = (data) => loginUser(data, setUser, setLoginError, router);
 
   return (
     <Layout>
