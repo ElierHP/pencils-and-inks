@@ -7,6 +7,8 @@ export default function TextInput({
   placeholder,
   autoComplete,
   register,
+  defaultValue,
+  step,
 }) {
   return (
     <Input
@@ -14,6 +16,8 @@ export default function TextInput({
       placeholder={placeholder}
       {...register}
       autoComplete={autoComplete}
+      defaultValue={defaultValue}
+      step={step}
     />
   );
 }

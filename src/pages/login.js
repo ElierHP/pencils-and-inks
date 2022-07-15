@@ -63,6 +63,7 @@ export default function Login() {
             </InputContainer>
 
             {/* Submit Button */}
+
             <FormButton type="submit" text="Sign in" />
 
             {/* Links to Register and Password Recovery. */}

@@ -1,33 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
-import { v4 as uuidv4 } from "uuid";
-import { getProducts } from "../../utils/api/products";
+import { createProduct, getProducts } from "../../utils/api/products";
+import ProductForm from "./ProductForm";
+import ProductList from "./ProductList";
+import { Button } from "../ui";
+import styled from "@emotion/styled";
 
 export default function Admin() {
+  const [adding, setAdding] = useState(false);
+
   const {
     data: products,
     isLoading,
     isError,
+    refetch,
   } = useQuery("products", () => getProducts());
 
   return (
-    <section>
-      {/* Check for loading & errors, then display UL. */}
-      {!isLoading && !isError ? (
-        <ul>
-          {products.map((product) => (
-            <li key={uuidv4()}>{product.title}</li>
-          ))}
-        </ul>
-      ) : (
-        <>
-          {/* Loading Display */}
-          {isLoading && <p>Loading</p>}
+    <>
+      <Wrapper>
+        {!adding && (
+          <Button onClick={() => setAdding(!adding)}>Add New Product</Button>
+        )}
 
-          {/* Error Display */}
-          {isError && <p>Error</p>}
-        </>
-      )}
-    </section>
+        {adding && <ProductForm setAdding={setAdding} refetch={refetch} />}
+
+        <ProductList
+          products={products}
+          isLoading={isLoading}
+          isError={isError}
+          refetch={refetch}
+        />
+      </Wrapper>
+    </>
   );
 }
+
+// Styles
+const Wrapper = styled.div`
+  padding: 2rem 0;
+`;

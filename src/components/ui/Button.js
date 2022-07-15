@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import Link from "next/link";
 
-export default function Button({ children, href, isLink }) {
+export default function Button({ children, href, isLink, onClick }) {
   return (
     <>
       {isLink ? (
@@ -13,7 +13,7 @@ export default function Button({ children, href, isLink }) {
           </Link>
         </Btn>
       ) : (
-        <Btn>{children}</Btn>
+        <Btn onClick={onClick}>{children}</Btn>
       )}
     </>
   );
