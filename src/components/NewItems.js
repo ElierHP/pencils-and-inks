@@ -1,23 +1,19 @@
 import React from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
-import axios from "axios";
 import Image from "next/image";
 import theme from "../styles/theme";
 import { Section, Container, Button } from "./ui";
 import { useQuery } from "react-query";
-import { BASE_URL } from "../utils/api";
+import { getProducts } from "../utils/api/products";
 
 export default function NewItems() {
-  const getProducts = async () =>
-    await axios.get(`${BASE_URL}/latest`).then((res) => res.data);
-
   // Queries
   const {
     data: products,
     isLoading,
     isError,
-  } = useQuery("products", getProducts);
+  } = useQuery("products", () => getProducts("/latest"));
 
   return (
     <Section>

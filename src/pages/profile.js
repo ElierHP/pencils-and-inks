@@ -4,6 +4,7 @@ import { Container } from "../components/ui";
 import { User } from "../context/UserProvider";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
+import Admin from "../components/admin/Admin";
 
 export default function Profile() {
   const [user] = useContext(User);
@@ -23,6 +24,7 @@ export default function Profile() {
             <Section>
               <Title>My Profile</Title>
               <p>Email: {user && user.email}</p>
+              {user.role === "admin" ? <Admin /> : <p>Member</p>}
             </Section>
           </Container>
         </Layout>
@@ -34,8 +36,7 @@ export default function Profile() {
 // Styles
 const Section = styled.section`
   padding: 2rem 0;
+  text-align: center;
 `;
 
-const Title = styled.h1`
-  text-align: left;
-`;
+const Title = styled.h1``;
