@@ -8,7 +8,12 @@ import theme from "../../styles/theme";
 import formatMessage from "../../utils/formatMessage";
 import { createProduct } from "../../utils/api/products";
 
-export default function ProductForm({ setAdding, refetch }) {
+export default function ProductForm({
+  setDisplay,
+  refetch,
+  product,
+  isAdding,
+}) {
   const {
     register,
     handleSubmit,
@@ -17,9 +22,13 @@ export default function ProductForm({ setAdding, refetch }) {
     resolver: yupResolver(productSchema),
   });
 
-  const onSubmit = (data) => {
-    createProduct(data);
-    setAdding(false);
+  const onSubmit = async (data) => {
+    if (isAdding) {
+      await createProduct(data);
+    } else {
+    }
+
+    setDisplay(false);
     refetch();
   };
 
@@ -32,6 +41,7 @@ export default function ProductForm({ setAdding, refetch }) {
             type="text"
             placeholder="Title"
             register={register("title")}
+            defaultValue={product && product.title}
           />
           {/* Title Error Msg */}
           {errors.title && <ErrorMsg>{formatMessage(errors.title)}</ErrorMsg>}
@@ -39,7 +49,12 @@ export default function ProductForm({ setAdding, refetch }) {
 
         {/* SKU Input */}
         <InputContainer>
-          <TextInput type="text" placeholder="SKU" register={register("sku")} />
+          <TextInput
+            type="text"
+            placeholder="SKU"
+            register={register("sku")}
+            defaultValue={product && product.sku}
+          />
           {/* SKU Error Msg */}
           {errors.sku && <ErrorMsg>{formatMessage(errors.sku)}</ErrorMsg>}
         </InputContainer>
@@ -52,6 +67,7 @@ export default function ProductForm({ setAdding, refetch }) {
             type="text"
             placeholder="Category"
             register={register("category")}
+            defaultValue={product && product.category}
           />
           {/* SKU Error Msg */}
           {errors.category && (
@@ -65,6 +81,7 @@ export default function ProductForm({ setAdding, refetch }) {
             type="text"
             placeholder="Tags"
             register={register("tags")}
+            defaultValue={product && product.tags}
           />
           {/* Tags Error Msg */}
           {errors.tags && <ErrorMsg>{formatMessage(errors.tags)}</ErrorMsg>}
@@ -78,7 +95,7 @@ export default function ProductForm({ setAdding, refetch }) {
             type="number"
             placeholder="Price"
             register={register("price")}
-            defaultValue={0}
+            defaultValue={product && product.price}
             step=".01"
           />
           {/* SKU Error Msg */}
@@ -91,6 +108,7 @@ export default function ProductForm({ setAdding, refetch }) {
             type="text"
             placeholder="Images"
             register={register("images")}
+            defaultValue={product && product.images}
           />
           {/* SKU Error Msg */}
           {errors.images && <ErrorMsg>{formatMessage(errors.images)}</ErrorMsg>}
@@ -98,7 +116,11 @@ export default function ProductForm({ setAdding, refetch }) {
       </InputWrapper>
       {/* Description */}
       <TextAreaContainer>
-        <TextArea placeholder="Description" {...register("description")} />
+        <TextArea
+          placeholder="Description"
+          {...register("description")}
+          defaultValue={product && product.description}
+        />
         {/* Description Error Msg */}
         {errors.description && (
           <ErrorMsg>{formatMessage(errors.description)}</ErrorMsg>
@@ -108,7 +130,7 @@ export default function ProductForm({ setAdding, refetch }) {
       {/* Submit */}
       <BtnContainer>
         <FormButton type="submit" text="Add Product" />
-        <Cancel onClick={() => setAdding(false)}>Cancel</Cancel>
+        <Cancel onClick={() => setDisplay(false)}>Cancel</Cancel>
       </BtnContainer>
     </Form>
   );

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
-import { createProduct, getProducts } from "../../utils/api/products";
+import { getProducts } from "../../utils/api/products";
 import ProductForm from "./ProductForm";
 import ProductList from "./ProductList";
 import { Button } from "../ui";
 import styled from "@emotion/styled";
 
 export default function Admin() {
-  const [adding, setAdding] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const {
     data: products,
@@ -19,18 +20,33 @@ export default function Admin() {
   return (
     <>
       <Wrapper>
-        {!adding && (
-          <Button onClick={() => setAdding(!adding)}>Add New Product</Button>
+        {/* Show or hide button based on isAdding, isEditing states.*/}
+        {!isAdding && !isEditing && (
+          <Button onClick={() => setIsAdding(!isAdding)}>
+            Add New Product
+          </Button>
         )}
 
-        {adding && <ProductForm setAdding={setAdding} refetch={refetch} />}
+        {/* Maps through products and displays them. */}
+        {!isAdding && (
+          <ProductList
+            products={products}
+            isLoading={isLoading}
+            isError={isError}
+            refetch={refetch}
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+          />
+        )}
 
-        <ProductList
-          products={products}
-          isLoading={isLoading}
-          isError={isError}
-          refetch={refetch}
-        />
+        {/* If adding is true, show add new product form. */}
+        {isAdding && (
+          <ProductForm
+            isAdding={isAdding}
+            setDisplay={setIsAdding}
+            refetch={refetch}
+          />
+        )}
       </Wrapper>
     </>
   );

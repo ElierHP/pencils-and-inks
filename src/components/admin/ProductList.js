@@ -4,37 +4,56 @@ import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import Button from "../ui/Button";
 import { deleteProduct } from "../../utils/api/products";
+import ProductForm from "./ProductForm";
 
-export default function ProductList({ products, isLoading, isError, refetch }) {
-  const [editing, setEditing] = useState(false);
+export default function ProductList({
+  products,
+  isLoading,
+  isError,
+  refetch,
+  isEditing,
+  setIsEditing,
+}) {
+  // State for the current product that was clicked on via Edit.
+  // This gets passed down to the edit form.
+  const [product, setProduct] = useState({});
 
   const handleDelete = async (id) => {
     await deleteProduct(id);
     refetch();
   };
 
+  const toggleEdit = (product) => {
+    setIsEditing(!isEditing);
+    setProduct(product);
+  };
+
   return (
     <>
       {/* Check for loading & errors, then display UL. */}
-      {!isLoading && !isError ? (
-        <>
-          {/* If not editing, display list, otherwise display edit form */}
-          <List>
-            {products.map((product) => (
-              <ListItem key={uuidv4()}>
-                <a href="/">{product.title}</a>
-                <BtnContainer>
-                  <Button onClick={() => setEditing(!editing)}>Edit</Button>
-                  <Button onClick={() => handleDelete(product.id)}>
-                    Delete
-                  </Button>
-                </BtnContainer>
-              </ListItem>
-            ))}
-          </List>
-        </>
+      {!isLoading && !isError && !isEditing ? (
+        <List>
+          {products.map((product) => (
+            <ListItem key={uuidv4()}>
+              <a href="/">{product.title}</a>
+              <BtnContainer>
+                <Button onClick={() => toggleEdit(product)}>Edit</Button>
+                <Button onClick={() => handleDelete(product.id)}>Delete</Button>
+              </BtnContainer>
+            </ListItem>
+          ))}
+        </List>
       ) : (
         <>
+          {/* If isEditing, display Edit form */}
+          {isEditing && (
+            <ProductForm
+              setDisplay={setIsEditing}
+              refetch={refetch}
+              product={product}
+            />
+          )}
+
           {/* Loading Display */}
           {isLoading && <p>Loading</p>}
 
