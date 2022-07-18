@@ -6,7 +6,7 @@ import { productSchema } from "../../validations/product";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import formatMessage from "../../utils/formatMessage";
-import { createProduct } from "../../utils/api/products";
+import { createProduct, editProduct } from "../../utils/api/products";
 
 export default function ProductForm({
   setDisplay,
@@ -26,6 +26,7 @@ export default function ProductForm({
     if (isAdding) {
       await createProduct(data);
     } else {
+      await editProduct(product.id, data);
     }
 
     setDisplay(false);
@@ -129,7 +130,10 @@ export default function ProductForm({
 
       {/* Submit */}
       <BtnContainer>
-        <FormButton type="submit" text="Add Product" />
+        <FormButton
+          type="submit"
+          text={isAdding ? "Add Product" : "Edit Product"}
+        />
         <Cancel onClick={() => setDisplay(false)}>Cancel</Cancel>
       </BtnContainer>
     </Form>

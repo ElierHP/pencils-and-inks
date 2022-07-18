@@ -7,7 +7,7 @@ export const productSchema = yup
     sku: yup.string().required().min(6).max(20),
     images: yup.string().required().min(6).max(500),
     category: yup.string().required().min(3).max(20),
-    tags: yup.string().required().max(50),
+    tags: yup.string().max(50),
     price: yup
       .number()
       .required()
