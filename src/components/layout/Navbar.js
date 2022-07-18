@@ -77,7 +77,6 @@ const Nav = styled.nav`
   width: 50%;
   background: ${theme.colors.light};
   padding: 2rem;
-
   /* Animations */
   transform: ${(props) =>
     props.isOpen ? "translateX(0)" : "translateX(-400px)"};

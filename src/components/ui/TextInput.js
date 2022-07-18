@@ -25,7 +25,7 @@ export default function TextInput({
 // Styles
 const Input = styled.input`
   padding: 0 1rem;
-  border: 2px solid ${theme.colors.neutral};
+  border: 2px solid ${theme.colors.neutralLight};
   width: 100%;
   min-height: 100%;
   border-radius: 3px;

@@ -6,7 +6,6 @@ export default function Container({ children }) {
 }
 
 // Styles
-
 const MainContainer = styled.div`
   max-width: 1400px;
   margin: auto;

@@ -1,15 +1,13 @@
-import Footer from "./Footer";
-import Header from "./Header";
+import React from "react";
+import Container from "./Container";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 
-export default function Layout({ children }) {
+export default function PageContainer({ children }) {
   return (
     <>
-      <Header />
-      {/* <Line></Line> */}
-      <main>{children}</main>
-      <Footer />
+      <Line></Line>
+      <Container>{children}</Container>
     </>
   );
 }
