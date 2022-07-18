@@ -5,6 +5,7 @@ import ProductForm from "./ProductForm";
 import ProductList from "./ProductList";
 import { Button } from "../ui";
 import styled from "@emotion/styled";
+import theme from "../../styles/theme";
 
 export default function Admin() {
   const [isAdding, setIsAdding] = useState(false);
@@ -22,9 +23,11 @@ export default function Admin() {
       <Wrapper>
         {/* Show or hide button based on isAdding, isEditing states.*/}
         {!isAdding && !isEditing && (
-          <Button onClick={() => setIsAdding(!isAdding)}>
-            Add New Product
-          </Button>
+          <BtnContainer>
+            <Button onClick={() => setIsAdding(!isAdding)}>
+              Add New Product
+            </Button>
+          </BtnContainer>
         )}
 
         {/* Maps through products and displays them. */}
@@ -54,5 +57,13 @@ export default function Admin() {
 
 // Styles
 const Wrapper = styled.div`
-  padding: 2rem 0;
+  padding-top: 1.5rem;
+  ${theme.mq()[0]} {
+    grid-template-columns: 7fr 1fr;
+    padding: 1.5rem 6rem;
+  }
+`;
+
+const BtnContainer = styled.div`
+  height: 48px;
 `;

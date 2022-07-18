@@ -37,7 +37,12 @@ export default function ProductList({
             <ListItem key={uuidv4()}>
               <a href="/">{product.title}</a>
               <BtnContainer>
-                <Button onClick={() => toggleEdit(product)}>Edit</Button>
+                <Button
+                  color={theme.colors.secondary}
+                  onClick={() => toggleEdit(product)}
+                >
+                  Edit
+                </Button>
                 <Button onClick={() => handleDelete(product.id)}>Delete</Button>
               </BtnContainer>
             </ListItem>
@@ -69,17 +74,26 @@ export default function ProductList({
 const List = styled.ol`
   text-align: left;
   background: ${theme.colors.light};
-  padding: 6rem;
+  padding: 0;
+  padding-top: 4rem;
+  ${theme.mq()[0]} {
+    grid-template-columns: 7fr 1fr;
+    padding: 6rem;
+  }
 `;
 
 const ListItem = styled.li`
   display: grid;
-  grid-template-columns: 7fr 1fr;
+  grid-template-columns: 1fr;
   align-items: center;
-  padding: 0.5rem 1.5rem;
+  padding: 1.5rem;
   border-radius: 0.4rem;
   &:hover {
     background: ${theme.colors.neutralLight};
+  }
+  ${theme.mq()[0]} {
+    grid-template-columns: 7fr 1fr;
+    padding: 0.5rem 1.5rem;
   }
 `;
 
@@ -87,4 +101,6 @@ const BtnContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  ${theme.mq()[0]} {
+  }
 `;

@@ -49,7 +49,7 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 7fr 1fr;
   padding: 1rem 0;
   padding-bottom: 3rem;
-  grid-gap: 2rem;
+  grid-gap: 1.5rem;
   position: relative;
   ${theme.mq()[2]} {
     grid-gap: 5rem;

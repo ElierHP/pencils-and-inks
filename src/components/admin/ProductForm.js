@@ -152,8 +152,11 @@ const Form = styled.form`
 
 const InputWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 3rem;
+  ${theme.mq()[0]} {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 const InputContainer = styled.div`
@@ -191,6 +194,7 @@ const BtnContainer = styled.div`
   justify-content: center;
   gap: 2rem;
 `;
+
 const Cancel = styled.div`
   padding: 1rem;
   cursor: pointer;
