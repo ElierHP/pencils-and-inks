@@ -1,32 +1,33 @@
 import React from "react";
-import theme from "../styles/theme";
+import theme from "../../styles/theme";
+import styled from "@emotion/styled";
 import {
   MdOutlineCheckBoxOutlineBlank,
   MdOutlineCheckBox,
 } from "react-icons/md";
 
-export default function CheckBox({ checked, setChecked }) {
+export default function CheckBox({ checked, setChecked, label }) {
   return (
     <CheckBoxContainer>
       {checked ? (
-        <CheckBox>
+        <Icon>
           <MdOutlineCheckBox
             color={theme.colors.neutralDark}
             onClick={() => setChecked(false)}
             size={25}
           />
-        </CheckBox>
+        </Icon>
       ) : (
-        <CheckBox>
+        <Icon>
           <MdOutlineCheckBoxOutlineBlank
             color={theme.colors.neutral}
             onClick={() => setChecked(true)}
             size={25}
           />
-        </CheckBox>
+        </Icon>
       )}
 
-      <Label htmlFor="graphite-pencils">Graphite Pencils</Label>
+      <Label htmlFor="graphite-pencils">{label}</Label>
     </CheckBoxContainer>
   );
 }
@@ -38,7 +39,7 @@ const CheckBoxContainer = styled.div`
   gap: 0.5rem;
 `;
 
-const CheckBox = styled.div`
+const Icon = styled.div`
   cursor: pointer;
 `;
 

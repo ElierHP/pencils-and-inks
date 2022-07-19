@@ -13,8 +13,16 @@ export default function Filter({
     <Box>
       <div>
         <Title>Product Type</Title>
-        <CheckBox checked={graphiteChecked} setChecked={setGraphiteChecked} />
-        <CheckBox checked={coloredChecked} setChecked={setColoredChecked} />
+        <CheckBox
+          checked={graphiteChecked}
+          setChecked={setGraphiteChecked}
+          label="Graphite Pencil"
+        />
+        <CheckBox
+          checked={coloredChecked}
+          setChecked={setColoredChecked}
+          label="Colored Pencil"
+        />
       </div>
       <div>
         <Title>Price</Title>

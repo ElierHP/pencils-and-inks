@@ -43,7 +43,9 @@ export default function Pencils() {
     <Layout>
       <PageContainer>
         <PageNav>
-          Home
+          <Link href="/">
+            <a>Home</a>
+          </Link>
           <MdKeyboardArrowRight color={theme.colors.neutral} size={20} />
           <Page>Pencils</Page>
         </PageNav>
