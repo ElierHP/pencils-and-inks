@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { useQuery } from "react-query";
 import { getProducts } from "../../utils/api/products";
@@ -7,13 +8,37 @@ import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import Image from "next/image";
 import Link from "next/link";
+import Filter from "../../components/Filter";
 
 export default function Pencils() {
+  const [graphiteChecked, setGraphiteChecked] = useState(false);
+  const [coloredChecked, setColoredChecked] = useState(false);
+
   const {
     data: products,
     isLoading,
     isError,
   } = useQuery("products", () => getProducts("/products?category=pencil"));
+
+  // Filter products based on the filter checkbox.
+  const filterProducts = () => {
+    const filteredProducts = products.filter((product) => {
+      if (graphiteChecked && coloredChecked) {
+        return (
+          product.tags.includes("black-ink") &&
+          product.tags.includes("featured")
+        );
+      } else if (graphiteChecked) {
+        return product.tags.includes("black-ink");
+      } else if (coloredChecked) {
+        return product.tags.includes("featured");
+      } else {
+        return product;
+      }
+    });
+
+    return filteredProducts;
+  };
 
   return (
     <Layout>
@@ -36,15 +61,19 @@ export default function Pencils() {
           />
         </ImageContainer>
         <Section>
-          <Filter>
-            <h3>Product Type</h3>
-            <input type="checkbox" name="graphite-pencils" />
-            <label htmlFor="graphite-pencils">Graphite Pencils</label>
-          </Filter>
+          {/* Filter Settings */}
+          <Filter
+            graphiteChecked={graphiteChecked}
+            setGraphiteChecked={setGraphiteChecked}
+            coloredChecked={coloredChecked}
+            setColoredChecked={setColoredChecked}
+          />
+
+          {/* Display Product List */}
           <List>
             {!isLoading && !isError && (
               <>
-                {products.map((product) => (
+                {filterProducts().map((product) => (
                   <ListItem key={product.id}>
                     {/* Clicking links to product page. */}
                     <Link href="/">
@@ -114,14 +143,6 @@ const Section = styled.section`
   padding: ${theme.space.section}rem 0;
   ${theme.mq()[1]} {
     grid-template-columns: 1fr 3fr;
-  }
-`;
-
-// Filter
-const Filter = styled.div`
-  display: none;
-  ${theme.mq()[1]} {
-    display: block;
   }
 `;
 
