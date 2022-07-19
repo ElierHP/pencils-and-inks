@@ -25,18 +25,17 @@ export default function Pencils() {
     const filteredProducts = products.filter((product) => {
       if (graphiteChecked && coloredChecked) {
         return (
-          product.tags.includes("black-ink") &&
-          product.tags.includes("featured")
+          product.tags.includes("graphite-pencil") ||
+          product.tags.includes("colored-pencil")
         );
       } else if (graphiteChecked) {
-        return product.tags.includes("black-ink");
+        return product.tags.includes("graphite-pencil");
       } else if (coloredChecked) {
-        return product.tags.includes("featured");
+        return product.tags.includes("colored-pencil");
       } else {
         return product;
       }
     });
-
     return filteredProducts;
   };
 

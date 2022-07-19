@@ -1,10 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
-import {
-  MdOutlineCheckBoxOutlineBlank,
-  MdOutlineCheckBox,
-} from "react-icons/md";
+import CheckBox from "./ui/CheckBox";
 
 export default function Filter({
   graphiteChecked,
@@ -16,47 +13,8 @@ export default function Filter({
     <Box>
       <div>
         <Title>Product Type</Title>
-        <CheckBoxContainer>
-          {graphiteChecked ? (
-            <CheckBox>
-              <MdOutlineCheckBox
-                color={theme.colors.neutralDark}
-                onClick={() => setGraphiteChecked(!graphiteChecked)}
-                size={25}
-              />
-            </CheckBox>
-          ) : (
-            <CheckBox>
-              <MdOutlineCheckBoxOutlineBlank
-                color={theme.colors.neutral}
-                onClick={() => setGraphiteChecked(!graphiteChecked)}
-                size={25}
-              />
-            </CheckBox>
-          )}
-
-          <Label htmlFor="graphite-pencils">Graphite Pencils</Label>
-        </CheckBoxContainer>
-        <CheckBoxContainer>
-          {coloredChecked ? (
-            <CheckBox>
-              <MdOutlineCheckBox
-                color={theme.colors.neutralDark}
-                onClick={() => setColoredChecked(!coloredChecked)}
-                size={25}
-              />
-            </CheckBox>
-          ) : (
-            <CheckBox>
-              <MdOutlineCheckBoxOutlineBlank
-                color={theme.colors.neutral}
-                onClick={() => setColoredChecked(!coloredChecked)}
-                size={25}
-              />
-            </CheckBox>
-          )}
-          <Label htmlFor="colored-pencils">Colored Pencils</Label>
-        </CheckBoxContainer>
+        <CheckBox checked={graphiteChecked} setChecked={setGraphiteChecked} />
+        <CheckBox checked={coloredChecked} setChecked={setColoredChecked} />
       </div>
       <div>
         <Title>Price</Title>
@@ -82,20 +40,6 @@ const Box = styled.div`
 
 const Title = styled.h3`
   margin-bottom: 2rem;
-`;
-
-const CheckBoxContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
-
-const CheckBox = styled.div`
-  cursor: pointer;
-`;
-
-const Label = styled.label`
-  margin-bottom: 0.4rem;
 `;
 
 const PriceInputs = styled.div`
