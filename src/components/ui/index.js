@@ -6,6 +6,7 @@ import Logo from "./Logo";
 import Section from "./Section";
 import TextInput from "./TextInput";
 import FormButton from "./FormButton";
+import ProductBanner from "./ProductBanner";
 
 export {
   Banner,
@@ -16,4 +17,5 @@ export {
   TextInput,
   FormButton,
   PageContainer,
+  ProductBanner,
 };

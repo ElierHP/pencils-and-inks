@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { useQuery } from "react-query";
 import { getProducts } from "../../utils/api/products";
-import { PageContainer } from "../../components/ui";
-import { MdKeyboardArrowRight } from "react-icons/md";
+import { PageContainer, ProductBanner } from "../../components/ui";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
-import Image from "next/image";
-import Link from "next/link";
 import Filter from "../../components/Filter";
 import ProductList from "../../components/ProductList";
 import filterPencils from "../../utils/filters/filterPencils";
+import ProductNav from "../../components/ProductNav";
 
 export default function Pencils() {
   const [graphiteChecked, setGraphiteChecked] = useState(false);
@@ -31,29 +29,17 @@ export default function Pencils() {
     featured
   );
 
-  console.log(showProducts);
   return (
     <Layout>
       <PageContainer>
-        <PageNav>
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-          <MdKeyboardArrowRight color={theme.colors.neutral} size={20} />
-          <Page>Pencils</Page>
-        </PageNav>
+        <ProductNav links={["Home", "Pencils"]} category="pencils" />
 
-        <ImageContainer>
-          <Title>Pencils</Title>
-          <Image
-            alt={"flower-drawing"}
-            src={"/flower-drawing.jpg"}
-            layout="fill"
-            objectFit="cover"
-            quality={100}
-            priority={true}
-          />
-        </ImageContainer>
+        <ProductBanner
+          title="Pencils"
+          src="/flower-drawing.jpg"
+          alt="flower-drawing"
+        />
+
         <Section>
           {/* Filter Settings */}
           <Filter
@@ -78,34 +64,6 @@ export default function Pencils() {
 }
 
 // Styles
-const PageNav = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding-bottom: 1rem;
-`;
-
-const Page = styled.span`
-  color: ${theme.colors.neutralDark};
-`;
-
-const Title = styled.h1`
-  position: absolute;
-  top: 2.5rem;
-  left: 2.5rem;
-  z-index: 1;
-  font-weight: ${theme.fontWeights.bold};
-  text-align: center;
-`;
-
-const ImageContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 200px;
-  ${theme.mq()[0]} {
-  }
-`;
-
 const Section = styled.section`
   display: grid;
   grid-template-columns: 1fr;
