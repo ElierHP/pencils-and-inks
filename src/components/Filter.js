@@ -8,11 +8,19 @@ export default function Filter({
   setGraphiteChecked,
   coloredChecked,
   setColoredChecked,
+  featured,
+  setFeatured,
 }) {
   return (
     <Box>
+      {/* Product type checkbox filters. */}
       <div>
         <Title>Product Type</Title>
+        <CheckBox
+          checked={featured}
+          setChecked={setFeatured}
+          label="Featured Products"
+        />
         <CheckBox
           checked={graphiteChecked}
           setChecked={setGraphiteChecked}
@@ -24,6 +32,8 @@ export default function Filter({
           label="Colored Pencil"
         />
       </div>
+
+      {/* Price filters */}
       <div>
         <Title>Price</Title>
         <PriceInputs>
@@ -56,7 +66,7 @@ const PriceInputs = styled.div`
 `;
 
 const NumInput = styled.input`
-  width: 100px;
+  width: 100%;
   padding: 0.4rem 0 0.4rem 1rem;
   border: solid ${theme.colors.neutral} 2px;
   border-radius: 3px;
@@ -64,7 +74,7 @@ const NumInput = styled.input`
 `;
 
 const Line = styled.div`
-  width: 15px;
+  width: 20px;
   height: 2px;
   background: ${theme.colors.neutral};
   margin: 0 1rem;
