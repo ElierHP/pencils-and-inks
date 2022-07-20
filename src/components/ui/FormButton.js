@@ -11,7 +11,6 @@ const Button = styled.input`
   background: ${theme.colors.primary};
   color: ${theme.colors.light};
   padding: 1.3rem 2rem;
-  border-radius: 4px;
   border: 0;
   transition: ${theme.transition.primary};
   cursor: pointer;

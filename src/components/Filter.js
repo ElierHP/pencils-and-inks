@@ -3,34 +3,20 @@ import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import CheckBox from "./ui/CheckBox";
 
-export default function Filter({
-  graphiteChecked,
-  setGraphiteChecked,
-  coloredChecked,
-  setColoredChecked,
-  featured,
-  setFeatured,
-}) {
+export default function Filter({ checkboxes }) {
   return (
     <Box>
       {/* Product type checkbox filters. */}
       <div>
         <Title>Product Type</Title>
-        <CheckBox
-          checked={featured}
-          setChecked={setFeatured}
-          label="Featured Products"
-        />
-        <CheckBox
-          checked={graphiteChecked}
-          setChecked={setGraphiteChecked}
-          label="Graphite Pencil"
-        />
-        <CheckBox
-          checked={coloredChecked}
-          setChecked={setColoredChecked}
-          label="Colored Pencil"
-        />
+        {checkboxes.map((item) => (
+          <CheckBox
+            key={item.label}
+            checked={item.checked}
+            setChecked={item.setChecked}
+            label={item.label}
+          />
+        ))}
       </div>
 
       {/* Price filters */}

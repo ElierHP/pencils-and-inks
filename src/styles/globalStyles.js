@@ -50,8 +50,18 @@ export default function GlobalStyles() {
           transition: ${theme.transition.primary};
           border-radius: 4px;
           cursor: pointer;
+
           &:hover {
             background: ${theme.colors.btnHover};
+          }
+        }
+        input,
+        select {
+          border-radius: 4px;
+          border: 2px solid ${theme.colors.neutralLight};
+          &:focus {
+            outline: none;
+            border: 2px solid ${theme.colors.btnHover};
           }
         }
         ,

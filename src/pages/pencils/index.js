@@ -2,19 +2,23 @@ import React, { useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { useQuery } from "react-query";
 import { getProducts } from "../../utils/api/products";
-import { PageContainer, ProductBanner } from "../../components/ui";
-import styled from "@emotion/styled";
-import theme from "../../styles/theme";
+import {
+  PageContainer,
+  ProductBanner,
+  ProductSection,
+} from "../../components/ui";
 import Filter from "../../components/Filter";
 import ProductList from "../../components/ProductList";
 import filterPencils from "../../utils/filters/filterPencils";
 import ProductNav from "../../components/ProductNav";
 
 export default function Pencils() {
+  // Checkbox states
   const [graphiteChecked, setGraphiteChecked] = useState(false);
   const [coloredChecked, setColoredChecked] = useState(false);
   const [featured, setFeatured] = useState(false);
 
+  // Get Request for products with pencils category
   const {
     data: products,
     isLoading,
@@ -24,15 +28,33 @@ export default function Pencils() {
   // Filter products based on the filter checkbox. Pass it down to ProductList component.
   const showProducts = filterPencils(
     products,
+    featured,
     graphiteChecked,
-    coloredChecked,
-    featured
+    coloredChecked
   );
 
+  // Checkbox settings passed to <Filter /> component
+  const checkboxes = [
+    {
+      checked: featured,
+      setChecked: setFeatured,
+      label: "Featured Products",
+    },
+    {
+      checked: graphiteChecked,
+      setChecked: setGraphiteChecked,
+      label: "Graphite Pencils",
+    },
+    {
+      checked: coloredChecked,
+      setChecked: setColoredChecked,
+      label: "Colored Pencils",
+    },
+  ];
   return (
     <Layout>
       <PageContainer>
-        <ProductNav links={["Home", "Pencils"]} category="pencils" />
+        <ProductNav links={["Home", "Pencils"]} />
 
         <ProductBanner
           title="Pencils"
@@ -40,16 +62,9 @@ export default function Pencils() {
           alt="flower-drawing"
         />
 
-        <Section>
+        <ProductSection>
           {/* Filter Settings */}
-          <Filter
-            graphiteChecked={graphiteChecked}
-            setGraphiteChecked={setGraphiteChecked}
-            coloredChecked={coloredChecked}
-            setColoredChecked={setColoredChecked}
-            featured={featured}
-            setFeatured={setFeatured}
-          />
+          <Filter checkboxes={checkboxes} />
 
           {/* Display Product List */}
           <ProductList
@@ -57,19 +72,8 @@ export default function Pencils() {
             isError={isError}
             showProducts={showProducts}
           />
-        </Section>
+        </ProductSection>
       </PageContainer>
     </Layout>
   );
 }
-
-// Styles
-const Section = styled.section`
-  display: grid;
-  grid-template-columns: 1fr;
-  padding: ${theme.space.section}rem 0;
-  gap: 1rem;
-  ${theme.mq()[1]} {
-    grid-template-columns: 1fr 4fr;
-  }
-`;

@@ -37,6 +37,7 @@ const theme = {
     warning: "#B87E27",
   },
   space: {
+    productSection: 4,
     section: 5,
   },
   transition: {
