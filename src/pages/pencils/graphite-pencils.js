@@ -9,28 +9,22 @@ import {
 } from "../../components/ui";
 import Filter from "../../components/Filter";
 import ProductList from "../../components/ProductList";
-import filterPencils from "../../utils/filters/filterPencils";
 import ProductNav from "../../components/ProductNav";
 
 export default function GraphitePencils() {
+  // Fetch query, changing this will refetch with new url.
+  const [query, setQuery] = useState(
+    "/products?category=pencils&tags=graphite-pencil"
+  );
+
+  // Checkbox states
   const [featured, setFeatured] = useState(false);
 
   const {
     data: products,
     isLoading,
     isError,
-  } = useQuery("products", () => getProducts("/products?category=pencil"));
-
-  // Create array with only graphite pencils
-  let graphitePencils;
-  if (!isLoading) {
-    graphitePencils = products.filter((product) =>
-      product.tags.includes("graphite-pencil")
-    );
-  }
-
-  // Filter products based on the filter checkbox. Pass it down to ProductList component.
-  const showProducts = filterPencils(graphitePencils, featured);
+  } = useQuery(["products", query], () => getProducts(query));
 
   // Checkbox settings passed to <Filter /> component
   const checkboxes = [
@@ -38,6 +32,7 @@ export default function GraphitePencils() {
       checked: featured,
       setChecked: setFeatured,
       label: "Featured Products",
+      tag: "featured",
     },
   ];
   return (
@@ -53,13 +48,18 @@ export default function GraphitePencils() {
 
         <ProductSection>
           {/* Filter Settings */}
-          <Filter checkboxes={checkboxes} />
+          <Filter
+            checkboxes={checkboxes}
+            setQuery={setQuery}
+            category="pencils"
+            queryTag={"&tags=graphite-pencil"}
+          />
 
           {/* Display Product List */}
           <ProductList
             isLoading={isLoading}
             isError={isError}
-            showProducts={showProducts}
+            products={products}
           />
         </ProductSection>
       </PageContainer>

@@ -8,6 +8,7 @@ import TextInput from "./TextInput";
 import FormButton from "./FormButton";
 import ProductBanner from "./ProductBanner";
 import ProductSection from "./ProductSection";
+import CheckBox from "./CheckBox";
 
 export {
   Banner,
@@ -20,4 +21,5 @@ export {
   PageContainer,
   ProductBanner,
   ProductSection,
+  CheckBox,
 };

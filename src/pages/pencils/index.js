@@ -9,10 +9,12 @@ import {
 } from "../../components/ui";
 import Filter from "../../components/Filter";
 import ProductList from "../../components/ProductList";
-import filterPencils from "../../utils/filters/filterPencils";
 import ProductNav from "../../components/ProductNav";
 
 export default function Pencils() {
+  // Fetch query, changing this will refetch with new url.
+  const [query, setQuery] = useState("/products?category=pencils");
+
   // Checkbox states
   const [graphiteChecked, setGraphiteChecked] = useState(false);
   const [coloredChecked, setColoredChecked] = useState(false);
@@ -23,15 +25,7 @@ export default function Pencils() {
     data: products,
     isLoading,
     isError,
-  } = useQuery("products", () => getProducts("/products?category=pencil"));
-
-  // Filter products based on the filter checkbox. Pass it down to ProductList component.
-  const showProducts = filterPencils(
-    products,
-    featured,
-    graphiteChecked,
-    coloredChecked
-  );
+  } = useQuery(["products", query], () => getProducts(query));
 
   // Checkbox settings passed to <Filter /> component
   const checkboxes = [
@@ -39,16 +33,19 @@ export default function Pencils() {
       checked: featured,
       setChecked: setFeatured,
       label: "Featured Products",
+      tag: "featured",
     },
     {
       checked: graphiteChecked,
       setChecked: setGraphiteChecked,
       label: "Graphite Pencils",
+      tag: "graphite-pencil",
     },
     {
       checked: coloredChecked,
       setChecked: setColoredChecked,
       label: "Colored Pencils",
+      tag: "colored-pencils",
     },
   ];
   return (
@@ -64,13 +61,17 @@ export default function Pencils() {
 
         <ProductSection>
           {/* Filter Settings */}
-          <Filter checkboxes={checkboxes} />
+          <Filter
+            checkboxes={checkboxes}
+            setQuery={setQuery}
+            category="pencils"
+          />
 
           {/* Display Product List */}
           <ProductList
             isLoading={isLoading}
             isError={isError}
-            showProducts={showProducts}
+            products={products}
           />
         </ProductSection>
       </PageContainer>

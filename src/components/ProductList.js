@@ -5,19 +5,12 @@ import { Button } from "../components/ui";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function ProductList({ isLoading, isError, showProducts }) {
-  const sortProducts = () => {
-    showProducts = showProducts.sort(
-      (product1, product2) => product1.price - product2.price
-    );
-    console.log(showProducts);
-  };
-
+export default function ProductList({ isLoading, isError, products }) {
   return (
     <div>
       <Sort>
         <h3>Sort By: </h3>
-        <Select name="product-sort" onChange={(e) => sortProducts()}>
+        <Select name="product-sort" onChange={(e) => console.log("Sort")}>
           <option value="default">Default</option>
           <option value="title-asc">Title Ascending</option>
           <option value="title-desc">Title Descending</option>
@@ -28,7 +21,7 @@ export default function ProductList({ isLoading, isError, showProducts }) {
       <List>
         {!isLoading && !isError && (
           <>
-            {showProducts.map((product) => (
+            {products.map((product) => (
               <ListItem key={product.id}>
                 {/* Clicking links to product page. */}
                 <Link href="/">

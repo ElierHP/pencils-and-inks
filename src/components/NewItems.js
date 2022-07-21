@@ -13,7 +13,7 @@ export default function NewItems() {
     data: products,
     isLoading,
     isError,
-  } = useQuery("products", () => getProducts("/latest"));
+  } = useQuery("products", () => getProducts("/products?filter=latest"));
 
   return (
     <Section>
@@ -100,6 +100,7 @@ const ProductImage = styled.div`
 
 const ProductTitle = styled.p`
   width: 150px;
+  margin-top: 1.5rem;
   ${theme.mq()[3]} {
     width: 20ch;
   }

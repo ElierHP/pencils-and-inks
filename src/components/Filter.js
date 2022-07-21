@@ -1,11 +1,26 @@
 import React from "react";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
-import CheckBox from "./ui/CheckBox";
+import { CheckBox, Button, FormButton } from "./ui";
 
-export default function Filter({ checkboxes }) {
+export default function Filter({
+  checkboxes,
+  setQuery,
+  category,
+  queryTag = "",
+}) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let tags = "";
+    checkboxes.forEach((item) => {
+      if (item.checked) tags += item.tag + ",";
+    });
+    tags === ""
+      ? setQuery(`/products?category=${category}${queryTag}`)
+      : setQuery(`/products?category=${category}&tags=${tags.slice(0, -1)}`);
+  };
   return (
-    <Box>
+    <Form onSubmit={(e) => handleSubmit(e)}>
       {/* Product type checkbox filters. */}
       <div>
         <Title>Product Type</Title>
@@ -28,17 +43,33 @@ export default function Filter({ checkboxes }) {
           <NumInput type="number" name="max-price" defaultValue={60} />
         </PriceInputs>
       </div>
-    </Box>
+
+      <BtnContainer>
+        <FormButton
+          color={theme.colors.secondary}
+          text="Apply Filters"
+          padding="0.8rem 2rem"
+        />
+
+        <Button
+          isLink={false}
+          color={theme.colors.neutral}
+          onClick={() => location.reload()}
+        >
+          Reset
+        </Button>
+      </BtnContainer>
+    </Form>
   );
 }
 
 // Styles
-const Box = styled.div`
+const Form = styled.form`
   display: none;
   ${theme.mq()[1]} {
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 2rem;
   }
 `;
 
@@ -64,4 +95,10 @@ const Line = styled.div`
   height: 2px;
   background: ${theme.colors.neutral};
   margin: 0 1rem;
+`;
+
+const BtnContainer = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
 `;

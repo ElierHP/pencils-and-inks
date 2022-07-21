@@ -45,16 +45,6 @@ export default function GlobalStyles() {
           }
         }
         ,
-        button {
-          border: 0;
-          transition: ${theme.transition.primary};
-          border-radius: 4px;
-          cursor: pointer;
-
-          &:hover {
-            background: ${theme.colors.btnHover};
-          }
-        }
         input,
         select {
           border-radius: 4px;
@@ -62,6 +52,21 @@ export default function GlobalStyles() {
           &:focus {
             outline: none;
             border: 2px solid ${theme.colors.btnHover};
+          }
+        }
+        ,
+        button,
+        input[type="submit"] {
+          border: 0;
+          transition: ${theme.transition.primary};
+          border-radius: 4px;
+          cursor: pointer;
+          &:hover {
+            background: ${theme.colors.btnHover};
+          }
+          &:focus {
+            outline: none;
+            border: none;
           }
         }
         ,

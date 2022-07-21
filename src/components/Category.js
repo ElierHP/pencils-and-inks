@@ -89,4 +89,5 @@ const ImageContainer = styled.div`
 const Paragraph = styled.p`
   font-weight: ${theme.fontWeights.bold};
   text-align: center;
+  margin-top: 1.5rem;
 `;
