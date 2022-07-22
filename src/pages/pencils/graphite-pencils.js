@@ -56,11 +56,17 @@ export default function GraphitePencils() {
           />
 
           {/* Display Product List */}
-          <ProductList
-            isLoading={isLoading}
-            isError={isError}
-            products={products}
-          />
+          {!isLoading && !isError ? (
+            <ProductList products={products} />
+          ) : (
+            <>
+              {/* Loading Display */}
+              {isLoading && <p>Loading products... please wait.</p>}
+
+              {/* Error Display */}
+              {isError && <p>Error: Couldn't load products.</p>}
+            </>
+          )}
         </ProductSection>
       </PageContainer>
     </Layout>

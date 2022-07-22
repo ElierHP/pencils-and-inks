@@ -5,7 +5,7 @@ import { Button } from "../components/ui";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function ProductList({ isLoading, isError, products }) {
+export default function ProductList({ products }) {
   return (
     <div>
       <Sort>
@@ -19,35 +19,31 @@ export default function ProductList({ isLoading, isError, products }) {
         </Select>
       </Sort>
       <List>
-        {!isLoading && !isError && (
-          <>
-            {products.map((product) => (
-              <ListItem key={product.id}>
-                {/* Clicking links to product page. */}
-                <Link href="/">
-                  <div>
-                    <ProductImage>
-                      <Image
-                        alt={product.title}
-                        src={product.images.split(",")[0]}
-                        layout="fill"
-                        objectFit="cover"
-                      />
-                    </ProductImage>
+        {products.map((product) => (
+          <ListItem key={product.id}>
+            {/* Clicking links to product page. */}
+            <Link href="/">
+              <div>
+                <ProductImage>
+                  <Image
+                    alt={product.title}
+                    src={product.images.split(",")[0]}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </ProductImage>
 
-                    <ProductTitle>{product.title}</ProductTitle>
-                    <Price>${product.price}</Price>
-                  </div>
-                </Link>
+                <ProductTitle>{product.title}</ProductTitle>
+                <Price>${product.price}</Price>
+              </div>
+            </Link>
 
-                {/* Button - Clicking adds to shopping cart. */}
-                <div>
-                  <Button>Add To Cart</Button>
-                </div>
-              </ListItem>
-            ))}
-          </>
-        )}
+            {/* Button - Clicking adds to shopping cart. */}
+            <div>
+              <Button>Add To Cart</Button>
+            </div>
+          </ListItem>
+        ))}
       </List>
     </div>
   );

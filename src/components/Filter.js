@@ -19,6 +19,10 @@ export default function Filter({
       ? setQuery(`/products?category=${category}${queryTag}`)
       : setQuery(`/products?category=${category}&tags=${tags.slice(0, -1)}`);
   };
+
+  const resetFilters = () => {
+    checkboxes.forEach((item) => item.setChecked(false));
+  };
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>
       {/* Product type checkbox filters. */}
@@ -54,7 +58,7 @@ export default function Filter({
         <Button
           isLink={false}
           color={theme.colors.neutral}
-          onClick={() => location.reload()}
+          onClick={() => resetFilters()}
         >
           Reset
         </Button>
