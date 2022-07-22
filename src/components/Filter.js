@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import { CheckBox, Button, FormButton } from "./ui";
@@ -9,6 +9,10 @@ export default function Filter({
   category,
   queryTag = "",
 }) {
+  // Price input values
+  const [minNum, setMinNum] = useState(0);
+  const [maxNum, setMaxNum] = useState(100);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let tags = "";
@@ -42,9 +46,19 @@ export default function Filter({
       <div>
         <Title>Price</Title>
         <PriceInputs>
-          <NumInput type="number" name="min-price" defaultValue={0} />
+          <NumInput
+            type="number"
+            name="min-price"
+            value={minNum}
+            onChange={(e) => setMinNum(e.target.value)}
+          />
           <Line></Line>
-          <NumInput type="number" name="max-price" defaultValue={60} />
+          <NumInput
+            type="number"
+            name="max-price"
+            value={maxNum}
+            onChange={(e) => setMaxNum(e.target.value)}
+          />
         </PriceInputs>
       </div>
 
