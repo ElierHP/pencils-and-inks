@@ -8,8 +8,15 @@ axios.defaults.withCredentials = true;
 
 // Create new account or login the user.
 const useAccount = () => {
-  const [error, isError] = useState(false);
+  const [error, setError] = useState({
+    error: false,
+    status: 200,
+    message: "Ok",
+  });
+  const [loading, setLoading] = useState(false);
+
   const [user, setUser] = useContext(User);
+
   const router = useRouter();
 
   // Redirect to home page if a user is already logged in.
@@ -20,6 +27,7 @@ const useAccount = () => {
   }, [user]);
 
   const postRequest = async (data, request) => {
+    setLoading(true);
     try {
       // Send login or create new user request based on params
       const res =
@@ -30,13 +38,32 @@ const useAccount = () => {
       // Redirect to home page if successful
       if (res.status === 200 || res.status === 201) {
         setUser(res.data);
-        router.push("/");
+        await router.push("/");
+        setLoading(false);
       }
-    } catch (error) {
-      isError(true);
+    } catch (err) {
+      // If unauthorized(login) or conflict(register), return correct error.
+      if (err.response.status === 401 || err.response.status === 409) {
+        setError({
+          error: true,
+          status: err.response.status,
+          message:
+            err.response.status === 401
+              ? "Incorrect Email or Password."
+              : "Account with that email already exists.",
+        });
+        // Else the server is down.
+      } else {
+        setError({
+          error: true,
+          status: err.response.status,
+          message: "Server Error. Please wait a few minutes and try again.",
+        });
+      }
+      setLoading(false);
     }
   };
-  return [postRequest, error];
+  return [postRequest, error, loading];
 };
 
 export default useAccount;

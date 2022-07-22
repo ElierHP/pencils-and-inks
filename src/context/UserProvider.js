@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import { getUser } from "../utils/api/users";
+import { Spinner } from "../components/ui";
 
 export const User = createContext();
 
@@ -23,7 +24,7 @@ export const UserProvider = ({ children }) => {
   return (
     <>
       {loading ? (
-        <div>LOADING</div>
+        <Spinner height={500} />
       ) : (
         <User.Provider value={[user, setUser]}>{children}</User.Provider>
       )}

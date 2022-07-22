@@ -1,5 +1,5 @@
 import Layout from "../components/layout/Layout";
-import { Container, FormButton, TextInput } from "../components/ui";
+import { Container, FormButton, Spinner, TextInput } from "../components/ui";
 import { userSchema } from "../validations/user";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,7 +10,7 @@ import formatMessage from "../utils/formatMessage";
 import useAccount from "../hooks/useAccount";
 
 export default function Login() {
-  const [login, loginError] = useAccount();
+  const [login, loginError, loading] = useAccount();
 
   const {
     register,
@@ -29,52 +29,54 @@ export default function Login() {
           <Title>Login</Title>
 
           <Form onSubmit={handleSubmit(onSubmit)}>
-            {loginError && (
-              <LoginErrorMsg>Incorrect Email or Password.</LoginErrorMsg>
+            {loginError.error && (
+              <LoginErrorMsg>{loginError.message}</LoginErrorMsg>
             )}
-            {/* Email Input */}
-            <InputContainer>
-              <TextInput
-                type="email"
-                placeholder="Email"
-                autoComplete="email"
-                register={register("email")}
-              />
+            {loading ? (
+              <Spinner />
+            ) : (
+              <>
+                {/* Email Input */}
+                <InputContainer>
+                  <TextInput
+                    type="email"
+                    placeholder="Email"
+                    autoComplete="email"
+                    register={register("email")}
+                  />
 
-              {/* Email Error Message */}
-              {errors.email && (
-                <ErrorMsg>{formatMessage(errors.email)}</ErrorMsg>
-              )}
-            </InputContainer>
+                  {/* Email Error Message */}
+                  {errors.email && (
+                    <ErrorMsg>{formatMessage(errors.email)}</ErrorMsg>
+                  )}
+                </InputContainer>
+                {/* Password Input */}
+                <InputContainer>
+                  <TextInput
+                    type="password"
+                    placeholder="Password"
+                    autoComplete="current-password"
+                    register={register("password")}
+                  />
 
-            {/* Password Input */}
-            <InputContainer>
-              <TextInput
-                type="password"
-                placeholder="Password"
-                autoComplete="current-password"
-                register={register("password")}
-              />
-
-              {/* Password Error Msg */}
-              {errors.password && (
-                <ErrorMsg>{formatMessage(errors.password)}</ErrorMsg>
-              )}
-            </InputContainer>
-
-            {/* Submit Button */}
-
-            <FormButton type="submit" text="Sign in" />
-
-            {/* Links to Register and Password Recovery. */}
-            <Links>
-              <Link href="/register">
-                <a>New customer? Create an account.</a>
-              </Link>
-              <Link href="/">
-                <a>Forgot your password?</a>
-              </Link>
-            </Links>
+                  {/* Password Error Msg */}
+                  {errors.password && (
+                    <ErrorMsg>{formatMessage(errors.password)}</ErrorMsg>
+                  )}
+                </InputContainer>
+                {/* Submit Button */}
+                <FormButton type="submit" text="Sign in" />
+                {/* Links to Register and Password Recovery. */}
+                <Links>
+                  <Link href="/register">
+                    <a>New customer? Create an account.</a>
+                  </Link>
+                  <Link href="/">
+                    <a>Forgot your password?</a>
+                  </Link>
+                </Links>
+              </>
+            )}
           </Form>
         </Container>
       </Section>

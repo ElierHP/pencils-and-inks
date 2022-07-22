@@ -9,6 +9,7 @@ import FormButton from "./FormButton";
 import ProductBanner from "./ProductBanner";
 import ProductSection from "./ProductSection";
 import CheckBox from "./CheckBox";
+import Spinner from "./Spinner";
 
 export {
   Banner,
@@ -22,4 +23,5 @@ export {
   ProductBanner,
   ProductSection,
   CheckBox,
+  Spinner,
 };

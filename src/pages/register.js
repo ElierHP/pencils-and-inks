@@ -1,5 +1,5 @@
 import Layout from "../components/layout/Layout";
-import { Container, FormButton, TextInput } from "../components/ui";
+import { Container, FormButton, Spinner, TextInput } from "../components/ui";
 import { userSchema } from "../validations/user";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,7 +10,7 @@ import formatMessage from "../utils/formatMessage";
 import useAccount from "../hooks/useAccount";
 
 export default function Register() {
-  const [registerUser, registerError] = useAccount();
+  const [registerUser, registerError, loading] = useAccount();
 
   const {
     register,
@@ -29,67 +29,67 @@ export default function Register() {
           <Title>Register</Title>
 
           <Form onSubmit={handleSubmit(onSubmit)}>
-            {registerError && (
-              <RegisterErrorMsg>
-                Account with that email already exists.
-              </RegisterErrorMsg>
+            {registerError.error && (
+              <RegisterErrorMsg>{registerError.message}</RegisterErrorMsg>
             )}
-            {/* Email Input */}
-            <InputContainer>
-              <TextInput
-                type="email"
-                placeholder="Email"
-                autoComplete="email"
-                register={register("email")}
-              />
+            {loading ? (
+              <Spinner />
+            ) : (
+              <>
+                {/* Email Input */}
+                <InputContainer>
+                  <TextInput
+                    type="email"
+                    placeholder="Email"
+                    autoComplete="email"
+                    register={register("email")}
+                  />
 
-              {/* Email Error Message */}
-              {errors.email && (
-                <ErrorMsg>{formatMessage(errors.email)}</ErrorMsg>
-              )}
-            </InputContainer>
+                  {/* Email Error Message */}
+                  {errors.email && (
+                    <ErrorMsg>{formatMessage(errors.email)}</ErrorMsg>
+                  )}
+                </InputContainer>
+                {/* Password Input */}
+                <InputContainer>
+                  <TextInput
+                    type="password"
+                    placeholder="Password"
+                    autoComplete="current-password"
+                    register={register("password")}
+                  />
 
-            {/* Password Input */}
-            <InputContainer>
-              <TextInput
-                type="password"
-                placeholder="Password"
-                autoComplete="current-password"
-                register={register("password")}
-              />
+                  {/* Password Error Msg */}
+                  {errors.password && (
+                    <ErrorMsg>{formatMessage(errors.password)}</ErrorMsg>
+                  )}
+                </InputContainer>
+                {/* Password Confirmation Input */}
+                <InputContainer>
+                  <TextInput
+                    type="password"
+                    placeholder="Password Confirmation"
+                    autoComplete="current-password"
+                    register={register("password_confirmation")}
+                  />
 
-              {/* Password Error Msg */}
-              {errors.password && (
-                <ErrorMsg>{formatMessage(errors.password)}</ErrorMsg>
-              )}
-            </InputContainer>
-
-            {/* Password Confirmation Input */}
-            <InputContainer>
-              <TextInput
-                type="password"
-                placeholder="Password Confirmation"
-                autoComplete="current-password"
-                register={register("password_confirmation")}
-              />
-
-              {/* Password Error Msg */}
-              {errors.password_confirmation && (
-                <ErrorMsg>
-                  {formatMessage(errors.password_confirmation)}
-                </ErrorMsg>
-              )}
-            </InputContainer>
-
-            {/* Submit Button */}
-            <FormButton type="submit" text="Create Account" />
-
-            {/* Links to Register and Password Recovery. */}
-            <Links>
-              <Link href="/login">
-                <a>Already have an account? Log in.</a>
-              </Link>
-            </Links>
+                  {/* Password Error Msg */}
+                  {errors.password_confirmation && (
+                    <ErrorMsg>
+                      {formatMessage(errors.password_confirmation)}
+                    </ErrorMsg>
+                  )}
+                </InputContainer>
+                {/* Submit Button */}
+                <FormButton type="submit" text="Create Account" />
+                {/* Links to Register and Password Recovery. */}
+                <Links>
+                  <Link href="/login">
+                    <a>Already have an account? Log in.</a>
+                  </Link>
+                </Links>
+              </>
+            )}
           </Form>
         </Container>
       </Section>
