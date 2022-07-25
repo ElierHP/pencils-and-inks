@@ -26,7 +26,7 @@ export default function LatestProducts() {
             {products.map((product) => (
               <ListItem key={product.id}>
                 {/* Clicking links to product page. */}
-                <Link href="/">
+                <Link href={`/products/${product.id}`}>
                   <div>
                     <ProductImage>
                       <Image

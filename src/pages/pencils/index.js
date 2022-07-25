@@ -34,7 +34,12 @@ export default function Pencils() {
   return (
     <Layout>
       <PageContainer>
-        <ProductNav links={["Home", "Pencils"]} />
+        <ProductNav
+          links={[
+            { url: "/", label: "Home" },
+            { url: "/pencils", label: "Pencils" },
+          ]}
+        />
 
         <ProductBanner
           title="Pencils"

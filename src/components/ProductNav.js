@@ -11,13 +11,13 @@ export default function ProductNav({ links }) {
       {links.map((link) => (
         <Wrapper key={uuidv4()}>
           {/* Check last item in links array and render different styles for it. */}
-          {links.slice(-1)[0] === link ? (
-            <CurrentPage>{link}</CurrentPage>
+          {links.slice(-1)[0].label === link.label ? (
+            <CurrentPage>{link.label}</CurrentPage>
           ) : (
             <>
-              {/* If link is home, link to "/". Otherwise link to /pencils or /papers etc. */}
-              <Link href={link === "Home" ? "/" : `/${link.toLowerCase()}`}>
-                <a>{link}</a>
+              {/* Render the links with correct url. */}
+              <Link href={link.url}>
+                <a>{link.label}</a>
               </Link>
               <MdKeyboardArrowRight color={theme.colors.neutral} size={20} />
             </>

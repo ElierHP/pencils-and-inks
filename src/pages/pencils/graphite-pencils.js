@@ -34,7 +34,13 @@ export default function GraphitePencils() {
   return (
     <Layout>
       <PageContainer>
-        <ProductNav links={["Home", "Pencils", "Graphite Pencils"]} />
+        <ProductNav
+          links={[
+            { label: "Home", url: "/" },
+            { label: "Pencils", url: "/pencils" },
+            { label: "Graphite Pencils" },
+          ]}
+        />
 
         <ProductBanner
           title="Graphite Pencils"
