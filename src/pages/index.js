@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Category from "../components/Category";
 import ImageSection from "../components/ImageSection";
+import LatestProducts from "../components/LatestProducts";
 import Layout from "../components/layout/Layout";
-import NewItems from "../components/NewItems";
 import Subscribe from "../components/Subscribe";
 import Banner from "../components/ui/Banner";
 
@@ -19,7 +19,7 @@ export default function Home() {
       </Head>
       <Banner />
       <Category />
-      <NewItems />
+      <LatestProducts />
       <ImageSection />
       <Subscribe />
     </Layout>

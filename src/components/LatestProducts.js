@@ -7,7 +7,7 @@ import { Section, Container, Button, ErrorMessage, Spinner } from "./ui";
 import { useQuery } from "react-query";
 import { getProducts } from "../utils/api/products";
 
-export default function NewItems() {
+export default function LatestProducts() {
   // Queries
   const {
     data: products,

@@ -11,6 +11,7 @@ import ProductSection from "./ProductSection";
 import CheckBox from "./CheckBox";
 import Spinner from "./Spinner";
 import ErrorMessage from "./ErrorMessage";
+import HandleAsync from "./HandleAsync";
 
 export {
   Banner,
@@ -26,4 +27,5 @@ export {
   CheckBox,
   Spinner,
   ErrorMessage,
+  HandleAsync,
 };

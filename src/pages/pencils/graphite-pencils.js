@@ -3,11 +3,10 @@ import Layout from "../../components/layout/Layout";
 import { useQuery } from "react-query";
 import { getProducts } from "../../utils/api/products";
 import {
-  ErrorMessage,
-  Spinner,
   PageContainer,
   ProductBanner,
   ProductSection,
+  HandleAsync,
 } from "../../components/ui";
 import Filter from "../../components/Filter";
 import ProductList from "../../components/ProductList";
@@ -22,9 +21,8 @@ export default function GraphitePencils() {
 
   // Array of objects with all the checkbox states, gets passed to the <Filter /> component.
   const checkboxes = useCheckbox(
-    "Featured",
-    "Graphite Pencil",
-    "Colored Pencil"
+    ["Graphite Pencil", "Featured", "Colored Pencil"],
+    true
   );
 
   const {
@@ -53,20 +51,10 @@ export default function GraphitePencils() {
             queryTag={"&tags=graphite-pencil"}
           />
 
-          {/* Display Product List */}
-          {!isLoading && !isError ? (
+          {/* Display Product List & Handle Errors/Loading */}
+          <HandleAsync isLoading={isLoading} isError={isError}>
             <ProductList products={products} />
-          ) : (
-            <>
-              {/* Loading Display */}
-              {isLoading && <Spinner />}
-
-              {/* Error Display */}
-              {isError && (
-                <ErrorMessage>Error: Couldn't load products.</ErrorMessage>
-              )}
-            </>
-          )}
+          </HandleAsync>
         </ProductSection>
       </PageContainer>
     </Layout>

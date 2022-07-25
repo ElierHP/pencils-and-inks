@@ -26,6 +26,7 @@ export default function Filter({
 
   const resetFilters = () => {
     checkboxes.forEach((item) => item.setChecked(false));
+    setQuery(`/products?category=${category}`);
   };
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>
