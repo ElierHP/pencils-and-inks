@@ -3,22 +3,27 @@ import Layout from "../../components/layout/Layout";
 import { useQuery } from "react-query";
 import { getProducts } from "../../utils/api/products";
 import {
+  ErrorMessage,
   PageContainer,
   ProductBanner,
   ProductSection,
+  Spinner,
 } from "../../components/ui";
 import Filter from "../../components/Filter";
 import ProductList from "../../components/ProductList";
 import ProductNav from "../../components/ProductNav";
+import useCheckbox from "../../hooks/useCheckbox";
 
 export default function Pencils() {
   // Fetch query, changing this will refetch with new url.
   const [query, setQuery] = useState("/products?category=pencils");
 
-  // Checkbox states
-  const [graphiteChecked, setGraphiteChecked] = useState(false);
-  const [coloredChecked, setColoredChecked] = useState(false);
-  const [featured, setFeatured] = useState(false);
+  // Array of objects with all the checkbox states, gets passed to the <Filter /> component.
+  const checkboxes = useCheckbox(
+    "Featured",
+    "Graphite Pencil",
+    "Colored Pencil"
+  );
 
   // Get Request for products with pencils category
   const {
@@ -26,28 +31,6 @@ export default function Pencils() {
     isLoading,
     isError,
   } = useQuery(["products", query], () => getProducts(query));
-
-  // Checkbox settings passed to <Filter /> component
-  const checkboxes = [
-    {
-      checked: featured,
-      setChecked: setFeatured,
-      label: "Featured Products",
-      tag: "featured",
-    },
-    {
-      checked: graphiteChecked,
-      setChecked: setGraphiteChecked,
-      label: "Graphite Pencils",
-      tag: "graphite-pencil",
-    },
-    {
-      checked: coloredChecked,
-      setChecked: setColoredChecked,
-      label: "Colored Pencils",
-      tag: "colored-pencils",
-    },
-  ];
 
   return (
     <Layout>
@@ -74,10 +57,12 @@ export default function Pencils() {
           ) : (
             <>
               {/* Loading Display */}
-              {isLoading && <p>Loading products... please wait.</p>}
+              {isLoading && <Spinner />}
 
               {/* Error Display */}
-              {isError && <p>Error: Couldn't load products.</p>}
+              {isError && (
+                <ErrorMessage>Error: Couldn't load products.</ErrorMessage>
+              )}
             </>
           )}
         </ProductSection>

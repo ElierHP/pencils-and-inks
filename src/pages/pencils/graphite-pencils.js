@@ -3,6 +3,8 @@ import Layout from "../../components/layout/Layout";
 import { useQuery } from "react-query";
 import { getProducts } from "../../utils/api/products";
 import {
+  ErrorMessage,
+  Spinner,
   PageContainer,
   ProductBanner,
   ProductSection,
@@ -10,6 +12,7 @@ import {
 import Filter from "../../components/Filter";
 import ProductList from "../../components/ProductList";
 import ProductNav from "../../components/ProductNav";
+import useCheckbox from "../../hooks/useCheckbox";
 
 export default function GraphitePencils() {
   // Fetch query, changing this will refetch with new url.
@@ -17,8 +20,12 @@ export default function GraphitePencils() {
     "/products?category=pencils&tags=graphite-pencil"
   );
 
-  // Checkbox states
-  const [featured, setFeatured] = useState(false);
+  // Array of objects with all the checkbox states, gets passed to the <Filter /> component.
+  const checkboxes = useCheckbox(
+    "Featured",
+    "Graphite Pencil",
+    "Colored Pencil"
+  );
 
   const {
     data: products,
@@ -26,15 +33,6 @@ export default function GraphitePencils() {
     isError,
   } = useQuery(["products", query], () => getProducts(query));
 
-  // Checkbox settings passed to <Filter /> component
-  const checkboxes = [
-    {
-      checked: featured,
-      setChecked: setFeatured,
-      label: "Featured Products",
-      tag: "featured",
-    },
-  ];
   return (
     <Layout>
       <PageContainer>
@@ -61,10 +59,12 @@ export default function GraphitePencils() {
           ) : (
             <>
               {/* Loading Display */}
-              {isLoading && <p>Loading products... please wait.</p>}
+              {isLoading && <Spinner />}
 
               {/* Error Display */}
-              {isError && <p>Error: Couldn't load products.</p>}
+              {isError && (
+                <ErrorMessage>Error: Couldn't load products.</ErrorMessage>
+              )}
             </>
           )}
         </ProductSection>

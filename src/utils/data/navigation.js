@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
+// Used to render all the navigation links.
 export const pencilNavData = {
   mainNav: {
     name: "Pencils",

@@ -7,7 +7,7 @@ import {
   paperNavData,
   inksNavData,
   accountNavData,
-} from "./data/navData";
+} from "../../utils/data/navigation";
 import NavLi from "./NavLi";
 
 export default function Navbar({ isOpen, setIsOpen }) {

@@ -10,6 +10,7 @@ import ProductBanner from "./ProductBanner";
 import ProductSection from "./ProductSection";
 import CheckBox from "./CheckBox";
 import Spinner from "./Spinner";
+import ErrorMessage from "./ErrorMessage";
 
 export {
   Banner,
@@ -24,4 +25,5 @@ export {
   ProductSection,
   CheckBox,
   Spinner,
+  ErrorMessage,
 };

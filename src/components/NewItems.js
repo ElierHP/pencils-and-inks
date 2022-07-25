@@ -3,7 +3,7 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import theme from "../styles/theme";
-import { Section, Container, Button } from "./ui";
+import { Section, Container, Button, ErrorMessage, Spinner } from "./ui";
 import { useQuery } from "react-query";
 import { getProducts } from "../utils/api/products";
 
@@ -52,12 +52,12 @@ export default function NewItems() {
         ) : (
           <>
             {/* Loading Display */}
-            {isLoading && (
-              <LoadingMsg>Loading products... please wait.</LoadingMsg>
-            )}
+            {isLoading && <Spinner />}
 
             {/* Error Display */}
-            {isError && <ErrorMsg>Error: Couldn't load products.</ErrorMsg>}
+            {isError && (
+              <ErrorMessage>Error: Couldn't load products.</ErrorMessage>
+            )}
           </>
         )}
       </Container>
@@ -110,14 +110,4 @@ const Price = styled.p`
   font-weight: ${theme.fontWeights.bold};
   font-size: 2rem;
   padding: 1rem 0;
-`;
-
-const ErrorMsg = styled.p`
-  color: ${theme.colors.error};
-  text-align: center;
-`;
-
-const LoadingMsg = styled.p`
-  color: ${theme.colors.warning};
-  text-align: center;
 `;
