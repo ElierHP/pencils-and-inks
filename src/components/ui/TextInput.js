@@ -9,7 +9,15 @@ export default function TextInput({
   register,
   defaultValue,
   step,
+  width = "100%",
 }) {
+  // Styles
+  const Input = styled.input`
+    padding: 0 1rem;
+    width: ${width};
+    min-height: 100%;
+    transition: ${theme.transition.primary};
+  `;
   return (
     <Input
       type={type}
@@ -21,11 +29,3 @@ export default function TextInput({
     />
   );
 }
-
-// Styles
-const Input = styled.input`
-  padding: 0 1rem;
-  width: 100%;
-  min-height: 100%;
-  transition: ${theme.transition.primary};
-`;
