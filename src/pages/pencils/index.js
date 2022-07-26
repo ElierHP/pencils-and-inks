@@ -9,8 +9,8 @@ import {
   HandleAsync,
 } from "../../components/ui";
 import Filter from "../../components/Filter";
-import ProductList from "../../components/ProductList";
-import ProductNav from "../../components/ProductNav";
+import ProductList from "../../components/products/ProductList";
+import ProductNav from "../../components/products/ProductNav";
 import useCheckbox from "../../hooks/useCheckbox";
 
 export default function Pencils() {

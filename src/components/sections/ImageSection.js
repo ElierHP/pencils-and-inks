@@ -2,8 +2,8 @@ import React from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import Image from "next/image";
-import theme from "../styles/theme";
-import { Section, Container, Logo } from "./ui";
+import theme from "../../styles/theme";
+import { Section, Container, Logo } from "../ui";
 
 export default function ImageSection() {
   return (

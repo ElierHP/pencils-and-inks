@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
-import theme from "../styles/theme";
+import theme from "../../styles/theme";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
 

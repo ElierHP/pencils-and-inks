@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import Link from "next/link";
-import formatMessage from "../utils/formatMessage";
+import { formatErrorMessage } from "../utils/formatText";
 import useAccount from "../hooks/useAccount";
 
 export default function Login() {
@@ -47,7 +47,7 @@ export default function Login() {
 
                   {/* Email Error Message */}
                   {errors.email && (
-                    <ErrorMsg>{formatMessage(errors.email)}</ErrorMsg>
+                    <ErrorMsg>{formatErrorMessage(errors.email)}</ErrorMsg>
                   )}
                 </InputContainer>
                 {/* Password Input */}

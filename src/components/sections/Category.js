@@ -2,8 +2,8 @@ import React from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import Image from "next/image";
-import theme from "../styles/theme";
-import { Section, Container } from "./ui";
+import theme from "../../styles/theme";
+import { Section, Container } from "../ui";
 import { v4 as uuidv4 } from "uuid";
 
 const categoryData = [

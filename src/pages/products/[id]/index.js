@@ -1,10 +1,18 @@
+import { useState } from "react";
 import Layout from "../../../components/layout/Layout";
-import ProductNav from "../../../components/ProductNav";
-import { Button, PageContainer, TextInput } from "../../../components/ui";
+import { HandleAsync, PageContainer } from "../../../components/ui";
 import styled from "@emotion/styled";
 import theme from "../../../styles/theme";
-import Image from "next/image";
 import { BASE_URL } from "../../../utils/api";
+import { formatCategory, formatTags } from "../../../utils/formatText";
+import {
+  ProductImages,
+  ProductRow,
+  ProductNav,
+  ProductInfo,
+} from "../../../components/products";
+import { useQuery } from "react-query";
+import { getProducts } from "../../../utils/api/products";
 
 function index({ product }) {
   const { title, id, category, tags, sku, price } = product;
@@ -15,25 +23,26 @@ function index({ product }) {
 
   const description = product.description.split("\n");
 
-  const formatLabel = (tag) => {
-    const formattedTag = tag
-      .split("-")
-      .map((string) => string.charAt(0).toUpperCase() + string.slice(1));
+  // Queries
+  const [query, setQuery] = useState(
+    `/products?category=${category}&tags=${tags}`
+  );
+  const {
+    data: products,
+    isLoading,
+    isError,
+  } = useQuery(["products", query], () => getProducts(query));
 
-    return formattedTag.join(" ");
-  };
-
-  const formatCategory = (category) =>
-    `${category.charAt(0).toUpperCase() + category.slice(1)}`;
   return (
     <Layout>
       <PageContainer>
+        {/* Top Product Navbar */}
         <ProductNav
           links={[
             { label: "Home", url: "/" },
             { label: formatCategory(category), url: `/${product.category}` },
             {
-              label: formatLabel(tags.split(",")[0]),
+              label: formatTags(tags.split(",")[0]),
               url: `/${category}/${tags.split(",")[0]}s`,
             },
             {
@@ -42,55 +51,23 @@ function index({ product }) {
             },
           ]}
         />
+        {/* Main Product Images + Information */}
         <MainProduct>
-          <ImageContainer>
-            <Images>
-              {images.map((image) => (
-                <Image
-                  alt={image}
-                  src={image}
-                  layout="responsive"
-                  width={100}
-                  height={100}
-                  objectFit="cover"
-                  quality={100}
-                />
-              ))}
-            </Images>
-            <Image
-              alt={`${title}-image`}
-              src={mainImage}
-              layout="responsive"
-              width={100}
-              height={100}
-              objectFit="cover"
-              quality={100}
-            />
-          </ImageContainer>
-          <ItemInfo>
-            <div>
-              <h2>{title}</h2>
-              <SkuText>SKU: {sku}</SkuText>
-            </div>
-            <p>
-              Price: <Price>${price}</Price>
-            </p>
-            <div>
-              <Button color={theme.colors.secondary}>Add To Wishlist</Button>
-            </div>
-            <InputContainer>
-              <CartInput>
-                <CartQuantity>Quantity</CartQuantity>
-                <TextInput type="number" width={"100px"} defaultValue={1} />
-              </CartInput>
-              <Button>Add To Cart</Button>
-            </InputContainer>
-          </ItemInfo>
+          <ProductImages mainImage={mainImage} images={images} title={title} />
+          <ProductInfo title={title} sku={sku} price={price} />
         </MainProduct>
-        <DescTitle>Description</DescTitle>
+
+        {/* Large Description */}
+        <Title>Description</Title>
         {description.map((text) => (
           <DescText>{text}</DescText>
         ))}
+
+        {/* Similar Products */}
+        <Title>You May Also Like</Title>
+        <HandleAsync isLoading={isLoading} isError={isError}>
+          <ProductRow products={products} />
+        </HandleAsync>
       </PageContainer>
     </Layout>
   );
@@ -105,59 +82,15 @@ const MainProduct = styled.section`
   gap: 15rem;
   padding: ${theme.space.productSection}rem 0;
 `;
-const ImageContainer = styled.div`
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 2rem;
-`;
 
-const Images = styled.div`
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 1rem;
-`;
-
-const ItemInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-`;
-
-const SkuText = styled.p`
-  color: ${theme.colors.neutral};
-`;
-
-const Price = styled.span`
-  font-weight: ${theme.fontWeights.bold};
-  font-size: ${theme.fontSizes.large}rem;
-`;
-
-const InputContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-  padding-top: 1.5rem;
-`;
-
-const CartInput = styled.div`
-  position: relative;
-`;
-
-const CartQuantity = styled.span`
-  position: absolute;
-  top: -2.2rem;
-  left: 0;
-  font-size: ${theme.fontSizes.small}rem;
-  color: ${theme.colors.neutral};
-`;
-
-const DescTitle = styled.h2`
+const Title = styled.h2`
   margin-bottom: 3rem;
 `;
 
 const DescText = styled.p`
   margin-bottom: 1rem;
 `;
+
 // NEXT JS FUNCTIONS
 // This function gets called at build time
 export async function getStaticProps(context) {
