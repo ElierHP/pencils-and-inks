@@ -12,7 +12,7 @@ export default function ProductRow({ products }) {
         <ListItem key={product.id}>
           {/* Clicking links to product page. */}
           <Link href={`/products/${product.id}`}>
-            <div>
+            <a>
               <ProductImage>
                 <Image
                   alt={product.title}
@@ -24,7 +24,7 @@ export default function ProductRow({ products }) {
 
               <ProductTitle>{product.title}</ProductTitle>
               <Price>${product.price}</Price>
-            </div>
+            </a>
           </Link>
 
           {/* Button - Clicking adds to shopping cart. */}

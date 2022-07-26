@@ -35,7 +35,7 @@ export default function ProductList({
         <List>
           {products.map((product) => (
             <ListItem key={uuidv4()}>
-              <a href="/">{product.title}</a>
+              <a href={`/products/${product.id}`}>{product.title}</a>
               <BtnContainer>
                 <Button
                   color={theme.colors.secondary}

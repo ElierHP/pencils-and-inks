@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Logo({ href, size, isLink = true }) {
   // Styles
-  const Text = styled.a`
+  const Text = styled.span`
     font-weight: ${theme.fontWeights.bold};
     font-size: ${size}rem;
     cursor: pointer;
@@ -23,7 +23,9 @@ export default function Logo({ href, size, isLink = true }) {
     <>
       {isLink ? (
         <Link href={href}>
-          <Text>{"Pencils&Inks"}</Text>
+          <a>
+            <Text>{"Pencils&Inks"}</Text>
+          </a>
         </Link>
       ) : (
         <Text>{"Pencils&Inks"}</Text>

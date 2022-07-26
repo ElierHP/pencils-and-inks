@@ -5,7 +5,7 @@ import { FormButton, TextInput } from "../ui";
 import { productSchema } from "../../validations/product";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
-import formatMessage from "../../utils/formatMessage";
+import { formatErrorMessage } from "../../utils/formatText";
 import { createProduct, editProduct } from "../../utils/api/products";
 
 export default function ProductForm({
@@ -45,7 +45,9 @@ export default function ProductForm({
             defaultValue={product && product.title}
           />
           {/* Title Error Msg */}
-          {errors.title && <ErrorMsg>{formatMessage(errors.title)}</ErrorMsg>}
+          {errors.title && (
+            <ErrorMsg>{formatErrorMessage(errors.title)}</ErrorMsg>
+          )}
         </InputContainer>
 
         {/* SKU Input */}
@@ -57,7 +59,7 @@ export default function ProductForm({
             defaultValue={product && product.sku}
           />
           {/* SKU Error Msg */}
-          {errors.sku && <ErrorMsg>{formatMessage(errors.sku)}</ErrorMsg>}
+          {errors.sku && <ErrorMsg>{formatErrorMessage(errors.sku)}</ErrorMsg>}
         </InputContainer>
       </InputWrapper>
 
@@ -72,7 +74,7 @@ export default function ProductForm({
           />
           {/* SKU Error Msg */}
           {errors.category && (
-            <ErrorMsg>{formatMessage(errors.category)}</ErrorMsg>
+            <ErrorMsg>{formatErrorMessage(errors.category)}</ErrorMsg>
           )}
         </InputContainer>
 
@@ -85,7 +87,9 @@ export default function ProductForm({
             defaultValue={product && product.tags}
           />
           {/* Tags Error Msg */}
-          {errors.tags && <ErrorMsg>{formatMessage(errors.tags)}</ErrorMsg>}
+          {errors.tags && (
+            <ErrorMsg>{formatErrorMessage(errors.tags)}</ErrorMsg>
+          )}
         </InputContainer>
       </InputWrapper>
 
@@ -100,7 +104,9 @@ export default function ProductForm({
             step=".01"
           />
           {/* SKU Error Msg */}
-          {errors.price && <ErrorMsg>{formatMessage(errors.price)}</ErrorMsg>}
+          {errors.price && (
+            <ErrorMsg>{formatErrorMessage(errors.price)}</ErrorMsg>
+          )}
         </InputContainer>
 
         {/* Images Input */}
@@ -112,7 +118,9 @@ export default function ProductForm({
             defaultValue={product && product.images}
           />
           {/* SKU Error Msg */}
-          {errors.images && <ErrorMsg>{formatMessage(errors.images)}</ErrorMsg>}
+          {errors.images && (
+            <ErrorMsg>{formatErrorMessage(errors.images)}</ErrorMsg>
+          )}
         </InputContainer>
       </InputWrapper>
       {/* Description */}
@@ -124,7 +132,7 @@ export default function ProductForm({
         />
         {/* Description Error Msg */}
         {errors.description && (
-          <ErrorMsg>{formatMessage(errors.description)}</ErrorMsg>
+          <ErrorMsg>{formatErrorMessage(errors.description)}</ErrorMsg>
         )}
       </TextAreaContainer>
 
@@ -176,6 +184,7 @@ const TextArea = styled.textarea`
   border-radius: 3px;
   padding: 1rem 1rem;
   border: 2px solid ${theme.colors.neutral};
+  resize: none;
   &:focus {
     outline: none;
     border: 2px solid ${theme.colors.btnHover};

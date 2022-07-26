@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Layout from "../../../components/layout/Layout";
 import { HandleAsync, PageContainer } from "../../../components/ui";
 import styled from "@emotion/styled";
@@ -12,7 +11,8 @@ import {
   ProductInfo,
 } from "../../../components/products";
 import { useQuery } from "react-query";
-import { getProducts } from "../../../utils/api/products";
+import { getSimilarProducts } from "../../../utils/api/products";
+import { v4 as uuidv4 } from "uuid";
 
 function index({ product }) {
   const { title, id, category, tags, sku, price } = product;
@@ -24,14 +24,11 @@ function index({ product }) {
   const description = product.description.split("\n");
 
   // Queries
-  const [query, setQuery] = useState(
-    `/products?category=${category}&tags=${tags}`
-  );
   const {
     data: products,
     isLoading,
     isError,
-  } = useQuery(["products", query], () => getProducts(query));
+  } = useQuery("products", () => getSimilarProducts(category, tags, sku));
 
   return (
     <Layout>
@@ -57,17 +54,21 @@ function index({ product }) {
           <ProductInfo title={title} sku={sku} price={price} />
         </MainProduct>
 
-        {/* Large Description */}
-        <Title>Description</Title>
-        {description.map((text) => (
-          <DescText>{text}</DescText>
-        ))}
+        <Section>
+          {/* Large Description */}
+          <h2>Description</h2>
+          <div>
+            {description.map((text) => (
+              <DescText key={uuidv4()}>{text}</DescText>
+            ))}
+          </div>
 
-        {/* Similar Products */}
-        <Title>You May Also Like</Title>
-        <HandleAsync isLoading={isLoading} isError={isError}>
-          <ProductRow products={products} />
-        </HandleAsync>
+          {/* Similar Products */}
+          <Title>You May Also Like</Title>
+          <HandleAsync isLoading={isLoading} isError={isError}>
+            <ProductRow products={products} />
+          </HandleAsync>
+        </Section>
       </PageContainer>
     </Layout>
   );
@@ -83,12 +84,18 @@ const MainProduct = styled.section`
   padding: ${theme.space.productSection}rem 0;
 `;
 
-const Title = styled.h2`
-  margin-bottom: 3rem;
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 `;
 
 const DescText = styled.p`
   margin-bottom: 1rem;
+`;
+
+const Title = styled.h2`
+  margin-bottom: -1rem;
 `;
 
 // NEXT JS FUNCTIONS
