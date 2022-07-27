@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Layout from "../../../components/layout/Layout";
 import { HandleAsync, PageContainer } from "../../../components/ui";
 import styled from "@emotion/styled";
@@ -9,12 +10,14 @@ import {
   ProductRow,
   ProductNav,
   ProductInfo,
+  ImageGallery,
 } from "../../../components/products";
 import { useQuery } from "react-query";
 import { getSimilarProducts } from "../../../utils/api/products";
 import { v4 as uuidv4 } from "uuid";
 
 function index({ product }) {
+  // Destructure all product data.
   const { title, id, category, tags, sku, price } = product;
 
   const mainImage = product.images.split(",")[0];
@@ -22,6 +25,10 @@ function index({ product }) {
   images.shift();
 
   const description = product.description.split("\n");
+
+  // States needed for zoomed in gallery.
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [currentImage, setCurrentImage] = useState("");
 
   // Queries
   const {
@@ -31,46 +38,67 @@ function index({ product }) {
   } = useQuery("products", () => getSimilarProducts(category, tags, sku));
 
   return (
-    <Layout>
-      <PageContainer>
-        {/* Top Product Navbar */}
-        <ProductNav
-          links={[
-            { label: "Home", url: "/" },
-            { label: formatCategory(category), url: `/${product.category}` },
-            {
-              label: formatTags(tags.split(",")[0]),
-              url: `/${category}/${tags.split(",")[0]}s`,
-            },
-            {
-              label: sku,
-              url: `/products/${id}`,
-            },
-          ]}
+    <>
+      {/* Display product page */}
+      {!isZoomed ? (
+        <Layout>
+          <PageContainer>
+            {/* Top Product Navbar */}
+            <ProductNav
+              links={[
+                { label: "Home", url: "/" },
+                {
+                  label: formatCategory(category),
+                  url: `/${product.category}`,
+                },
+                {
+                  label: formatTags(tags.split(",")[0]),
+                  url: `/${category}/${tags.split(",")[0]}s`,
+                },
+                {
+                  label: sku,
+                  url: `/products/${id}`,
+                },
+              ]}
+            />
+            {/* Main Product Images + Information */}
+            <MainProduct>
+              <ProductImages
+                mainImage={mainImage}
+                images={images}
+                title={title}
+                setIsZoomed={setIsZoomed}
+                setCurrentImage={setCurrentImage}
+              />
+              <ProductInfo title={title} sku={sku} price={price} />
+            </MainProduct>
+
+            <Section>
+              {/* Large Description */}
+              <h2>Description</h2>
+              <div>
+                {description.map((text) => (
+                  <DescText key={uuidv4()}>{text}</DescText>
+                ))}
+              </div>
+
+              {/* Similar Products */}
+              <Title>You May Also Like</Title>
+              <HandleAsync isLoading={isLoading} isError={isError}>
+                <ProductRow products={products} />
+              </HandleAsync>
+            </Section>
+          </PageContainer>
+        </Layout>
+      ) : (
+        // Display gallery when user clicks on a product image.
+        <ImageGallery
+          images={[mainImage, ...images]}
+          currentImage={currentImage}
+          setIsZoomed={setIsZoomed}
         />
-        {/* Main Product Images + Information */}
-        <MainProduct>
-          <ProductImages mainImage={mainImage} images={images} title={title} />
-          <ProductInfo title={title} sku={sku} price={price} />
-        </MainProduct>
-
-        <Section>
-          {/* Large Description */}
-          <h2>Description</h2>
-          <div>
-            {description.map((text) => (
-              <DescText key={uuidv4()}>{text}</DescText>
-            ))}
-          </div>
-
-          {/* Similar Products */}
-          <Title>You May Also Like</Title>
-          <HandleAsync isLoading={isLoading} isError={isError}>
-            <ProductRow products={products} />
-          </HandleAsync>
-        </Section>
-      </PageContainer>
-    </Layout>
+      )}
+    </>
   );
 }
 

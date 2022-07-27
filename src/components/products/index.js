@@ -3,5 +3,13 @@ import ProductInfo from "./ProductInfo";
 import ProductList from "./ProductList";
 import ProductNav from "./ProductNav";
 import ProductRow from "./ProductRow";
+import ImageGallery from "./ImageGallery";
 
-export { ProductImages, ProductInfo, ProductList, ProductNav, ProductRow };
+export {
+  ProductImages,
+  ProductInfo,
+  ProductList,
+  ProductNav,
+  ProductRow,
+  ImageGallery,
+};

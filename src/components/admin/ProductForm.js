@@ -183,12 +183,7 @@ const TextArea = styled.textarea`
   width: 100%;
   border-radius: 3px;
   padding: 1rem 1rem;
-  border: 2px solid ${theme.colors.neutral};
   resize: none;
-  &:focus {
-    outline: none;
-    border: 2px solid ${theme.colors.btnHover};
-  }
 `;
 
 const ErrorMsg = styled.p`

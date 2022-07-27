@@ -46,9 +46,11 @@ export default function GlobalStyles() {
         }
         ,
         input,
-        select {
+        select,
+        textarea {
           border-radius: 4px;
           border: 2px solid ${theme.colors.neutralLight};
+          transition: ${theme.transition.primary};
           &:focus {
             outline: none;
             border: 2px solid ${theme.colors.btnHover};

@@ -16,7 +16,6 @@ export default function TextInput({
     padding: 0 1rem;
     width: ${width};
     min-height: 100%;
-    transition: ${theme.transition.primary};
   `;
   return (
     <Input
