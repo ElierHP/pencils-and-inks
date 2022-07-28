@@ -13,15 +13,17 @@ export default function ProductInfo({ title, sku, price }) {
       <p>
         Price: <Price>${price}</Price>
       </p>
-      <div>
+      <BtnContainer>
         <Button color={theme.colors.secondary}>Add To Wishlist</Button>
-      </div>
+      </BtnContainer>
       <InputContainer>
         <CartInput>
           <CartQuantity>Quantity</CartQuantity>
           <TextInput type="number" width={"100px"} defaultValue={1} />
         </CartInput>
-        <Button>Add To Cart</Button>
+        <BtnContainer>
+          <Button>Add To Cart</Button>
+        </BtnContainer>
       </InputContainer>
     </ItemInfo>
   );
@@ -31,7 +33,10 @@ export default function ProductInfo({ title, sku, price }) {
 const ItemInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 1.5rem;
+  ${theme.mq()[0]} {
+    gap: 4rem;
+  }
 `;
 
 const SkuText = styled.p`
@@ -59,4 +64,11 @@ const CartQuantity = styled.span`
   left: 0;
   font-size: ${theme.fontSizes.small}rem;
   color: ${theme.colors.neutral};
+`;
+
+const BtnContainer = styled.div`
+  width: 100%;
+  ${theme.mq()[0]} {
+    width: initial;
+  }
 `;

@@ -107,9 +107,13 @@ export default index;
 // Styles
 const MainProduct = styled.section`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15rem;
+  grid-template-columns: 1fr;
+  gap: 0;
   padding: ${theme.space.productSection}rem 0;
+  ${theme.mq()[1]} {
+    grid-template-columns: 1fr 1fr;
+    gap: 15rem;
+  }
 `;
 
 const Section = styled.section`

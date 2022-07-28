@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 import theme from "../../styles/theme";
 import Link from "next/link";
-import { Button } from "../ui";
+import { Button, List, ImageContainer } from "../ui";
 
 export default function ProductRow({ products }) {
   return (
@@ -13,14 +13,14 @@ export default function ProductRow({ products }) {
           {/* Clicking links to product page. */}
           <Link href={`/products/${product.id}`}>
             <a>
-              <ProductImage>
+              <ImageContainer>
                 <Image
                   alt={product.title}
                   src={product.images.split(",")[0]}
                   layout="fill"
                   objectFit="cover"
                 />
-              </ProductImage>
+              </ImageContainer>
 
               <ProductTitle>{product.title}</ProductTitle>
               <Price>${product.price}</Price>
@@ -38,35 +38,14 @@ export default function ProductRow({ products }) {
 }
 
 // Styles
-const List = styled.ul`
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  flex-wrap: wrap;
-  gap: 3rem;
-  ${theme.mq()[0]} {
-    justify-content: space-between;
-  }
-`;
-
 const ListItem = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 
-const ProductImage = styled.div`
-  position: relative;
-  width: 150px;
-  height: 150px;
-  ${theme.mq()[2]} {
-    width: 250px;
-    height: 250px;
-  }
-`;
-
 const ProductTitle = styled.p`
-  width: 150px;
+  width: 130px;
   margin-top: 1.5rem;
   ${theme.mq()[3]} {
     width: 20ch;

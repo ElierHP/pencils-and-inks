@@ -3,7 +3,7 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import theme from "../../styles/theme";
-import { Section, Container } from "../ui";
+import { Section, Container, ImageContainer, List } from "../ui";
 import { v4 as uuidv4 } from "uuid";
 
 const categoryData = [
@@ -64,26 +64,6 @@ export default function Category() {
 const Title = styled.h2`
   margin-bottom: 4rem;
   text-align: center;
-`;
-
-const List = styled.ul`
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  flex-wrap: wrap;
-  ${theme.mq()[0]} {
-    justify-content: space-between;
-  }
-`;
-
-const ImageContainer = styled.div`
-  position: relative;
-  width: 150px;
-  height: 150px;
-  ${theme.mq()[2]} {
-    width: 250px;
-    height: 250px;
-  }
 `;
 
 const Paragraph = styled.p`

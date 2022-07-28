@@ -16,6 +16,7 @@ export default function Button({
     color: ${theme.colors.light};
     padding: 0.8rem 1.5rem;
     height: 100%;
+    width: inherit;
   `;
 
   const A = styled.a`
