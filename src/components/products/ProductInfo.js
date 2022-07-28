@@ -13,18 +13,26 @@ export default function ProductInfo({ title, sku, price }) {
       <p>
         Price: <Price>${price}</Price>
       </p>
-      <BtnContainer>
-        <Button color={theme.colors.secondary}>Add To Wishlist</Button>
-      </BtnContainer>
-      <InputContainer>
-        <CartInput>
-          <CartQuantity>Quantity</CartQuantity>
-          <TextInput type="number" width={"100px"} defaultValue={1} />
-        </CartInput>
+      <Buttons>
+        {/* Wishlist Button */}
         <BtnContainer>
-          <Button>Add To Cart</Button>
+          <Button color={theme.colors.secondary}>Add To Wishlist</Button>
         </BtnContainer>
-      </InputContainer>
+
+        {/* Add to Cart Section */}
+        <InputContainer>
+          {/* Cart Quantity Input */}
+          <CartInput>
+            <CartQuantity>Quantity</CartQuantity>
+            <TextInput type="number" width={"100px"} defaultValue={1} />
+          </CartInput>
+
+          {/* Add to Cart Button */}
+          <BtnContainer>
+            <Button>Add To Cart</Button>
+          </BtnContainer>
+        </InputContainer>
+      </Buttons>
     </ItemInfo>
   );
 }
@@ -48,10 +56,31 @@ const Price = styled.span`
   font-size: ${theme.fontSizes.large}rem;
 `;
 
+const Buttons = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  ${theme.mq()[0]} {
+    flex-direction: row;
+    gap: 4rem;
+  }
+  ${theme.mq()[1]} {
+    flex-direction: column;
+    gap: 4rem;
+  }
+`;
+
 const InputContainer = styled.div`
   display: flex;
   gap: 1rem;
   padding-top: 1.5rem;
+  ${theme.mq()[0]} {
+    padding-top: 0;
+    order: 1;
+  }
+  ${theme.mq()[1]} {
+    padding-top: 1.5rem;
+  }
 `;
 
 const CartInput = styled.div`
@@ -68,6 +97,7 @@ const CartQuantity = styled.span`
 
 const BtnContainer = styled.div`
   width: 100%;
+  order: 2;
   ${theme.mq()[0]} {
     width: initial;
   }

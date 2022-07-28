@@ -32,6 +32,7 @@ export default function ProductNav({ links }) {
 const PageNav = styled.div`
   display: flex;
   padding-bottom: 1rem;
+  flex-wrap: wrap;
 `;
 
 const Wrapper = styled.div`

@@ -112,6 +112,10 @@ const MainProduct = styled.section`
   padding: ${theme.space.productSection}rem 0;
   ${theme.mq()[1]} {
     grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  ${theme.mq()[2]} {
+    grid-template-columns: 1fr 1fr;
     gap: 15rem;
   }
 `;

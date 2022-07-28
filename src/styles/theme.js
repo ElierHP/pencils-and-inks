@@ -17,7 +17,7 @@ const theme = {
   },
   lineHeights: {
     body: 1.5,
-    heading: 1,
+    heading: 1.35,
   },
   letterSpacing: {
     body: 0.5,
