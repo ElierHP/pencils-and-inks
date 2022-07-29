@@ -39,9 +39,9 @@ export default function ProductList({ products }) {
             </Link>
 
             {/* Button - Clicking adds to shopping cart. */}
-            <div>
+            <BtnContainer>
               <Button>Add To Cart</Button>
-            </div>
+            </BtnContainer>
           </ListItem>
         ))}
       </List>
@@ -107,4 +107,8 @@ const Price = styled.p`
   font-weight: ${theme.fontWeights.bold};
   font-size: 2rem;
   padding: 1rem 0;
+`;
+
+const BtnContainer = styled.div`
+  margin-bottom: 2rem;
 `;

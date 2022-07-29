@@ -1,22 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import { GoSearch } from "react-icons/go";
-import { TextInput } from "./ui";
+import { useRouter } from "next/router";
 
 export default function Searchbar() {
+  const [input, setInput] = useState("");
+
+  const router = useRouter();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (input.trim() !== "" && input.length < 200)
+      router.push(`/search?q=${input}`);
+  };
+
   return (
-    <SearchBarMain>
-      <TextInput type="text" placeholder="Search..." />
+    <SearchBarMain onSubmit={(e) => handleSearch(e)}>
+      <Input
+        type="text"
+        placeholder="Search..."
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+
       <SearchIcon>
-        <GoSearch size={25} color={theme.colors.light} />
+        <GoSearch
+          size={25}
+          color={theme.colors.light}
+          onClick={(e) => handleSearch(e)}
+        />
       </SearchIcon>
     </SearchBarMain>
   );
 }
 
 // Styles
-const SearchBarMain = styled.div`
+const SearchBarMain = styled.form`
   display: flex;
   height: 50px;
   /* Order was used to swap placements between searchbar and cart. */
@@ -33,4 +53,11 @@ const SearchIcon = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+// Styles
+const Input = styled.input`
+  padding: 0 1rem;
+  width: 100%;
+  min-height: 100%;
 `;
