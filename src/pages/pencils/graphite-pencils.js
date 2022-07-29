@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { useQuery } from "react-query";
 import { getProducts } from "../../utils/api/products";
+import { PageContainer, HandleAsync } from "../../components/ui";
+import Filter from "../../components/Filter";
 import {
-  PageContainer,
+  ProductList,
+  ProductNav,
   ProductBanner,
   ProductSection,
-  HandleAsync,
-} from "../../components/ui";
-import Filter from "../../components/Filter";
-import ProductList from "../../components/products/ProductList";
-import ProductNav from "../../components/products/ProductNav";
+} from "../../components/products";
 import useCheckbox from "../../hooks/useCheckbox";
 
 export default function GraphitePencils() {

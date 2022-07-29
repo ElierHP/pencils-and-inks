@@ -6,8 +6,6 @@ import Logo from "./Logo";
 import Section from "./Section";
 import TextInput from "./TextInput";
 import FormButton from "./FormButton";
-import ProductBanner from "./ProductBanner";
-import ProductSection from "./ProductSection";
 import CheckBox from "./CheckBox";
 import Spinner from "./Spinner";
 import ErrorMessage from "./ErrorMessage";
@@ -24,8 +22,6 @@ export {
   TextInput,
   FormButton,
   PageContainer,
-  ProductBanner,
-  ProductSection,
   CheckBox,
   Spinner,
   ErrorMessage,

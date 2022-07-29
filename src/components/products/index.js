@@ -4,6 +4,8 @@ import ProductList from "./ProductList";
 import ProductNav from "./ProductNav";
 import ProductRow from "./ProductRow";
 import ImageGallery from "./ImageGallery";
+import ProductSection from "./ProductSection";
+import ProductBanner from "./ProductBanner";
 
 export {
   ProductImages,
@@ -12,4 +14,6 @@ export {
   ProductNav,
   ProductRow,
   ImageGallery,
+  ProductSection,
+  ProductBanner,
 };
