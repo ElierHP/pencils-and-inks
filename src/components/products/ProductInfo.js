@@ -1,14 +1,17 @@
 import React from "react";
-import { Button, TextInput } from "../ui";
+import { Button, Ratings, TextInput } from "../ui";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 
-export default function ProductInfo({ title, sku, price }) {
+export default function ProductInfo({ title, sku, price, rating }) {
   return (
     <ItemInfo>
       <div>
         <h2>{title}</h2>
         <SkuText>SKU: {sku}</SkuText>
+        <RatingContainer>
+          <Ratings rating={rating} /> <ReviewCount>{rating} Stars</ReviewCount>
+        </RatingContainer>
       </div>
       <p>
         Price: <Price>${price}</Price>
@@ -48,6 +51,17 @@ const ItemInfo = styled.div`
 `;
 
 const SkuText = styled.p`
+  color: ${theme.colors.neutral};
+`;
+
+const RatingContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: center;
+`;
+
+const ReviewCount = styled.span`
   color: ${theme.colors.neutral};
 `;
 

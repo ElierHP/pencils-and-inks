@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 import theme from "../../styles/theme";
 import Link from "next/link";
-import { Button, List, ImageContainer } from "../ui";
+import { Button, List, Ratings, ListItem } from "../ui";
 
 export default function ProductRow({ products }) {
   return (
@@ -13,17 +13,20 @@ export default function ProductRow({ products }) {
           {/* Clicking links to product page. */}
           <Link href={`/products/${product.id}`}>
             <a>
-              <ImageContainer>
-                <Image
-                  alt={product.title}
-                  src={product.images.split(",")[0]}
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </ImageContainer>
+              <Image
+                alt={product.title}
+                src={product.images.split(",")[0]}
+                layout="responsive"
+                objectFit="cover"
+                height={100}
+                width={100}
+              />
 
               <ProductTitle>{product.title}</ProductTitle>
-              <Price>${product.price}</Price>
+              <PriceContainer>
+                <Price>${product.price}</Price>
+                <Ratings rating={product.rating} />
+              </PriceContainer>
             </a>
           </Link>
 
@@ -38,18 +41,14 @@ export default function ProductRow({ products }) {
 }
 
 // Styles
-const ListItem = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+const ProductTitle = styled.p`
+  width: 100%;
 `;
 
-const ProductTitle = styled.p`
-  width: 130px;
-  margin-top: 1.5rem;
-  ${theme.mq()[3]} {
-    width: 20ch;
-  }
+const PriceContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Price = styled.p`

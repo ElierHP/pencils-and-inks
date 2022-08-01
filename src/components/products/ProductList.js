@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
-import { Button } from "../../components/ui";
+import { Button, Ratings, ListItem } from "../../components/ui";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -24,17 +24,20 @@ export default function ProductList({ products }) {
             {/* Clicking links to product page. */}
             <Link href={`/products/${product.id}`}>
               <div>
-                <ProductImage>
-                  <Image
-                    alt={product.title}
-                    src={product.images.split(",")[0]}
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                </ProductImage>
+                <Image
+                  alt={product.title}
+                  src={product.images.split(",")[0]}
+                  layout="responsive"
+                  objectFit="cover"
+                  height={100}
+                  width={100}
+                />
 
                 <ProductTitle>{product.title}</ProductTitle>
-                <Price>${product.price}</Price>
+                <PriceContainer>
+                  <Price>${product.price}</Price>
+                  <Ratings rating={product.rating} />
+                </PriceContainer>
               </div>
             </Link>
 
@@ -65,6 +68,7 @@ const List = styled.ul`
   /* Galaxy Fold Breakpoint */
   @media only screen and (max-width: 350px) {
     grid-template-columns: 1fr;
+    justify-items: center;
   }
 
   display: grid;
@@ -76,31 +80,14 @@ const List = styled.ul`
   }
 `;
 
-const ListItem = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-const ProductImage = styled.div`
-  position: relative;
-  width: 130px;
-  height: 130px;
-  ${theme.mq()[0]} {
-    width: 150px;
-    height: 150px;
-  }
-  ${theme.mq()[2]} {
-    width: 250px;
-    height: 250px;
-  }
-`;
-
 const ProductTitle = styled.p`
-  width: 150px;
-  ${theme.mq()[2]} {
-    width: 250px;
-  }
+  width: 100%;
+`;
+
+const PriceContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Price = styled.p`

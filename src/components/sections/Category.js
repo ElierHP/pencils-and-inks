@@ -3,7 +3,7 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import theme from "../../styles/theme";
-import { Section, Container, ImageContainer, List } from "../ui";
+import { Section, Container, List, ListItem } from "../ui";
 import { v4 as uuidv4 } from "uuid";
 
 const categoryData = [
@@ -40,19 +40,23 @@ export default function Category() {
         <Title>Shop by Category</Title>
         <List>
           {categoryData.map((product) => (
-            <Link key={product.key} href={product.url}>
-              <li>
-                <ImageContainer>
+            <ListItem key={product.key}>
+              {/* Clicking links to product page. */}
+              <Link href={product.url}>
+                <a>
                   <Image
                     alt={product.title}
                     src={product.img}
-                    layout="fill"
+                    layout="responsive"
                     objectFit="cover"
+                    height={100}
+                    width={100}
                   />
-                </ImageContainer>
-                <Paragraph>{product.title}</Paragraph>
-              </li>
-            </Link>
+
+                  <Paragraph>{product.title}</Paragraph>
+                </a>
+              </Link>
+            </ListItem>
           ))}
         </List>
       </Container>

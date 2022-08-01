@@ -7,6 +7,7 @@ import { getProducts } from "../utils/api/products";
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
+import Searchbar from "../components/Searchbar";
 
 export default function search() {
   const router = useRouter();
@@ -16,8 +17,8 @@ export default function search() {
     data: products,
     isLoading,
     isError,
-  } = useQuery("products", () =>
-    getProducts(`/products?query=${router.query.q}`)
+  } = useQuery(["products", router.query.q], () =>
+    getProducts(`/products?search=${router.query.q}`)
   );
 
   return (

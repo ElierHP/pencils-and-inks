@@ -18,7 +18,7 @@ import { v4 as uuidv4 } from "uuid";
 
 function index({ product }) {
   // Destructure all product data.
-  const { title, id, category, tags, sku, price } = product;
+  const { title, id, category, tags, sku, price, rating } = product;
 
   const mainImage = product.images.split(",")[0];
   const images = product.images.split(",");
@@ -70,7 +70,12 @@ function index({ product }) {
                 setIsZoomed={setIsZoomed}
                 setCurrentImage={setCurrentImage}
               />
-              <ProductInfo title={title} sku={sku} price={price} />
+              <ProductInfo
+                title={title}
+                sku={sku}
+                price={price}
+                rating={rating}
+              />
             </MainProduct>
 
             <Section>
