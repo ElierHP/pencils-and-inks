@@ -12,3 +12,7 @@ export const postCart = async (id) =>
 // Get /cart - get all product_ids in cart session.
 export const getCart = async () =>
   await axios.get(`${BASE_URL}/cart`).then((res) => res.data);
+
+// Destroy /cart/id
+export const deleteCart = async (id) =>
+  await axios.delete(`${BASE_URL}/cart/${id}`).then((res) => res.data);

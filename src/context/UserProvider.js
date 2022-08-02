@@ -8,7 +8,7 @@ export const User = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [cart, setCart] = useState("");
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const serverRequest = async () => {

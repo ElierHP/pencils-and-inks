@@ -3,28 +3,26 @@ import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import { CgShoppingCart } from "react-icons/cg";
 import { User } from "../context/UserProvider";
+import Link from "next/link";
 
 export default function ShoppingCart() {
   const [, , cart] = useContext(User);
 
-  const getNumber = () => {
-    if (cart.toString().includes(",")) {
-      return cart.split(",").length;
-    } else {
-      return 1;
-    }
-  };
-
   return (
     <Cart>
-      <CartContainer>
-        {cart !== null && (
-          <ItemCount>
-            <Number>{getNumber()}</Number>
-          </ItemCount>
-        )}
-        <CartIcon />
-      </CartContainer>
+      <Link href="/cart">
+        <a>
+          <CartContainer>
+            {/* Check that cart isn't empty. */}
+            {cart.length > 0 && (
+              <ItemCount>
+                <Number>{cart.length}</Number>
+              </ItemCount>
+            )}
+            <CartIcon />
+          </CartContainer>
+        </a>
+      </Link>
       <CartTitle>Cart</CartTitle>
     </Cart>
   );
@@ -36,7 +34,6 @@ const Cart = styled.div`
   align-items: center;
   gap: 1rem;
   font-weight: ${theme.fontWeights.bold};
-  cursor: pointer;
   margin-left: auto;
   margin-right: -1.7rem;
   ${theme.mq()[2]} {
@@ -49,6 +46,7 @@ const CartContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const ItemCount = styled.div`
