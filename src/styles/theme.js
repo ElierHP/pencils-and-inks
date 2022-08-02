@@ -35,6 +35,7 @@ const theme = {
     btnHover: "#03A47D",
     error: "#E02626",
     warning: "#B87E27",
+    success: "#18C052",
   },
   space: {
     productSection: 4,

@@ -75,6 +75,7 @@ function index({ product }) {
                 sku={sku}
                 price={price}
                 rating={rating}
+                id={id}
               />
             </MainProduct>
 

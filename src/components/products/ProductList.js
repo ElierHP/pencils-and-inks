@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
-import { Button, Ratings, ListItem } from "../../components/ui";
+import { Button, Ratings, ListItem, CartButton } from "../../components/ui";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -43,7 +43,7 @@ export default function ProductList({ products }) {
 
             {/* Button - Clicking adds to shopping cart. */}
             <BtnContainer>
-              <Button>Add To Cart</Button>
+              <CartButton id={product.id} />
             </BtnContainer>
           </ListItem>
         ))}

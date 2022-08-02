@@ -1,9 +1,9 @@
 import React from "react";
-import { Button, Ratings, TextInput } from "../ui";
+import { Button, CartButton, Ratings, TextInput } from "../ui";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 
-export default function ProductInfo({ title, sku, price, rating }) {
+export default function ProductInfo({ title, sku, price, rating, id }) {
   return (
     <ItemInfo>
       <div>
@@ -32,7 +32,7 @@ export default function ProductInfo({ title, sku, price, rating }) {
 
           {/* Add to Cart Button */}
           <BtnContainer>
-            <Button>Add To Cart</Button>
+            <CartButton id={id} />
           </BtnContainer>
         </InputContainer>
       </Buttons>

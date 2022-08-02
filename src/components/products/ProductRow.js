@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 import theme from "../../styles/theme";
 import Link from "next/link";
-import { Button, List, Ratings, ListItem } from "../ui";
+import { Button, List, Ratings, ListItem, CartButton } from "../ui";
 
 export default function ProductRow({ products }) {
   return (
@@ -32,7 +32,7 @@ export default function ProductRow({ products }) {
 
           {/* Button - Clicking adds to shopping cart. */}
           <BtnContainer>
-            <Button>Add To Cart</Button>
+            <CartButton id={product.id} />
           </BtnContainer>
         </ListItem>
       ))}

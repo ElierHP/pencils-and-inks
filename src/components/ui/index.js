@@ -13,6 +13,7 @@ import HandleAsync from "./HandleAsync";
 import List from "./List";
 import ListItem from "./ListItem";
 import Ratings from "./Ratings";
+import CartButton from "./CartButton";
 
 export {
   Banner,
@@ -30,4 +31,5 @@ export {
   List,
   ListItem,
   Ratings,
+  CartButton,
 };
