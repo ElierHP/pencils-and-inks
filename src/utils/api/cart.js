@@ -4,9 +4,9 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 
 // Post /cart - Adds product_id to cart session.
-export const postCart = async (id) =>
+export const postCart = async (id, quantity = 1) =>
   await axios
-    .post(`${BASE_URL}/cart`, { product_id: id })
+    .post(`${BASE_URL}/cart`, { product_id: id, quantity })
     .then((res) => res.data);
 
 // Get /cart - get all product_ids in cart session.

@@ -2,34 +2,38 @@ import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import { CgShoppingCart } from "react-icons/cg";
-import { User } from "../context/UserProvider";
+import { Cart } from "../context/CartProvider";
 import Link from "next/link";
 
 export default function ShoppingCart() {
-  const [, , cart] = useContext(User);
+  const [cart, isLoading, isError] = useContext(Cart);
 
   return (
-    <Cart>
+    <MainCart>
       <Link href="/cart">
         <a>
           <CartContainer>
-            {/* Check that cart isn't empty. */}
-            {cart.length > 0 && (
-              <ItemCount>
-                <Number>{cart.length}</Number>
-              </ItemCount>
+            {/* Display Item count if cart isn't empty. */}
+            {!isError && (
+              <>
+                {!isLoading && cart.length > 0 && (
+                  <ItemCount>
+                    <Number>{cart.length}</Number>
+                  </ItemCount>
+                )}
+              </>
             )}
             <CartIcon />
           </CartContainer>
         </a>
       </Link>
       <CartTitle>Cart</CartTitle>
-    </Cart>
+    </MainCart>
   );
 }
 
 // Styles
-const Cart = styled.div`
+const MainCart = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
