@@ -42,7 +42,7 @@ export default function cart() {
                             priority={true}
                           />
                         </ImageContainer>
-                        <h3>{product.title}</h3>
+                        <ProductTitle>{product.title}</ProductTitle>
                       </A>
                     </Link>
 
@@ -86,8 +86,11 @@ export default function cart() {
 // Styles
 const Section = styled.section`
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr;
   gap: 3rem;
+  ${theme.mq()[2]} {
+    grid-template-columns: 2fr 1fr;
+  }
 `;
 
 const MainCart = styled.div`
@@ -99,10 +102,14 @@ const MainCart = styled.div`
 const CartItem = styled.div`
   border: solid ${theme.colors.neutralLight} 3px;
   border-radius: 3px;
-  padding: 1.5rem;
+  padding: 2rem 0.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
+  ${theme.mq()[0]} {
+    padding: 1.5rem;
+  }
 `;
 
 const A = styled.a`
@@ -113,9 +120,21 @@ const A = styled.a`
 `;
 
 const ImageContainer = styled.div`
+  /* Galaxy Fold Breakpoint */
+  @media only screen and (max-width: 350px) {
+    width: 50px;
+    height: 50px;
+  }
   width: 100px;
   height: 100px;
   cursor: pointer;
+`;
+
+const ProductTitle = styled.h3`
+  display: none;
+  ${theme.mq()[1]} {
+    display: block;
+  }
 `;
 
 const CloseIcon = styled.div`
@@ -136,10 +155,11 @@ const Checkout = styled.div`
   border-radius: 3px;
   display: flex;
   flex-direction: column;
-  /* justify-content: center;
-  align-items: center; */
   gap: 2rem;
-  padding: 3rem 5rem;
+  padding: 1.5rem;
+  ${theme.mq()[0]} {
+    padding: 3rem 5rem;
+  }
 `;
 
 const SubTotal = styled.h2`
@@ -152,4 +172,5 @@ const ContinueText = styled.a`
   cursor: pointer;
   color: ${theme.colors.neutralDark};
   font-size: ${theme.fontSizes.small}rem;
+  text-align: center;
 `;

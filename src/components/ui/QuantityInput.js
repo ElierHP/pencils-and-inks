@@ -25,8 +25,11 @@ const CartInput = styled.div`
 `;
 
 const Input = styled.input`
-  width: 100px;
+  width: 65px;
   padding: 0.5rem 0 0.5rem 1rem;
+  ${theme.mq()[0]} {
+    width: 100px;
+  }
 `;
 
 const CartQuantity = styled.span`
