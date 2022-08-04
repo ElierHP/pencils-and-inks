@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, CartButton, Ratings, TextInput } from "../ui";
+import { Button, CartButton, Ratings, TextInput, QuantityInput } from "../ui";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 
@@ -25,10 +25,7 @@ export default function ProductInfo({ title, sku, price, rating, id }) {
         {/* Add to Cart Section */}
         <InputContainer>
           {/* Cart Quantity Input */}
-          <CartInput>
-            <CartQuantity>Quantity</CartQuantity>
-            <TextInput type="number" width={"100px"} defaultValue={1} />
-          </CartInput>
+          <QuantityInput />
 
           {/* Add to Cart Button */}
           <BtnContainer>
@@ -95,18 +92,6 @@ const InputContainer = styled.div`
   ${theme.mq()[1]} {
     padding-top: 1.5rem;
   }
-`;
-
-const CartInput = styled.div`
-  position: relative;
-`;
-
-const CartQuantity = styled.span`
-  position: absolute;
-  top: -2.2rem;
-  left: 0;
-  font-size: ${theme.fontSizes.small}rem;
-  color: ${theme.colors.neutral};
 `;
 
 const BtnContainer = styled.div`

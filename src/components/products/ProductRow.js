@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 import theme from "../../styles/theme";
 import Link from "next/link";
-import { Button, List, Ratings, ListItem, CartButton } from "../ui";
+import { List, Ratings, ListItem, CartButton } from "../ui";
 
 export default function ProductRow({ products }) {
   return (

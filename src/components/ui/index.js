@@ -14,6 +14,7 @@ import List from "./List";
 import ListItem from "./ListItem";
 import Ratings from "./Ratings";
 import CartButton from "./CartButton";
+import QuantityInput from "./QuantityInput";
 
 export {
   Banner,
@@ -32,4 +33,5 @@ export {
   ListItem,
   Ratings,
   CartButton,
+  QuantityInput,
 };
