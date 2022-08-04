@@ -10,7 +10,7 @@ import Link from "next/link";
 import { IoClose } from "react-icons/io5";
 
 export default function cart() {
-  const [products, isLoading] = useCart();
+  const [products, isLoading, , subTotal] = useCart();
 
   const handleDelete = (id) => {
     deleteCart(id);
@@ -24,7 +24,7 @@ export default function cart() {
         <Section>
           <MainCart>
             {/* Check that cart isn't empty. */}
-            {!isLoading ? (
+            {!isLoading && products.length > 0 ? (
               <>
                 {products.map((product) => (
                   <CartItem key={product.id}>
@@ -67,7 +67,7 @@ export default function cart() {
           </MainCart>
           <Checkout>
             <SubTotal>
-              Subtotal: <span>$59.99</span>
+              Subtotal: <span>${subTotal()}</span>
             </SubTotal>
             <p>Taxes and shipping calculated at checkout.</p>
             <BtnContainer>
@@ -157,6 +157,7 @@ const Checkout = styled.div`
   flex-direction: column;
   gap: 2rem;
   padding: 1.5rem;
+  max-height: 292px;
   ${theme.mq()[0]} {
     padding: 3rem 5rem;
   }

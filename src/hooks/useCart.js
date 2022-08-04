@@ -52,5 +52,17 @@ export default function useCart() {
 
     serverRequest();
   }, [cart]);
-  return [products, isLoading, isError];
+
+  // Find total cost of all products in cart.
+  const subTotal = () => {
+    let total = 0;
+    if (products.length > 0) {
+      products.forEach(
+        (product) => (total += product.quantity * product.price)
+      );
+    }
+    return total;
+  };
+
+  return [products, isLoading, isError, subTotal];
 }
