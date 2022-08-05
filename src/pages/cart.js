@@ -7,7 +7,7 @@ import useCart from "../hooks/useCart";
 import Link from "next/link";
 import CartSection from "../components/sections/CartSection";
 
-export default function cart() {
+export default function Cart() {
   const [products, isLoading, isError, subTotal, handleDelete] = useCart();
 
   return (

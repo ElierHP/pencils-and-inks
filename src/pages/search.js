@@ -9,7 +9,7 @@ import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import Searchbar from "../components/Searchbar";
 
-export default function search() {
+export default function Search() {
   const router = useRouter();
 
   // Get Request for products based on search filter.

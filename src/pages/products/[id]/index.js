@@ -16,7 +16,7 @@ import { useQuery } from "react-query";
 import { getSimilarProducts } from "../../../utils/api/products";
 import { v4 as uuidv4 } from "uuid";
 
-function index({ product }) {
+function Index({ product }) {
   // Destructure all product data.
   const { title, id, category, tags, sku, price, rating } = product;
 
@@ -108,7 +108,7 @@ function index({ product }) {
   );
 }
 
-export default index;
+export default Index;
 
 // Styles
 const MainProduct = styled.section`
