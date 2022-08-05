@@ -3,17 +3,20 @@ import axios from "axios";
 import { BASE_URL } from "../utils/api";
 import { Cart } from "../context/CartProvider";
 import { deleteCart, getCart } from "../utils/api/cart";
+import { useRouter } from "next/router";
 
 export default function useCart() {
-  const [cart, setCart, isLoading] = useContext(Cart);
+  const [cart, setCart, isLoading, , isError, setIsError] = useContext(Cart);
   const [products, setProducts] = useState([]);
+
+  const router = useRouter();
 
   useEffect(() => {
     const serverRequest = async () => {
       let cartIds = "";
 
       // Get all product ids from shopping cart session as a string.
-      if (!isLoading) {
+      if (!isLoading && !isError) {
         cart.forEach((item) => {
           if (cart.length <= 1) {
             cartIds = item.product_id;
@@ -38,10 +41,12 @@ export default function useCart() {
         // Check if response is an array or an object.
         if (res.data.constructor.toString().indexOf("Array") != -1) {
           // Loop through each product and add cart quantity.
-          productRes = res.data.reverse().map((product) => {
-            index += 1;
-            return { ...product, quantity: cart[index - 1].quantity };
-          });
+          productRes = res.data
+            .sort((a, b) => a.id - b.id)
+            .map((product) => {
+              index += 1;
+              return { ...product, quantity: cart[index - 1].quantity };
+            });
         } else {
           // If response is an object, turn it into an array.
           productRes = [{ ...res.data, quantity: cart[index].quantity }];
@@ -66,11 +71,15 @@ export default function useCart() {
 
   // Delete shopping cart item
   const handleDelete = async (id) => {
-    await deleteCart(id);
-    const res = await getCart();
-    if (res.length < 1) window.location.reload();
-    setCart(res);
+    try {
+      await deleteCart(id);
+      const res = await getCart();
+      setCart(res);
+      if (res.length < 1) router.push("/");
+    } catch (error) {
+      setIsError(true);
+    }
   };
 
-  return [products, isLoading, subTotal, handleDelete];
+  return [products, isLoading, isError, subTotal, handleDelete];
 }

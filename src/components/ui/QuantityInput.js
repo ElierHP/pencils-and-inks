@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
-import { updateCart } from "../../utils/api/cart";
+import { getCart, updateCart } from "../../utils/api/cart";
+import { Cart } from "../../context/CartProvider";
 
 export default function QuantityInput({ initialQuantity, id }) {
   const [quantity, setQuantity] = useState(initialQuantity);
 
-  const handleChange = (e) => {
-    // Value can't be below 1.
-    e.target.value == 0 ? setQuantity(1) : setQuantity(e.target.value);
+  const [, setCart, , , , setIsError] = useContext(Cart);
 
-    // Send patch request to server, updating shopping cart session.
-    updateCart(id, parseInt(e.target.value));
+  useEffect(() => {
+    const serverReq = async () => {
+      try {
+        await updateCart(id, parseInt(quantity));
+        const res = await getCart();
+        setCart(res);
+      } catch (error) {
+        setIsError(true);
+      }
+    };
+    serverReq();
+  }, [quantity]);
 
-    // Reload page.
-    window.location.reload();
+  const handleChange = async (e) => {
+    // Value can't be below 0.
+    e.target.value < 0 ? setQuantity(0) : setQuantity(e.target.value);
   };
 
   return (
@@ -32,6 +42,11 @@ const CartInput = styled.div`
 `;
 
 const Input = styled.input`
+  /* Galaxy Fold Breakpoint */
+  @media only screen and (max-width: 350px) {
+    width: 40px;
+  }
+
   width: 65px;
   padding: 0.5rem 0 0.5rem 1rem;
   ${theme.mq()[0]} {
