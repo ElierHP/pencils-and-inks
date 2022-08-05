@@ -25,7 +25,7 @@ export default function Search() {
     <Layout>
       <PageContainer>
         <Title>
-          Search results for <SearchQuery>"{router.query.q}"</SearchQuery>
+          Search results for <SearchQuery>{`"${router.query.q}"`}</SearchQuery>
         </Title>
         <HandleAsync isLoading={isLoading} isError={isError}>
           <ProductRow products={products} />

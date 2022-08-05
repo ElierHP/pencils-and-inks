@@ -9,7 +9,7 @@ export default function Subscribe() {
     <Section>
       <Wrapper>
         <FaMailBulk size={80} color={theme.colors.neutralDark} />
-        <Heading>Let's Keep In Touch!</Heading>
+        <Heading>{"Let's Keep In Touch!"}</Heading>
         <p>
           Subscribe to receive special offers, giveaways, and exclusive deals.
         </p>

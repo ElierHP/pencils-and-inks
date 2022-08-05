@@ -14,7 +14,7 @@ export default function Profile() {
     if (user === null) {
       router.push("/login");
     }
-  }, []);
+  }, [user, router]);
 
   return (
     <>

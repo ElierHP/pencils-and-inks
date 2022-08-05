@@ -19,8 +19,9 @@ export default function QuantityInput({ initialQuantity, id }) {
         setIsError(true);
       }
     };
+    console.log("ran it");
     serverReq();
-  }, [quantity]);
+  }, [quantity, id, setCart, setIsError]);
 
   const handleChange = async (e) => {
     // Value can't be below 0.
