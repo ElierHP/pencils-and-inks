@@ -2,9 +2,10 @@ import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/api";
 import { Cart } from "../context/CartProvider";
+import { deleteCart, getCart } from "../utils/api/cart";
 
 export default function useCart() {
-  const [cart, isLoading, isError] = useContext(Cart);
+  const [cart, setCart, isLoading] = useContext(Cart);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function useCart() {
         // Check if response is an array or an object.
         if (res.data.constructor.toString().indexOf("Array") != -1) {
           // Loop through each product and add cart quantity.
-          productRes = res.data.map((product) => {
+          productRes = res.data.reverse().map((product) => {
             index += 1;
             return { ...product, quantity: cart[index - 1].quantity };
           });
@@ -49,7 +50,6 @@ export default function useCart() {
         setProducts(productRes);
       }
     };
-
     serverRequest();
   }, [cart]);
 
@@ -57,12 +57,20 @@ export default function useCart() {
   const subTotal = () => {
     let total = 0;
     if (products.length > 0) {
-      products.forEach(
-        (product) => (total += product.quantity * product.price)
-      );
+      products.forEach((product) => {
+        total += parseFloat(product.quantity) * parseFloat(product.price);
+      });
     }
-    return total;
+    return (Math.round(total * 100) / 100).toFixed(2);
   };
 
-  return [products, isLoading, isError, subTotal];
+  // Delete shopping cart item
+  const handleDelete = async (id) => {
+    await deleteCart(id);
+    const res = await getCart();
+    if (res.length < 1) window.location.reload();
+    setCart(res);
+  };
+
+  return [products, isLoading, subTotal, handleDelete];
 }

@@ -6,7 +6,7 @@ import { Cart } from "../context/CartProvider";
 import Link from "next/link";
 
 export default function ShoppingCart() {
-  const [cart, isLoading, isError] = useContext(Cart);
+  const [cart, , isLoading, , isError] = useContext(Cart);
 
   return (
     <MainCart>

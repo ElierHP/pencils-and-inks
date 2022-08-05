@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
+import { updateCart } from "../../utils/api/cart";
 
-export default function QuantityInput() {
-  const [quantity, setQuantity] = useState(1);
+export default function QuantityInput({ initialQuantity, id }) {
+  const [quantity, setQuantity] = useState(initialQuantity);
 
   const handleChange = (e) => {
-    // value can't be below 1.
+    // Value can't be below 1.
     e.target.value == 0 ? setQuantity(1) : setQuantity(e.target.value);
+
+    // Send patch request to server, updating shopping cart session.
+    updateCart(id, parseInt(e.target.value));
+
+    // Reload page.
+    window.location.reload();
   };
 
   return (

@@ -3,19 +3,13 @@ import Layout from "../components/layout/Layout";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import { PageContainer, Button, QuantityInput } from "../components/ui";
-import { deleteCart } from "../utils/api/cart";
 import useCart from "../hooks/useCart";
 import Image from "next/image";
 import Link from "next/link";
 import { IoClose } from "react-icons/io5";
 
 export default function cart() {
-  const [products, isLoading, , subTotal] = useCart();
-
-  const handleDelete = (id) => {
-    deleteCart(id);
-    window.location.reload();
-  };
+  const [products, isLoading, subTotal, handleDelete] = useCart();
 
   return (
     <Layout>
@@ -46,9 +40,17 @@ export default function cart() {
                       </A>
                     </Link>
 
-                    <QuantityInput />
+                    <QuantityInput
+                      id={product.id}
+                      initialQuantity={product.quantity}
+                    />
 
-                    <p>${product.price * product.quantity}</p>
+                    <p>
+                      $
+                      {(
+                        Math.round(product.price * product.quantity * 100) / 100
+                      ).toFixed(2)}
+                    </p>
 
                     {/* Delete From Cart */}
                     <CloseIcon>

@@ -1,13 +1,33 @@
-import React, { createContext } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { getCart } from "../utils/api/cart";
-import { useQuery } from "react-query";
 
 export const Cart = createContext();
 
 export const CartProvider = ({ children }) => {
-  const { data: cart, isLoading, isError } = useQuery("cart", () => getCart());
+  const [cart, setCart] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    const serverRequest = async () => {
+      try {
+        const res = await getCart();
+        setCart(res);
+        setIsLoading(false);
+      } catch (error) {
+        setIsError(true);
+        setIsLoading(false);
+      }
+    };
+
+    serverRequest();
+  }, []);
 
   return (
-    <Cart.Provider value={[cart, isLoading, isError]}>{children}</Cart.Provider>
+    <Cart.Provider
+      value={[cart, setCart, isLoading, setIsLoading, isError, setIsError]}
+    >
+      {children}
+    </Cart.Provider>
   );
 };

@@ -26,7 +26,9 @@ export const UserProvider = ({ children }) => {
       {loading ? (
         <Spinner height={500} />
       ) : (
-        <User.Provider value={[user, setUser]}>{children}</User.Provider>
+        <User.Provider value={[user, setUser, setLoading]}>
+          {children}
+        </User.Provider>
       )}
     </>
   );
