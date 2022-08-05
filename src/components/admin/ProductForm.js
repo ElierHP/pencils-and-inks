@@ -23,14 +23,18 @@ export default function ProductForm({
   });
 
   const onSubmit = async (data) => {
-    if (isAdding) {
-      await createProduct(data);
-    } else {
-      await editProduct(product.id, data);
-    }
+    try {
+      if (isAdding) {
+        await createProduct({ ...data, rating: 0 });
+      } else {
+        await editProduct(product.id, data);
+      }
 
-    setDisplay(false);
-    refetch();
+      setDisplay(false);
+      refetch();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

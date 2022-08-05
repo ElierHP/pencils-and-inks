@@ -19,7 +19,7 @@ export default function QuantityInput({ initialQuantity, id }) {
         setIsError(true);
       }
     };
-    console.log("ran it");
+
     serverReq();
   }, [quantity, id, setCart, setIsError]);
 
