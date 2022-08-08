@@ -29,11 +29,11 @@ export default function Button({
   return (
     <>
       {isLink ? (
-        <Btn>
-          <Link href={href}>
+        <Link href={href}>
+          <Btn>
             <A>{children}</A>
-          </Link>
-        </Btn>
+          </Btn>
+        </Link>
       ) : (
         <Btn onClick={onClick}>{children}</Btn>
       )}

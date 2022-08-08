@@ -17,6 +17,10 @@ export const getCart = async () =>
 export const deleteCart = async (id) =>
   await axios.delete(`${BASE_URL}/cart/${id}`).then((res) => res.data);
 
+// Destroy /cart
+export const deleteCartSession = async () =>
+  await axios.delete(`${BASE_URL}/cart`).then((res) => res.data);
+
 // Patch/Put /card/id
 export const updateCart = async (id, quantity) =>
   await axios.patch(`${BASE_URL}/cart/${id}`, { quantity });

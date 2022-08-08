@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/api";
 import { Cart } from "../context/CartProvider";
-import { deleteCart, getCart } from "../utils/api/cart";
+import { deleteCart, deleteCartSession, getCart } from "../utils/api/cart";
 import { useRouter } from "next/router";
 
 export default function useCart() {
@@ -81,5 +81,21 @@ export default function useCart() {
     }
   };
 
-  return [products, isLoading, isError, subTotal, handleDelete];
+  // Handles the order checkout
+  const handleCheckout = async (isCheckout, setIsCheckout) => {
+    try {
+      // Delete cart session
+      await deleteCartSession();
+      // Get the new empty session and change global cart state to it.
+      const res = await getCart();
+      setCart(res);
+
+      // Change checkout display state
+      setIsCheckout(!isCheckout);
+    } catch (error) {
+      setIsError(true);
+    }
+  };
+
+  return [products, isLoading, isError, subTotal, handleDelete, handleCheckout];
 }
