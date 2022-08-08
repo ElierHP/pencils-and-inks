@@ -15,18 +15,35 @@ export default function Filter({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     let tags = "";
+
     checkboxes.forEach((item) => {
       if (item.checked) tags += item.tag + ",";
     });
-    tags === ""
-      ? setQuery(`/products?category=${category}${queryTag}`)
-      : setQuery(`/products?category=${category}&tags=${tags.slice(0, -1)}`);
+
+    // If category is empty, search by tags only.
+    if (category === "all") {
+      tags === ""
+        ? setQuery(`/products?tags=${queryTag}`)
+        : setQuery(`/products?tags=${tags.slice(0, -1)}`);
+    } else {
+      // Else if there's a category, search by category.
+      tags === ""
+        ? setQuery(`/products?category=${category}${queryTag}`)
+        : setQuery(`/products?category=${category}&tags=${tags.slice(0, -1)}`);
+    }
   };
 
+  // Reset all the checkboxes.
   const resetFilters = () => {
-    checkboxes.forEach((item) => item.setChecked(false));
-    setQuery(`/products?category=${category}`);
+    if (category === "all") {
+      checkboxes.forEach((item) => item.setChecked(true));
+      setQuery(`/products`);
+    } else {
+      checkboxes.forEach((item) => item.setChecked(false));
+      setQuery(`/products?category=${category}`);
+    }
   };
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>
