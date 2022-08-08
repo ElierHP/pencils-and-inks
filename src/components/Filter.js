@@ -22,7 +22,7 @@ export default function Filter({
       if (item.checked) tags += item.tag + ",";
     });
 
-    // If category is empty, search by tags only.
+    // If category is "all", search by tags only.
     if (category === "all") {
       tags === ""
         ? setQuery(`/products?tags=${queryTag}`)
@@ -30,20 +30,17 @@ export default function Filter({
     } else {
       // Else if there's a category, search by category.
       tags === ""
-        ? setQuery(`/products?category=${category}${queryTag}`)
+        ? setQuery(`/products?category=${category}`)
         : setQuery(`/products?category=${category}&tags=${tags.slice(0, -1)}`);
     }
   };
 
   // Reset all the checkboxes.
   const resetFilters = () => {
-    if (category === "all") {
-      checkboxes.forEach((item) => item.setChecked(true));
-      setQuery(`/products`);
-    } else {
-      checkboxes.forEach((item) => item.setChecked(false));
-      setQuery(`/products?category=${category}`);
-    }
+    checkboxes.forEach((item) => item.setChecked(false));
+    category === "all"
+      ? setQuery(`/products`)
+      : setQuery(`/products?category=${category}`);
   };
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>

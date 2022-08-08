@@ -1,38 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../components/layout/Layout";
-import axios from "axios";
 import { useQuery } from "react-query";
-import { BASE_URL } from "../utils/api";
+import { getProducts } from "../utils/api/products";
+import { PageContainer, HandleAsync } from "../components/ui";
+import Filter from "../components/Filter";
+import {
+  ProductList,
+  ProductNav,
+  ProductSection,
+  ProductBanner,
+} from "../components/products";
+import useCheckbox from "../hooks/useCheckbox";
 
 export default function Featured() {
-  const getProducts = async () => {
-    // Get request for all products
-    const data = await axios
-      .get(`${BASE_URL}/products`)
-      .then((res) => res.data);
+  // Fetch query, changing this will refetch with new url.
+  const [query, setQuery] = useState("/products?tags=featured");
 
-    // Filter out featured products
-    const featured = data.filter((product) =>
-      product.tags.includes("featured")
-    );
-    return featured;
-  };
-
-  // Queries, initial data is an empty array.
+  // Get Request for all products
   const {
     data: products,
     isLoading,
     isError,
-  } = useQuery("products", getProducts, { initialData: [] });
+  } = useQuery(["products", query], () => getProducts(query));
+
+  // Array of objects with all the checkbox states, gets passed to the <Filter /> component.
+  const checkboxes = useCheckbox(
+    [
+      "Featured",
+      "Graphite Pencil",
+      "Colored Pencil",
+      "Mechanical Pencil",
+      "Sketch Paper",
+      "Sketchbooks",
+      "Artist Inks",
+      "Inking Pens",
+    ],
+    true,
+    false
+  );
 
   return (
     <Layout>
-      <h1>Featured Page</h1>
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>{product.title}</li>
-        ))}
-      </ul>
+      <PageContainer>
+        <ProductNav
+          links={[
+            { url: "/", label: "Home" },
+            { url: "/products", label: "Featured Products" },
+          ]}
+        />
+
+        <ProductBanner
+          title="Featured Products"
+          src="/bird-drawing.jpg"
+          alt="bird-drawing"
+        />
+
+        <ProductSection>
+          {/* Filter Settings */}
+          <Filter checkboxes={checkboxes} setQuery={setQuery} category="all" />
+
+          {/* Display Product List & Handle Errors/Loading */}
+          <HandleAsync isLoading={isLoading} isError={isError}>
+            <ProductList products={products} />
+          </HandleAsync>
+        </ProductSection>
+      </PageContainer>
     </Layout>
   );
 }
