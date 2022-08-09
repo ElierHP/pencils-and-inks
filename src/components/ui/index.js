@@ -15,6 +15,8 @@ import ListItem from "./ListItem";
 import Ratings from "./Ratings";
 import CartButton from "./CartButton";
 import QuantityInput from "./QuantityInput";
+import FilterForm from "./FilterForm";
+import CloseIcon from "./CloseIcon";
 
 export {
   Banner,
@@ -34,4 +36,6 @@ export {
   Ratings,
   CartButton,
   QuantityInput,
+  FilterForm,
+  CloseIcon,
 };

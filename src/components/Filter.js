@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
-import { CheckBox, Button, FormButton } from "./ui";
-import { IoClose } from "react-icons/io5";
+import { CheckBox, Button, FormButton, FilterForm, CloseIcon } from "./ui";
+import useFilter from "../hooks/useFilter";
 
 export default function Filter({
   checkboxes,
@@ -12,49 +12,14 @@ export default function Filter({
   showFilters,
   setShowFilters,
 }) {
-  // Price input values
-  const [minNum, setMinNum] = useState(0);
-  const [maxNum, setMaxNum] = useState(100);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Hide the filters display
-    setShowFilters(false);
-
-    let tags = "";
-
-    checkboxes.forEach((item) => {
-      if (item.checked) tags += item.tag + ",";
-    });
-
-    // If category is "all", search by tags only.
-    if (category === "all") {
-      tags === ""
-        ? setQuery(`/products?tags=${queryTag}`)
-        : setQuery(`/products?tags=${tags.slice(0, -1)}`);
-    } else {
-      // Else if there's a category, search by category.
-      tags === ""
-        ? setQuery(`/products?category=${category}`)
-        : setQuery(`/products?category=${category}&tags=${tags.slice(0, -1)}`);
-    }
-  };
-
-  // Reset all the checkboxes.
-  const resetFilters = () =>
-    checkboxes.forEach((item) => item.setChecked(false));
+  // useFilter custom hook
+  const [minNum, setMinNum, maxNum, setMaxNum, handleSubmit, resetFilters] =
+    useFilter(checkboxes, setQuery, category, queryTag, setShowFilters);
 
   return (
-    <Form showFilters={showFilters} onSubmit={(e) => handleSubmit(e)}>
+    <FilterForm showFilters={showFilters} handleSubmit={handleSubmit}>
       {/* Close icon for mobile view */}
-      <CloseIcon>
-        <IoClose
-          size={30}
-          color="inherit"
-          onClick={() => setShowFilters(false)}
-        />
-      </CloseIcon>
+      <CloseIcon handleClick={setShowFilters} />
       {/* Product type checkbox filters. */}
       <div>
         <Title>Product Type</Title>
@@ -103,46 +68,9 @@ export default function Filter({
           Reset
         </Button>
       </BtnContainer>
-    </Form>
+    </FilterForm>
   );
 }
-
-// Styles
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  background: ${theme.colors.light};
-  height: 100%;
-  padding: 0 1.5rem;
-  justify-content: center;
-  width: 70%;
-
-  /* Animations */
-  transform: ${(props) =>
-    props.showFilters ? "translateX(0)" : "translateX(-400px)"};
-  transition: ${theme.transition.secondary};
-
-  ${theme.mq()[0]} {
-    transform: ${(props) =>
-      props.showFilters ? "translateX(0)" : "translateX(-600px)"};
-  }
-
-  ${theme.mq()[1]} {
-    z-index: 1;
-    position: relative;
-    width: initial;
-    padding: 0;
-    justify-content: initial;
-    width: initial;
-    transform: translateX(0);
-  }
-`;
-
 const Title = styled.h3`
   margin-bottom: 2rem;
 `;
@@ -174,20 +102,5 @@ const BtnContainer = styled.div`
   flex-direction: column;
   ${theme.mq()[1]} {
     flex-direction: row;
-  }
-`;
-
-// Close Icon
-const CloseIcon = styled.div`
-  text-align: right;
-  display: block;
-  transition: ${theme.transition.primary};
-  color: ${theme.colors.neutralDark};
-  cursor: pointer;
-  &:hover {
-    color: ${theme.colors.btnHover};
-  }
-  ${theme.mq()[1]} {
-    display: none;
   }
 `;

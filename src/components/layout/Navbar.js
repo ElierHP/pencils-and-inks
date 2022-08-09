@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
-import { IoClose } from "react-icons/io5";
 import {
   pencilNavData,
   paperNavData,
@@ -9,6 +8,7 @@ import {
   accountNavData,
 } from "../../utils/data/navigation";
 import NavLi from "./NavLi";
+import { CloseIcon } from "../ui";
 
 export default function Navbar({ isOpen, setIsOpen }) {
   const [showPencils, setShowPencils] = useState(false);
@@ -21,9 +21,7 @@ export default function Navbar({ isOpen, setIsOpen }) {
       {/* Navbar Links*/}
       <NavUl>
         {/* Closes Mobile Menu */}
-        <CloseIcon>
-          <IoClose size={30} color="inherit" onClick={() => setIsOpen(false)} />
-        </CloseIcon>
+        <CloseIcon handleClick={setIsOpen} />
 
         {/* Home Page Link */}
         <NavLi data={{ name: "Home" }} isSubNav={false} />
@@ -53,22 +51,6 @@ export default function Navbar({ isOpen, setIsOpen }) {
 }
 
 // Styles
-
-// X icon that closes mobile menu
-const CloseIcon = styled.div`
-  text-align: right;
-  display: block;
-  transition: ${theme.transition.primary};
-  color: ${theme.colors.neutralDark};
-  cursor: pointer;
-  &:hover {
-    color: ${theme.colors.btnHover};
-  }
-  ${theme.mq()[2]} {
-    display: none;
-  }
-`;
-
 const Nav = styled.nav`
   position: fixed;
   top: 0;
