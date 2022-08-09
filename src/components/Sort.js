@@ -1,16 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 
-export default function Sort({ showFilters, setShowFilters }) {
+export default function Sort({
+  showFilters,
+  setShowFilters,
+  query,
+  setQuery,
+  category = "",
+}) {
+  const [initialQuery] = useState(query);
+
+  const handleSort = (e) => {
+    let value = e.target.value;
+
+    if (value === "default") {
+      setQuery(initialQuery);
+    } else {
+      category === "all"
+        ? setQuery(query + `?sort=${value}`)
+        : setQuery(query + `&sort=${value}`);
+    }
+  };
+
   return (
     <SelectContainer>
       <SortBy>
         <SortTitle>Sort By: </SortTitle>
-        <Select name="product-sort" onChange={(e) => console.log("Sort")}>
+        <Select name="product-sort" onChange={(e) => handleSort(e)}>
           <option value="default">Default</option>
-          <option value="title-asc">Title Ascending</option>
-          <option value="title-desc">Title Descending</option>
+          <option value="asc">Title Ascending</option>
+          <option value="desc">Title Descending</option>
           <option value="price-asc">Price Ascending</option>
           <option value="price-desc">Price Descending</option>
         </Select>

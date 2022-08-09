@@ -4,12 +4,10 @@ import theme from "../../styles/theme";
 import { Ratings, ListItem, CartButton } from "../../components/ui";
 import Link from "next/link";
 import Image from "next/image";
-import Sort from "../Sort";
 
-export default function ProductList({ products, showFilters, setShowFilters }) {
+export default function ProductList({ products }) {
   return (
     <div>
-      <Sort showFilters={showFilters} setShowFilters={setShowFilters} />
       <List>
         {products.map((product) => (
           <ListItem key={product.id}>

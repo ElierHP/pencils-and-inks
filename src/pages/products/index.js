@@ -11,6 +11,7 @@ import {
   ProductBanner,
 } from "../../components/products";
 import useCheckbox from "../../hooks/useCheckbox";
+import Sort from "../../components/Sort";
 
 export default function Products() {
   // Shows & hides the filters in mobile view.
@@ -63,19 +64,23 @@ export default function Products() {
           <Filter
             checkboxes={checkboxes}
             setQuery={setQuery}
-            category="all"
             showFilters={showFilters}
             setShowFilters={setShowFilters}
+            category="all"
           />
-
-          {/* Display Product List & Handle Errors/Loading */}
-          <HandleAsync isLoading={isLoading} isError={isError}>
-            <ProductList
-              products={products}
+          <div>
+            <Sort
               showFilters={showFilters}
               setShowFilters={setShowFilters}
+              query={query}
+              setQuery={setQuery}
+              category="all"
             />
-          </HandleAsync>
+            {/* Display Product List & Handle Errors/Loading */}
+            <HandleAsync isLoading={isLoading} isError={isError}>
+              <ProductList products={products} />
+            </HandleAsync>
+          </div>
         </ProductSection>
       </PageContainer>
     </Layout>
