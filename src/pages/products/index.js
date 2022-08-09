@@ -13,6 +13,9 @@ import {
 import useCheckbox from "../../hooks/useCheckbox";
 
 export default function Products() {
+  // Shows & hides the filters in mobile view.
+  const [showFilters, setShowFilters] = useState(false);
+
   // Fetch query, changing this will refetch with new url.
   const [query, setQuery] = useState("/products");
 
@@ -57,11 +60,21 @@ export default function Products() {
 
         <ProductSection>
           {/* Filter Settings */}
-          <Filter checkboxes={checkboxes} setQuery={setQuery} category="all" />
+          <Filter
+            checkboxes={checkboxes}
+            setQuery={setQuery}
+            category="all"
+            showFilters={showFilters}
+            setShowFilters={setShowFilters}
+          />
 
           {/* Display Product List & Handle Errors/Loading */}
           <HandleAsync isLoading={isLoading} isError={isError}>
-            <ProductList products={products} />
+            <ProductList
+              products={products}
+              showFilters={showFilters}
+              setShowFilters={setShowFilters}
+            />
           </HandleAsync>
         </ProductSection>
       </PageContainer>

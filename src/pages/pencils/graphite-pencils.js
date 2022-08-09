@@ -13,6 +13,9 @@ import {
 import useCheckbox from "../../hooks/useCheckbox";
 
 export default function GraphitePencils() {
+  // Shows & hides the filters in mobile view.
+  const [showFilters, setShowFilters] = useState(false);
+
   // Fetch query, changing this will refetch with new url.
   const [query, setQuery] = useState(
     "/products?category=pencils&tags=graphite-pencil"
@@ -54,11 +57,17 @@ export default function GraphitePencils() {
             setQuery={setQuery}
             category="pencils"
             queryTag={"&tags=graphite-pencil"}
+            showFilters={showFilters}
+            setShowFilters={setShowFilters}
           />
 
           {/* Display Product List & Handle Errors/Loading */}
           <HandleAsync isLoading={isLoading} isError={isError}>
-            <ProductList products={products} />
+            <ProductList
+              products={products}
+              showFilters={showFilters}
+              setShowFilters={setShowFilters}
+            />
           </HandleAsync>
         </ProductSection>
       </PageContainer>

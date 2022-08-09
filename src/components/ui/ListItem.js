@@ -17,6 +17,9 @@ const Li = styled.li`
     width: 150px;
   }
   ${theme.mq()[2]} {
+    width: 200px;
+  }
+  ${theme.mq()[3]} {
     width: 250px;
   }
 `;

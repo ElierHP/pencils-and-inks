@@ -1,23 +1,15 @@
 import React from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
-import { Button, Ratings, ListItem, CartButton } from "../../components/ui";
+import { Ratings, ListItem, CartButton } from "../../components/ui";
 import Link from "next/link";
 import Image from "next/image";
+import Sort from "../Sort";
 
-export default function ProductList({ products }) {
+export default function ProductList({ products, showFilters, setShowFilters }) {
   return (
     <div>
-      <Sort>
-        <h3>Sort By: </h3>
-        <Select name="product-sort" onChange={(e) => console.log("Sort")}>
-          <option value="default">Default</option>
-          <option value="title-asc">Title Ascending</option>
-          <option value="title-desc">Title Descending</option>
-          <option value="price-asc">Price Ascending</option>
-          <option value="price-desc">Price Descending</option>
-        </Select>
-      </Sort>
+      <Sort showFilters={showFilters} setShowFilters={setShowFilters} />
       <List>
         {products.map((product) => (
           <ListItem key={product.id}>
@@ -53,30 +45,20 @@ export default function ProductList({ products }) {
 }
 
 // Styles
-const Sort = styled.div`
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-`;
-
-const Select = styled.select`
-  border-color: ${theme.colors.neutral};
-  padding: 0.2rem 0.5rem;
-`;
-
 const List = styled.ul`
   /* Galaxy Fold Breakpoint */
   @media only screen and (max-width: 350px) {
     grid-template-columns: 1fr;
-    justify-items: center;
   }
 
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 3rem;
+  justify-items: center;
   cursor: pointer;
   ${theme.mq()[0]} {
     grid-template-columns: repeat(3, 1fr);
+    justify-items: left;
   }
 `;
 

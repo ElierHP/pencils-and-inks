@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import { CheckBox, Button, FormButton } from "./ui";
+import { IoClose } from "react-icons/io5";
 
 export default function Filter({
   checkboxes,
   setQuery,
   category,
   queryTag = "",
+  showFilters,
+  setShowFilters,
 }) {
   // Price input values
   const [minNum, setMinNum] = useState(0);
@@ -15,6 +18,9 @@ export default function Filter({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Hide the filters display
+    setShowFilters(false);
 
     let tags = "";
 
@@ -36,14 +42,19 @@ export default function Filter({
   };
 
   // Reset all the checkboxes.
-  const resetFilters = () => {
+  const resetFilters = () =>
     checkboxes.forEach((item) => item.setChecked(false));
-    category === "all"
-      ? setQuery(`/products`)
-      : setQuery(`/products?category=${category}`);
-  };
+
   return (
-    <Form onSubmit={(e) => handleSubmit(e)}>
+    <Form showFilters={showFilters} onSubmit={(e) => handleSubmit(e)}>
+      {/* Close icon for mobile view */}
+      <CloseIcon>
+        <IoClose
+          size={30}
+          color="inherit"
+          onClick={() => setShowFilters(false)}
+        />
+      </CloseIcon>
       {/* Product type checkbox filters. */}
       <div>
         <Title>Product Type</Title>
@@ -98,11 +109,37 @@ export default function Filter({
 
 // Styles
 const Form = styled.form`
-  display: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: ${theme.colors.light};
+  height: 100%;
+  padding: 0 1.5rem;
+  justify-content: center;
+  width: 70%;
+
+  /* Animations */
+  transform: ${(props) =>
+    props.showFilters ? "translateX(0)" : "translateX(-400px)"};
+  transition: ${theme.transition.secondary};
+
+  ${theme.mq()[0]} {
+    transform: ${(props) =>
+      props.showFilters ? "translateX(0)" : "translateX(-600px)"};
+  }
+
   ${theme.mq()[1]} {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    z-index: 1;
+    position: relative;
+    width: initial;
+    padding: 0;
+    justify-content: initial;
+    width: initial;
+    transform: translateX(0);
   }
 `;
 
@@ -134,4 +171,23 @@ const BtnContainer = styled.div`
   margin-top: 2rem;
   display: flex;
   gap: 1rem;
+  flex-direction: column;
+  ${theme.mq()[1]} {
+    flex-direction: row;
+  }
+`;
+
+// Close Icon
+const CloseIcon = styled.div`
+  text-align: right;
+  display: block;
+  transition: ${theme.transition.primary};
+  color: ${theme.colors.neutralDark};
+  cursor: pointer;
+  &:hover {
+    color: ${theme.colors.btnHover};
+  }
+  ${theme.mq()[1]} {
+    display: none;
+  }
 `;
