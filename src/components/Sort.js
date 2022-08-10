@@ -9,17 +9,32 @@ export default function Sort({
   setQuery,
   category = "",
 }) {
+  // Save the initial query to a state, used for "default" sort.
   const [initialQuery] = useState(query);
 
   const handleSort = (e) => {
+    // value refers to the current option value in the select.
     let value = e.target.value;
 
+    // find index of the word "sort" in the query
+    let index = query.search("sort");
+
+    // sanitizedQuery is used to remove the "&sort=asc" params from the query before setting a new one.
+    let sanitizedQuery = query;
+
+    // If "sort" was found in the query, slice it off.
+    if (index !== -1) {
+      sanitizedQuery = query.slice(0, index - 1);
+    }
+
+    // If value is set to default, use the initial query that was saved.
     if (value === "default") {
       setQuery(initialQuery);
     } else {
+      // Else add the sort params to the query
       category === "all"
-        ? setQuery(query + `?sort=${value}`)
-        : setQuery(query + `&sort=${value}`);
+        ? setQuery(sanitizedQuery + `?sort=${value}`)
+        : setQuery(sanitizedQuery + `&sort=${value}`);
     }
   };
 
