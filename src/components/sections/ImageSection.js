@@ -10,7 +10,7 @@ export default function ImageSection() {
     <Section>
       <Container>
         <Wrapper>
-          <Link href="/about">
+          <Link href="/products">
             <MainImage>
               <LogoContainer>
                 <Logo isLink={false} size={2} />

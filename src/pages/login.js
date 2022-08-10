@@ -1,5 +1,5 @@
 import Layout from "../components/layout/Layout";
-import { Container, FormButton, Spinner, TextInput } from "../components/ui";
+import { Container, FormButton, Spinner } from "../components/ui";
 import { userSchema } from "../validations/user";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -38,11 +38,11 @@ export default function Login() {
               <>
                 {/* Email Input */}
                 <InputContainer>
-                  <TextInput
+                  <Input
                     type="email"
                     placeholder="Email"
                     autoComplete="email"
-                    register={register("email")}
+                    {...register("email")}
                   />
 
                   {/* Email Error Message */}
@@ -52,16 +52,16 @@ export default function Login() {
                 </InputContainer>
                 {/* Password Input */}
                 <InputContainer>
-                  <TextInput
+                  <Input
                     type="password"
                     placeholder="Password"
                     autoComplete="current-password"
-                    register={register("password")}
+                    {...register("password")}
                   />
 
                   {/* Password Error Msg */}
                   {errors.password && (
-                    <ErrorMsg>{formatMessage(errors.password)}</ErrorMsg>
+                    <ErrorMsg>{formatErrorMessage(errors.password)}</ErrorMsg>
                   )}
                 </InputContainer>
                 {/* Submit Button */}
@@ -110,6 +110,12 @@ const Form = styled.form`
 const InputContainer = styled.div`
   position: relative;
   height: 50px;
+`;
+
+const Input = styled.input`
+  padding: 0 1rem;
+  width: 100%;
+  min-height: 100%;
 `;
 
 const ErrorMsg = styled.p`
