@@ -13,8 +13,8 @@ export const pencilNavData = {
       key: uuidv4(),
     },
     {
-      name: "Color Pencils",
-      url: "/pencils/color-pencils",
+      name: "Colored Pencils",
+      url: "/pencils/colored-pencils",
       key: uuidv4(),
     },
     {

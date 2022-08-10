@@ -53,5 +53,6 @@ export default function useFilter(
     setMinNum(0);
     setMaxNum(100);
   };
+
   return [minNum, setMinNum, maxNum, setMaxNum, handleSubmit, resetFilters];
 }
