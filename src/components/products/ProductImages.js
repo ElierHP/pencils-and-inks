@@ -52,6 +52,12 @@ const ImageContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 3fr;
   gap: 2rem;
+  ${theme.mq()[1]} {
+    grid-template-columns: 1fr 5fr;
+  }
+  ${theme.mq()[2]} {
+    grid-template-columns: 1fr 3fr;
+  }
 `;
 
 const Images = styled.div`

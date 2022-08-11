@@ -30,38 +30,41 @@ export default function ImageGallery({ images, currentImage, setIsZoomed }) {
   return (
     <ZoomedImage>
       <Container>
-        <CloseIcon>
-          <IoClose
-            size={40}
-            color="inherit"
-            onClick={() => setIsZoomed(false)}
-          />
-        </CloseIcon>
-        <ImageContainer>
-          <Image
-            alt={`product-image`}
-            src={images[currentIndex]}
-            layout="responsive"
-            width={100}
-            height={100}
-            objectFit="cover"
-            quality={100}
-          />
-        </ImageContainer>
-        <LeftArrow>
-          <FiArrowLeft
-            size={40}
-            color="inherit"
-            onClick={() => handleLeftArrow()}
-          />
-        </LeftArrow>
-        <RightArrow>
-          <FiArrowRight
-            size={40}
-            color="inherit"
-            onClick={() => handleRightArrow()}
-          />
-        </RightArrow>
+        <FlexContainer>
+          <CloseIcon>
+            <IoClose
+              size={40}
+              color="inherit"
+              onClick={() => setIsZoomed(false)}
+            />
+          </CloseIcon>
+          <LeftArrow>
+            <FiArrowLeft
+              size={40}
+              color="inherit"
+              onClick={() => handleLeftArrow()}
+            />
+          </LeftArrow>
+          <ImageContainer>
+            <Image
+              alt={`product-image`}
+              src={images[currentIndex]}
+              layout="responsive"
+              width={100}
+              height={100}
+              objectFit="cover"
+              quality={100}
+            />
+          </ImageContainer>
+
+          <RightArrow>
+            <FiArrowRight
+              size={40}
+              color="inherit"
+              onClick={() => handleRightArrow()}
+            />
+          </RightArrow>
+        </FlexContainer>
       </Container>
     </ZoomedImage>
   );
@@ -75,20 +78,31 @@ const ZoomedImage = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  padding-top: 5rem;
+`;
+
+const FlexContainer = styled.div`
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ImageContainer = styled.div`
   position: relative;
-  max-height: 600px;
-  max-width: 600px;
+  height: 300px;
+  width: 300px;
   margin: auto;
+  ${theme.mq()[1]} {
+    height: 600px;
+    width: 600px;
+  }
 `;
 
 const CloseIcon = styled.div`
   position: absolute;
-  top: -2.5rem;
-  right: 0;
+  top: 2.5rem;
+  right: 2.5rem;
   cursor: pointer;
   transition: ${theme.transition.primary};
   color: ${theme.colors.neutral};
@@ -99,11 +113,17 @@ const CloseIcon = styled.div`
 
 const LeftArrow = styled.div`
   position: absolute;
-  left: 0;
-  top: 50%;
+  bottom: 10%;
+  left: 30%;
   cursor: pointer;
   transition: ${theme.transition.primary};
   color: ${theme.colors.neutral};
+  ${theme.mq()[0]} {
+    position: relative;
+    bottom: initial;
+    left: initial;
+  }
+
   &:hover {
     color: ${theme.colors.btnHover};
   }
@@ -111,11 +131,17 @@ const LeftArrow = styled.div`
 
 const RightArrow = styled.div`
   position: absolute;
-  right: 0;
-  top: 50%;
+  bottom: 10%;
+  right: 30%;
   cursor: pointer;
   transition: ${theme.transition.primary};
   color: ${theme.colors.neutral};
+  ${theme.mq()[0]} {
+    position: relative;
+    bottom: initial;
+    right: initial;
+  }
+
   &:hover {
     color: ${theme.colors.btnHover};
   }

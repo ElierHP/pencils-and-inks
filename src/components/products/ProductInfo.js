@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, CartButton, Ratings, TextInput, QuantityInput } from "../ui";
+import { Button, CartButton, Ratings, QuantityInput } from "../ui";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 
@@ -45,6 +45,12 @@ const ItemInfo = styled.div`
   ${theme.mq()[0]} {
     gap: 4rem;
   }
+  ${theme.mq()[1]} {
+    gap: 1rem;
+  }
+  ${theme.mq()[2]} {
+    gap: 4rem;
+  }
 `;
 
 const SkuText = styled.p`
@@ -77,6 +83,9 @@ const Buttons = styled.div`
   }
   ${theme.mq()[1]} {
     flex-direction: column;
+    gap: 1.5rem;
+  }
+  ${theme.mq()[2]} {
     gap: 4rem;
   }
 `;

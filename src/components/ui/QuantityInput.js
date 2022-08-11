@@ -4,7 +4,7 @@ import theme from "../../styles/theme";
 import { getCart, updateCart } from "../../utils/api/cart";
 import { Cart } from "../../context/CartProvider";
 
-export default function QuantityInput({ initialQuantity, id }) {
+export default function QuantityInput({ initialQuantity = 1, id }) {
   const [quantity, setQuantity] = useState(initialQuantity);
 
   const [, setCart, , , , setIsError] = useContext(Cart);
