@@ -11,6 +11,7 @@ import {
   ProductSection,
 } from "../../components/products";
 import useCheckbox from "../../hooks/useCheckbox";
+import Sort from "../../components/Sort";
 
 export default function GraphitePencils() {
   // Shows & hides the filters in mobile view.
@@ -23,7 +24,7 @@ export default function GraphitePencils() {
 
   // Array of objects with all the checkbox states, gets passed to the <Filter /> component.
   const checkboxes = useCheckbox(
-    ["Graphite Pencil", "Featured", "Colored Pencil"],
+    ["Graphite Pencil", "Featured", "Colored Pencil", "Mechanical Pencil"],
     true
   );
 
@@ -56,19 +57,22 @@ export default function GraphitePencils() {
             checkboxes={checkboxes}
             setQuery={setQuery}
             category="pencils"
-            queryTag={"&tags=graphite-pencil"}
             showFilters={showFilters}
             setShowFilters={setShowFilters}
           />
-
-          {/* Display Product List & Handle Errors/Loading */}
-          <HandleAsync isLoading={isLoading} isError={isError}>
-            <ProductList
-              products={products}
+          <div>
+            {/* Sort products */}
+            <Sort
               showFilters={showFilters}
               setShowFilters={setShowFilters}
+              query={query}
+              setQuery={setQuery}
             />
-          </HandleAsync>
+            {/* Display Product List & Handle Errors/Loading */}
+            <HandleAsync isLoading={isLoading} isError={isError}>
+              <ProductList products={products} />
+            </HandleAsync>
+          </div>
         </ProductSection>
       </PageContainer>
     </Layout>

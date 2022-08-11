@@ -22,7 +22,7 @@ export default function Pencils() {
 
   // Array of objects with all the checkbox states, gets passed to the <Filter /> component.
   const checkboxes = useCheckbox(
-    ["Featured", "Graphite Pencil", "Colored Pencil"],
+    ["Featured", "Graphite Pencil", "Colored Pencil", "Mechanical Pencil"],
     true,
     true
   );

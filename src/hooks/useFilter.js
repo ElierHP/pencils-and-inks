@@ -4,7 +4,6 @@ export default function useFilter(
   checkboxes,
   setQuery,
   category,
-  queryTag = "",
   setShowFilters
 ) {
   // Price input values
@@ -31,9 +30,7 @@ export default function useFilter(
 
     // If category is "all", search by tags only.
     if (category === "all") {
-      tags === ""
-        ? setQuery(`/products?tags=${queryTag}${priceQuery}`)
-        : setQuery(`/products?tags=${tags.slice(0, -1)}${priceQuery}`);
+      setQuery(`/products?tags=${tags.slice(0, -1)}${priceQuery}`);
     } else {
       // Else if there's a category, search by category.
       tags === ""

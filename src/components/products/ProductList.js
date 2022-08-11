@@ -13,7 +13,7 @@ export default function ProductList({ products }) {
           <ListItem key={product.id}>
             {/* Clicking links to product page. */}
             <Link href={`/products/${product.id}`}>
-              <div>
+              <a>
                 <Image
                   alt={product.title}
                   src={product.images.split(",")[0]}
@@ -28,7 +28,7 @@ export default function ProductList({ products }) {
                   <Price>${product.price}</Price>
                   <Ratings rating={product.rating} />
                 </PriceContainer>
-              </div>
+              </a>
             </Link>
 
             {/* Button - Clicking adds to shopping cart. */}

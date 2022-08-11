@@ -35,7 +35,6 @@ export default function ColoredPencils() {
     isError,
   } = useQuery(["products", query], () => getProducts(query));
 
-  console.log(query);
   return (
     <Layout>
       <PageContainer>
@@ -59,7 +58,6 @@ export default function ColoredPencils() {
             checkboxes={checkboxes}
             setQuery={setQuery}
             category="pencils"
-            queryTag={"&tags=colored-pencil"}
             showFilters={showFilters}
             setShowFilters={setShowFilters}
           />
