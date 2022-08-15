@@ -2,8 +2,11 @@ import React from "react";
 import { Button, CartButton, Ratings, QuantityInput } from "../ui";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
+import useWishlist from "../../hooks/useWishlist";
 
 export default function ProductInfo({ title, sku, price, rating, id }) {
+  const addToWishlist = useWishlist(id);
+
   return (
     <ItemInfo>
       <div>
@@ -18,7 +21,7 @@ export default function ProductInfo({ title, sku, price, rating, id }) {
       </p>
       <Buttons>
         {/* Wishlist Button */}
-        <BtnContainer>
+        <BtnContainer onClick={() => addToWishlist()}>
           <Button color={theme.colors.secondary}>Add To Wishlist</Button>
         </BtnContainer>
 

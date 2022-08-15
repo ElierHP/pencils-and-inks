@@ -1,10 +1,12 @@
 import { useContext, useEffect } from "react";
 import Layout from "../components/layout/Layout";
-import { Container } from "../components/ui";
+import { Button, Container } from "../components/ui";
 import { User } from "../context/UserProvider";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import Admin from "../components/admin/Admin";
+
+import UserProfile from "../components/UserProfile";
 
 export default function Profile() {
   const [user] = useContext(User);
@@ -23,8 +25,17 @@ export default function Profile() {
           <Container>
             <Section>
               <Title>My Profile</Title>
-              <p>Email: {user && user.email}</p>
-              {user.role === "admin" ? <Admin /> : <p>Member</p>}
+              <AccountSection>
+                <div>
+                  <p>Hello! Welcome to your user profile.</p>
+                  <p>Email: {user && user.email}</p>
+                </div>
+                <BtnContainer>
+                  <Button>Change My Email</Button>
+                  <Button>Change My Password</Button>
+                </BtnContainer>
+              </AccountSection>
+              {user.role === "admin" ? <Admin /> : <UserProfile />}
             </Section>
           </Container>
         </Layout>
@@ -36,7 +47,19 @@ export default function Profile() {
 // Styles
 const Section = styled.section`
   padding: 2rem 0;
+`;
+
+const Title = styled.h1`
   text-align: center;
 `;
 
-const Title = styled.h1``;
+const AccountSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const BtnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
