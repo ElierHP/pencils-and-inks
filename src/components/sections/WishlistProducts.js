@@ -7,7 +7,7 @@ import { HandleAsync } from "../ui";
 import styled from "@emotion/styled";
 import { deleteWishlist, deleteWishlistItem } from "../../utils/api/wishlist";
 
-export default function WishlistSection({
+export default function WishlistProducts({
   getProducts,
   isLoading,
   isError,

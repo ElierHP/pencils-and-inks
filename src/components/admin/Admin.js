@@ -3,9 +3,9 @@ import { useQuery } from "react-query";
 import { getProducts } from "../../utils/api/products";
 import ProductForm from "./ProductForm";
 import ProductList from "./ProductList";
-import { Button } from "../ui";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
+import { IoAddCircleOutline } from "react-icons/io5";
 
 export default function Admin() {
   const [isAdding, setIsAdding] = useState(false);
@@ -23,11 +23,15 @@ export default function Admin() {
       <Wrapper>
         {/* Show or hide button based on isAdding, isEditing states.*/}
         {!isAdding && !isEditing && (
-          <BtnContainer>
-            <Button onClick={() => setIsAdding(!isAdding)}>
-              Add New Product
-            </Button>
-          </BtnContainer>
+          <AddNew>
+            <h3>Add New Product</h3>
+            <IconContainer>
+              <IoAddCircleOutline
+                size={40}
+                onClick={() => setIsAdding(!isAdding)}
+              />
+            </IconContainer>
+          </AddNew>
         )}
 
         {/* Maps through products and displays them. */}
@@ -64,6 +68,18 @@ const Wrapper = styled.div`
   }
 `;
 
-const BtnContainer = styled.div`
-  height: 48px;
+const AddNew = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+`;
+
+const IconContainer = styled.div`
+  cursor: pointer;
+  color: ${theme.colors.neutral};
+  transition: ${theme.transition.color};
+  &:hover {
+    color: ${theme.colors.btnHover};
+  }
 `;
