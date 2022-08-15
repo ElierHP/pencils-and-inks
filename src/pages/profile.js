@@ -5,7 +5,7 @@ import { User } from "../context/UserProvider";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import Admin from "../components/admin/Admin";
-
+import theme from "../styles/theme";
 import UserProfile from "../components/UserProfile";
 
 export default function Profile() {
@@ -32,7 +32,9 @@ export default function Profile() {
                 </div>
                 <BtnContainer>
                   <Button>Change My Email</Button>
-                  <Button>Change My Password</Button>
+                  <Button color={theme.colors.secondary}>
+                    Change My Password
+                  </Button>
                 </BtnContainer>
               </AccountSection>
               {user.role === "admin" ? <Admin /> : <UserProfile />}
@@ -56,10 +58,20 @@ const Title = styled.h1`
 const AccountSection = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  padding-bottom: 3.5rem;
+  ${theme.mq()[0]} {
+    flex-direction: row;
+    padding-bottom: 0;
+  }
 `;
 
 const BtnContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-top: 1rem;
+  ${theme.mq()[0]} {
+    margin-top: 0;
+  }
 `;
