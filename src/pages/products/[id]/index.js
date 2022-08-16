@@ -15,6 +15,7 @@ import {
 import { useQuery } from "react-query";
 import { getSimilarProducts } from "../../../utils/api/products";
 import { v4 as uuidv4 } from "uuid";
+import Reviews from "../../../components/Reviews";
 
 function Index({ product }) {
   // Destructure all product data.
@@ -79,21 +80,28 @@ function Index({ product }) {
               />
             </MainProduct>
 
-            <Section>
-              {/* Large Description */}
-              <h2>Description</h2>
-              <div>
-                {description.map((text) => (
-                  <DescText key={uuidv4()}>{text}</DescText>
-                ))}
-              </div>
+            <Flex>
+              <section>
+                {/* Large Description */}
+                <Title>Description</Title>
+                <div>
+                  {description.map((text) => (
+                    <DescText key={uuidv4()}>{text}</DescText>
+                  ))}
+                </div>
+              </section>
 
               {/* Similar Products */}
-              <Title>You May Also Like</Title>
-              <HandleAsync isLoading={isLoading} isError={isError}>
-                <ProductRow products={products} />
-              </HandleAsync>
-            </Section>
+              <section>
+                <Title>You May Also Like</Title>
+                <HandleAsync isLoading={isLoading} isError={isError}>
+                  <ProductRow products={products} />
+                </HandleAsync>
+              </section>
+
+              {/* Reviews */}
+              <Reviews />
+            </Flex>
           </PageContainer>
         </Layout>
       ) : (
@@ -126,7 +134,7 @@ const MainProduct = styled.section`
   }
 `;
 
-const Section = styled.section`
+const Flex = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -137,7 +145,7 @@ const DescText = styled.p`
 `;
 
 const Title = styled.h2`
-  margin-bottom: -1rem;
+  margin-bottom: 3rem;
 `;
 
 // NEXT JS FUNCTIONS

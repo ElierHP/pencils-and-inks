@@ -13,7 +13,9 @@ export default function HandleAsync({ children, isLoading, isError }) {
 
           {/* Error Display */}
           {isError && (
-            <ErrorMessage>{"Error: Couldn't load products."}</ErrorMessage>
+            <ErrorMessage>
+              {"Server Error: Couldn't load the request."}
+            </ErrorMessage>
           )}
         </>
       )}
