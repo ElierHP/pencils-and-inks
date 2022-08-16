@@ -21,3 +21,7 @@ export const logout = async (setUser, router) => {
     router.push("/");
   }
 };
+
+// Update User
+export const updateUser = async (id, data) =>
+  await axios.patch(`${BASE_URL}/users/${id}`, { user: data });

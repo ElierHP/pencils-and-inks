@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import { Button, Container } from "../components/ui";
 import { User } from "../context/UserProvider";
@@ -9,8 +9,10 @@ import theme from "../styles/theme";
 import Wishlist from "../components/Wishlist";
 import { Cart } from "../context/CartProvider";
 import { logout } from "../utils/api/users";
+import EditProfileForm from "../components/sections/EditProfileForm";
 
 export default function Profile() {
+  const [isEditing, setIsEditing] = useState(false);
   const [user, setUser] = useContext(User);
   const router = useRouter();
 
@@ -29,34 +31,45 @@ export default function Profile() {
           <Container>
             <Section>
               <Title>My Profile</Title>
-              <AccountSection>
-                {/* Shopping Cart */}
-                <div>
-                  <CartText>
-                    Your shopping cart currenly has {cart.length}
-                    {cart.length === 1 ? " item." : " items."}
-                  </CartText>
-                  <Btn>
-                    <Button href="/cart" isLink={true}>
-                      Go to Cart
-                    </Button>
-                  </Btn>
-                </div>
+              {!isEditing ? (
+                <>
+                  <AccountSection>
+                    {/* Shopping Cart */}
+                    <div>
+                      <CartText>
+                        Your shopping cart currenly has {cart.length}
+                        {cart.length === 1 ? " item." : " items."}
+                      </CartText>
+                      <Btn>
+                        <Button href="/cart" isLink={true}>
+                          Go to Cart
+                        </Button>
+                      </Btn>
+                    </div>
 
-                {/* Change Email/Password buttons */}
-                <BtnContainer>
-                  <Btn>
-                    <Button color={theme.colors.secondary}>Edit Account</Button>
-                  </Btn>
-                  <Btn>
-                    <Button onClick={() => logout(setUser, router)}>
-                      Logout
-                    </Button>
-                  </Btn>
-                </BtnContainer>
-              </AccountSection>
+                    {/* Change Email/Password buttons */}
+                    <BtnContainer>
+                      <Btn>
+                        <Button
+                          color={theme.colors.secondary}
+                          onClick={() => setIsEditing(true)}
+                        >
+                          Edit Account
+                        </Button>
+                      </Btn>
+                      <Btn>
+                        <Button onClick={() => logout(setUser, router)}>
+                          Logout
+                        </Button>
+                      </Btn>
+                    </BtnContainer>
+                  </AccountSection>
 
-              {user.role === "admin" ? <Admin /> : <Wishlist />}
+                  {user.role === "admin" ? <Admin /> : <Wishlist />}
+                </>
+              ) : (
+                <EditProfileForm setIsEditing={setIsEditing} />
+              )}
             </Section>
           </Container>
         </Layout>

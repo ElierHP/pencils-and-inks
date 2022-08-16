@@ -76,7 +76,7 @@ export default function Register() {
                   {/* Password Error Msg */}
                   {errors.password_confirmation && (
                     <ErrorMsg>
-                      {formatMessage(errors.password_confirmation)}
+                      {formatErrorMessage(errors.password_confirmation)}
                     </ErrorMsg>
                   )}
                 </InputContainer>
