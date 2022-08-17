@@ -19,12 +19,29 @@ export default function CommentForm({ setIsCommenting }) {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
+      {/* Rating Input */}
       <Wrapper>
-        <RatingTitle>What would you rate this item?</RatingTitle>
+        <QuestionContainer>
+          <Question>What would you rate this item?</Question>
+          {/* Recommended Error Message */}
+          {errors.rating && (
+            <ErrorMsg>{formatErrorMessage(errors.rating)}</ErrorMsg>
+          )}
+        </QuestionContainer>
         <RatingInput register={register} />
       </Wrapper>
+
+      {/* Recommended Input */}
       <Wrapper>
-        <p>Would you recommend this item?</p>
+        <QuestionContainer>
+          <Question>Would you recommend this item?</Question>
+          {/* Recommended Error Message */}
+          {errors.recommended && (
+            <ErrorMsg>{formatErrorMessage(errors.recommended)}</ErrorMsg>
+          )}
+        </QuestionContainer>
+
+        {/* Input */}
         <Recommended>
           <RecWrapper>
             <label htmlFor="rec-yes">Yes</label>
@@ -56,15 +73,17 @@ export default function CommentForm({ setIsCommenting }) {
         )}
       </InputContainer>
       {/* Comment Input */}
-      <TextArea
-        type="text"
-        placeholder="Write comment..."
-        {...register("comment")}
-      />
-      {/* Comment Error Msg */}
-      {errors.comment && (
-        <ErrorMsg>{formatErrorMessage(errors.comment)}</ErrorMsg>
-      )}
+      <TextAreaContainer>
+        <TextArea
+          type="text"
+          placeholder="Write comment..."
+          {...register("comment")}
+        />
+        {/* Comment Error Msg */}
+        {errors.comment && (
+          <ErrorMsg>{formatErrorMessage(errors.comment)}</ErrorMsg>
+        )}
+      </TextAreaContainer>
       {/* Submit Button */}
       <BtnContainer>
         <FormButton
@@ -84,16 +103,24 @@ export default function CommentForm({ setIsCommenting }) {
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.3rem;
   margin-top: 2rem;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   gap: 3rem;
+  display: block;
+  ${theme.mq()[0]} {
+    display: flex;
+  }
 `;
 
-const RatingTitle = styled.p`
+const QuestionContainer = styled.div`
+  position: relative;
+`;
+
+const Question = styled.p`
   margin-bottom: 0.5rem;
 `;
 
@@ -124,6 +151,9 @@ const Input = styled.input`
   min-height: 100%;
 `;
 
+const TextAreaContainer = styled.div`
+  position: relative;
+`;
 const TextArea = styled.textarea`
   display: block;
   padding: 1rem;
@@ -138,16 +168,26 @@ const ErrorMsg = styled.p`
 `;
 
 const BtnContainer = styled.div`
-  max-width: 500px;
+  max-width: 600px;
   display: flex;
+  flex-direction: column;
   gap: 2rem;
+  ${theme.mq()[0]} {
+    flex-direction: row;
+  }
 `;
 
 const CancelButton = styled.button`
   border: 2px solid ${theme.colors.neutral};
-  padding: 0 3rem;
+  padding: 1rem 5rem;
+
   &:hover {
+    border: 2px solid ${theme.colors.neutral};
     background: ${theme.colors.neutral};
     color: ${theme.colors.light};
+  }
+
+  &:focus {
+    border: 2px solid ${theme.colors.neutral};
   }
 `;

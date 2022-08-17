@@ -49,7 +49,7 @@ const Input = styled.input`
   }
 
   width: 65px;
-  padding: 0.5rem 0 0.5rem 1rem;
+  padding: 0.6rem 0 0.6rem 1rem;
   ${theme.mq()[0]} {
     width: 100px;
   }
