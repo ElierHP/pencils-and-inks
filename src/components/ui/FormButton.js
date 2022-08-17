@@ -15,6 +15,7 @@ export default function FormButton({
     border: 0;
     transition: ${theme.transition.primary};
     cursor: pointer;
+    width: 100%;
     &:hover {
       background: ${theme.colors.btnHover};
     }

@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { getReviews } from "../utils/api/reviews";
 import { useQuery } from "react-query";
-import { Button, HandleAsync, Ratings } from "./ui";
+import { HandleAsync, Ratings } from "./ui";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import { GiCheckMark } from "react-icons/gi";
+import CommentForm from "./CommentForm";
 
 export default function Reviews() {
+  const [isCommenting, setIsCommenting] = useState(false);
+
   // Get Request for all reviews
   const { data, isLoading, isError } = useQuery("reviews", () => getReviews());
 
@@ -16,34 +19,40 @@ export default function Reviews() {
   return (
     <section>
       <TitleContainer>
-        <Title>Customer Reviews</Title>
-        <ReviewButton>Write Review</ReviewButton>
+        <h2>Customer Reviews</h2>
+        <ReviewButton onClick={() => setIsCommenting(!isCommenting)}>
+          Write Review
+        </ReviewButton>
       </TitleContainer>
-      <HandleAsync isLoading={isLoading} isError={isError}>
-        <Ul>
-          {reviewsArray().map((review) => (
-            <li>
-              <Score>
-                <RatingContainer>
-                  <Ratings rating={review.rating} mobileSize={"20px"} />
-                </RatingContainer>
-                {review.recommended ? (
-                  <Recommended>
-                    <RecommendedText>Recommended! </RecommendedText>
-                    <div>
-                      <GiCheckMark color={theme.colors.success} size={30} />
-                    </div>
-                  </Recommended>
-                ) : (
-                  <p>Not Recommended! </p>
-                )}
-              </Score>
-              <h4>{review.title}</h4>
-              <p>{review.comment}</p>
-            </li>
-          ))}
-        </Ul>
-      </HandleAsync>
+      {!isCommenting ? (
+        <HandleAsync isLoading={isLoading} isError={isError}>
+          <Ul>
+            {reviewsArray().map((review) => (
+              <li key={review.id}>
+                <Score>
+                  <RatingContainer>
+                    <Ratings rating={review.rating} mobileSize={"20px"} />
+                  </RatingContainer>
+                  {review.recommended ? (
+                    <Recommended>
+                      <RecommendedText>Recommended! </RecommendedText>
+                      <div>
+                        <GiCheckMark color={theme.colors.success} size={30} />
+                      </div>
+                    </Recommended>
+                  ) : (
+                    <p>Not Recommended! </p>
+                  )}
+                </Score>
+                <h4>{review.title}</h4>
+                <p>{review.comment}</p>
+              </li>
+            ))}
+          </Ul>
+        </HandleAsync>
+      ) : (
+        <CommentForm setIsCommenting={setIsCommenting} />
+      )}
     </section>
   );
 }
@@ -55,19 +64,18 @@ const TitleContainer = styled.div`
   align-items: center;
 `;
 
-const Title = styled.h2`
-  margin-bottom: 3rem;
-`;
-
 const ReviewButton = styled.button`
   padding: 1rem 2rem;
-  border: solid ${theme.colors.neutralLight};
+  border: 3px solid ${theme.colors.neutralLight};
   box-shadow: 3px 3px 10px ${theme.colors.neutralLight};
   &:hover {
     color: ${theme.colors.light};
     background: ${theme.colors.neutral};
-    border: solid ${theme.colors.neutral};
+    border: 3px solid ${theme.colors.neutral};
     box-shadow: 3px 3px 10px ${theme.colors.neutral};
+  }
+  &:focus {
+    border: 3px solid ${theme.colors.neutral};
   }
 `;
 
@@ -76,6 +84,7 @@ const Ul = styled.ul`
   padding: 3rem;
   margin: 0;
   border-radius: 3px;
+  margin-top: 3rem;
 `;
 
 const Score = styled.div`
