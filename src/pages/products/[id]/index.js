@@ -100,7 +100,7 @@ function Index({ product }) {
               </section>
 
               {/* Reviews */}
-              <Reviews id={id} />
+              <Reviews product_id={id} />
             </Flex>
           </PageContainer>
         </Layout>

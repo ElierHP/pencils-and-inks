@@ -1,26 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { getReviews } from "../utils/api/reviews";
 import { useQuery } from "react-query";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
-import CommentForm from "./CommentForm";
-import CommentsList from "./CommentsList";
+import ReviewForm from "./ReviewForm";
+import ReviewList from "./ReviewList";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
+import { User } from "../context/UserProvider";
+import { useRouter } from "next/router";
 
-export default function Reviews({ id }) {
+export default function Reviews({ product_id }) {
+  const [user] = useContext(User);
   const [isCommenting, setIsCommenting] = useState(false);
+
+  // States for mobile display
   const [hideButton, setHideButton] = useState(true);
   const [showMenu, setShowMenu] = useState(true);
-  const [hasReviews, setHasReviews] = useState(true);
+
+  const router = useRouter();
 
   // Get Request for all reviews
-  const { data, isLoading, isError } = useQuery("reviews", () =>
-    getReviews(id).catch((e) =>
-      e.response.data === "There are no user reviews."
-        ? setHasReviews(false)
-        : setHasReviews(true)
-    )
+  const { data, isLoading, isError, refetch } = useQuery("reviews", () =>
+    getReviews(product_id)
   );
 
   const handleClick = () => {
@@ -30,7 +32,11 @@ export default function Reviews({ id }) {
 
   const ReviewButtonClick = (e) => {
     e.target.blur();
-    setIsCommenting(!isCommenting);
+    if (user) {
+      setIsCommenting(!isCommenting);
+    } else {
+      router.push("/login");
+    }
   };
 
   return (
@@ -62,14 +68,18 @@ export default function Reviews({ id }) {
       {!isCommenting ? (
         <>
           {/* Show reviews if product has any. */}
-          {hasReviews ? (
-            <CommentsList data={data} isLoading={isLoading} isError={isError} />
+          {!isLoading && data.length !== 0 ? (
+            <ReviewList data={data} isLoading={isLoading} isError={isError} />
           ) : (
             <p>This product currently has no reviews.</p>
           )}
         </>
       ) : (
-        <CommentForm setIsCommenting={setIsCommenting} />
+        <ReviewForm
+          setIsCommenting={setIsCommenting}
+          product_id={product_id}
+          refetch={refetch}
+        />
       )}
     </section>
   );

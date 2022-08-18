@@ -1,12 +1,19 @@
-import { FormButton, RatingInput } from "../components/ui";
+import { useContext } from "react";
+import { FormButton, RatingInput } from "./ui";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import { formatErrorMessage } from "../utils/formatText";
 import { commentSchema } from "../validations/comment";
+import { User } from "../context/UserProvider";
+import axios from "axios";
+import { createReview } from "../utils/api/reviews";
 
-export default function CommentForm({ setIsCommenting }) {
+export default function ReviewForm({ setIsCommenting, product_id }) {
+  const [user] = useContext(User);
+
+  // Get Request
   const {
     register,
     handleSubmit,
@@ -15,7 +22,18 @@ export default function CommentForm({ setIsCommenting }) {
     resolver: yupResolver(commentSchema),
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      await createReview({
+        ...data,
+        product_id: product_id,
+        user_id: user.id,
+      });
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

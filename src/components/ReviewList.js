@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import { isArray } from "../utils/isArray";
 
-export default function ReviewsList({ data, isLoading, isError }) {
+export default function ReviewList({ data, isLoading, isError }) {
   // Returns an array based on the data; for map iteration.
   const reviewsArray = () => {
     // If data is not undefined, run this.
@@ -27,7 +27,7 @@ export default function ReviewsList({ data, isLoading, isError }) {
     <HandleAsync isLoading={isLoading} isError={isError}>
       <Ul>
         {reviewsArray().map((review) => (
-          <li key={review.id}>
+          <Li key={review.id}>
             <Score>
               <RatingContainer>
                 <Ratings rating={review.rating} mobileSize={"20px"} />
@@ -45,7 +45,7 @@ export default function ReviewsList({ data, isLoading, isError }) {
             </Score>
             <h4>{review.title}</h4>
             <CommentText>{review.comment}</CommentText>
-          </li>
+          </Li>
         ))}
       </Ul>
     </HandleAsync>
@@ -54,13 +54,18 @@ export default function ReviewsList({ data, isLoading, isError }) {
 
 // Styles
 const Ul = styled.ul`
-  border: solid ${theme.colors.neutralLight} 3px;
-  padding: 3rem;
   margin: 0;
-  border-radius: 3px;
   margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 `;
 
+const Li = styled.li`
+  border: solid ${theme.colors.neutralLight} 3px;
+  padding: 3rem;
+  border-radius: 3px;
+`;
 const Score = styled.div`
   display: flex;
   align-items: center;
