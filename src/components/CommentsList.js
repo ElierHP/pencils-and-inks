@@ -3,10 +3,25 @@ import { GiCheckMark } from "react-icons/gi";
 import { HandleAsync, Ratings } from "./ui";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
+import { isArray } from "../utils/isArray";
 
 export default function ReviewsList({ data, isLoading, isError }) {
-  // Reviews start as empty array.
-  const reviewsArray = () => (data ? data : []);
+  // Returns an array based on the data; for map iteration.
+  const reviewsArray = () => {
+    // If data is not undefined, run this.
+    if (data) {
+      if (isArray(data)) {
+        // If data is an array, return it.
+        return data;
+      } else {
+        // If result is not an array, convert it into one.
+        return [{ ...data }];
+      }
+      // Else return empty array.
+    } else {
+      return [];
+    }
+  };
 
   return (
     <HandleAsync isLoading={isLoading} isError={isError}>

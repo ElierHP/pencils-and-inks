@@ -8,13 +8,20 @@ import CommentsList from "./CommentsList";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 
-export default function Reviews() {
+export default function Reviews({ id }) {
   const [isCommenting, setIsCommenting] = useState(false);
   const [hideButton, setHideButton] = useState(true);
   const [showMenu, setShowMenu] = useState(true);
+  const [hasReviews, setHasReviews] = useState(true);
 
   // Get Request for all reviews
-  const { data, isLoading, isError } = useQuery("reviews", () => getReviews());
+  const { data, isLoading, isError } = useQuery("reviews", () =>
+    getReviews(id).catch((e) =>
+      e.response.data === "There are no user reviews."
+        ? setHasReviews(false)
+        : setHasReviews(true)
+    )
+  );
 
   const handleClick = () => {
     setHideButton(!hideButton);
@@ -25,6 +32,7 @@ export default function Reviews() {
     e.target.blur();
     setIsCommenting(!isCommenting);
   };
+
   return (
     <section>
       {/* Title and Add Comment Button */}
@@ -52,7 +60,14 @@ export default function Reviews() {
 
       {/* Display Comments or Comment Form */}
       {!isCommenting ? (
-        <CommentsList data={data} isLoading={isLoading} isError={isError} />
+        <>
+          {/* Show reviews if product has any. */}
+          {hasReviews ? (
+            <CommentsList data={data} isLoading={isLoading} isError={isError} />
+          ) : (
+            <p>This product currently has no reviews.</p>
+          )}
+        </>
       ) : (
         <CommentForm setIsCommenting={setIsCommenting} />
       )}

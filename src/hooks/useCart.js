@@ -4,6 +4,7 @@ import { BASE_URL } from "../utils/api";
 import { Cart } from "../context/CartProvider";
 import { deleteCart, deleteCartSession, getCart } from "../utils/api/cart";
 import { useRouter } from "next/router";
+import { isArray } from "../utils/isArray";
 
 export default function useCart() {
   const [cart, setCart, isLoading, , isError, setIsError] = useContext(Cart);
@@ -39,7 +40,7 @@ export default function useCart() {
         let productRes = [];
 
         // Check if response is an array or an object.
-        if (res.data.constructor.toString().indexOf("Array") != -1) {
+        if (isArray(res.data)) {
           // Loop through each product and add cart quantity.
           productRes = res.data
             .sort((a, b) => a.id - b.id)
