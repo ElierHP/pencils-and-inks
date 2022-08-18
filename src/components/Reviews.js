@@ -69,7 +69,12 @@ export default function Reviews({ product_id }) {
         <>
           {/* Show reviews if product has any. */}
           {!isLoading && data.length !== 0 ? (
-            <ReviewList data={data} isLoading={isLoading} isError={isError} />
+            <ReviewList
+              data={data}
+              isLoading={isLoading}
+              isError={isError}
+              refetch={refetch}
+            />
           ) : (
             <p>This product currently has no reviews.</p>
           )}

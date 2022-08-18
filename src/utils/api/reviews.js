@@ -14,3 +14,9 @@ export const createReview = async (data) =>
   await axios
     .post(`${BASE_URL}/reviews`, { review: data })
     .then((res) => res.data);
+
+// Delete review
+export const deleteReview = async (id, refetch) => {
+  await axios.delete(`${BASE_URL}/reviews/${id}`);
+  refetch();
+};

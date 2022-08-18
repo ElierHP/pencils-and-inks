@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { GiCheckMark } from "react-icons/gi";
 import { HandleAsync, Ratings } from "./ui";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 import { isArray } from "../utils/isArray";
+import { IoClose } from "react-icons/io5";
+import { BsHandThumbsDownFill } from "react-icons/bs";
+import { User } from "../context/UserProvider";
+import { deleteReview } from "../utils/api/reviews";
 
-export default function ReviewList({ data, isLoading, isError }) {
+export default function ReviewList({ data, isLoading, isError, refetch }) {
+  const [user] = useContext(User);
+
   // Returns an array based on the data; for map iteration.
   const reviewsArray = () => {
     // If data is not undefined, run this.
@@ -34,17 +40,36 @@ export default function ReviewList({ data, isLoading, isError }) {
               </RatingContainer>
               {review.recommended ? (
                 <Recommended>
-                  <RecommendedText>Recommended! </RecommendedText>
+                  <RecommendedText>Recommended!</RecommendedText>
                   <div>
                     <GiCheckMark color={theme.colors.success} size={30} />
                   </div>
                 </Recommended>
               ) : (
-                <p>Not Recommended! </p>
+                <Recommended>
+                  <RecommendedText style={{ color: theme.colors.error }}>
+                    Not Recommended!
+                  </RecommendedText>
+                  <div>
+                    <BsHandThumbsDownFill
+                      color={theme.colors.error}
+                      size={30}
+                    />
+                  </div>
+                </Recommended>
               )}
             </Score>
             <h4>{review.title}</h4>
             <CommentText>{review.comment}</CommentText>
+            {user && review.user_id === user.id && (
+              <CloseIcon>
+                <IoClose
+                  size={30}
+                  color="inherit"
+                  onClick={() => deleteReview(review.id, refetch)}
+                />
+              </CloseIcon>
+            )}
           </Li>
         ))}
       </Ul>
@@ -62,6 +87,7 @@ const Ul = styled.ul`
 `;
 
 const Li = styled.li`
+  position: relative;
   border: solid ${theme.colors.neutralLight} 3px;
   padding: 3rem;
   border-radius: 3px;
@@ -96,4 +122,15 @@ const RecommendedText = styled.p`
 
 const CommentText = styled.p`
   color: ${theme.colors.neutralDark};
+`;
+
+const CloseIcon = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: ${theme.colors.neutral};
+  cursor: pointer;
+  &:hover {
+    color: ${theme.colors.btnHover};
+  }
 `;

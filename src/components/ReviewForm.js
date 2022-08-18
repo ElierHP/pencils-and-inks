@@ -7,10 +7,9 @@ import theme from "../styles/theme";
 import { formatErrorMessage } from "../utils/formatText";
 import { commentSchema } from "../validations/comment";
 import { User } from "../context/UserProvider";
-import axios from "axios";
 import { createReview } from "../utils/api/reviews";
 
-export default function ReviewForm({ setIsCommenting, product_id }) {
+export default function ReviewForm({ setIsCommenting, product_id, refetch }) {
   const [user] = useContext(User);
 
   // Get Request
@@ -23,16 +22,13 @@ export default function ReviewForm({ setIsCommenting, product_id }) {
   });
 
   const onSubmit = async (data) => {
-    try {
-      await createReview({
-        ...data,
-        product_id: product_id,
-        user_id: user.id,
-      });
-      window.location.reload();
-    } catch (error) {
-      console.log(error);
-    }
+    await createReview({
+      ...data,
+      product_id: product_id,
+      user_id: user.id,
+    });
+    await refetch();
+    setIsCommenting(false);
   };
 
   return (
