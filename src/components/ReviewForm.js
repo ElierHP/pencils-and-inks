@@ -9,7 +9,7 @@ import { commentSchema } from "../validations/comment";
 import { User } from "../context/UserProvider";
 import { createReview } from "../utils/api/reviews";
 
-export default function ReviewForm({ setIsCommenting, product_id, refetch }) {
+export default function ReviewForm({ setIsCommenting, product_id }) {
   const [user] = useContext(User);
 
   // Get Request
@@ -27,8 +27,7 @@ export default function ReviewForm({ setIsCommenting, product_id, refetch }) {
       product_id: product_id,
       user_id: user.id,
     });
-    await refetch();
-    setIsCommenting(false);
+    window.location.reload();
   };
 
   return (

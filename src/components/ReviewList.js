@@ -9,7 +9,7 @@ import { BsHandThumbsDownFill } from "react-icons/bs";
 import { User } from "../context/UserProvider";
 import { deleteReview } from "../utils/api/reviews";
 
-export default function ReviewList({ data, isLoading, isError, refetch }) {
+export default function ReviewList({ data, isLoading, isError, product_id }) {
   const [user] = useContext(User);
 
   // Returns an array based on the data; for map iteration.
@@ -34,6 +34,7 @@ export default function ReviewList({ data, isLoading, isError, refetch }) {
       <Ul>
         {reviewsArray().map((review) => (
           <Li key={review.id}>
+            <p>{review.product_id}</p>
             <Score>
               <RatingContainer>
                 <Ratings rating={review.rating} mobileSize={"20px"} />
@@ -66,7 +67,7 @@ export default function ReviewList({ data, isLoading, isError, refetch }) {
                 <IoClose
                   size={30}
                   color="inherit"
-                  onClick={() => deleteReview(review.id, refetch)}
+                  onClick={() => deleteReview(review.id, product_id)}
                 />
               </CloseIcon>
             )}

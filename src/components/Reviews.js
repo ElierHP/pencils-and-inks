@@ -21,7 +21,7 @@ export default function Reviews({ product_id }) {
   const router = useRouter();
 
   // Get Request for all reviews
-  const { data, isLoading, isError, refetch } = useQuery("reviews", () =>
+  const { data, isLoading, isError } = useQuery("reviews", () =>
     getReviews(product_id)
   );
 
@@ -73,18 +73,14 @@ export default function Reviews({ product_id }) {
               data={data}
               isLoading={isLoading}
               isError={isError}
-              refetch={refetch}
+              product_id={product_id}
             />
           ) : (
             <p>This product currently has no reviews.</p>
           )}
         </>
       ) : (
-        <ReviewForm
-          setIsCommenting={setIsCommenting}
-          product_id={product_id}
-          refetch={refetch}
-        />
+        <ReviewForm setIsCommenting={setIsCommenting} product_id={product_id} />
       )}
     </section>
   );

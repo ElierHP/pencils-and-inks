@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 // Get reviews from server
 export const getReviews = async (id) =>
   await axios
-    .get(`${BASE_URL}/reviews`, { params: { product_id: id } })
+    .get(`${BASE_URL}/reviews?product_id=${id}`)
     .then((res) => res.data);
 
 // Post new review
@@ -16,7 +16,7 @@ export const createReview = async (data) =>
     .then((res) => res.data);
 
 // Delete review
-export const deleteReview = async (id, refetch) => {
-  await axios.delete(`${BASE_URL}/reviews/${id}`);
-  refetch();
+export const deleteReview = async (id, product_id) => {
+  await axios.delete(`${BASE_URL}/reviews/${id}?product_id=${product_id}`);
+  window.location.reload();
 };

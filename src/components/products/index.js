@@ -6,6 +6,7 @@ import ProductRow from "./ProductRow";
 import ImageGallery from "./ImageGallery";
 import ProductSection from "./ProductSection";
 import ProductBanner from "./ProductBanner";
+import SimilarProducts from "./SimilarProducts";
 
 export {
   ProductImages,
@@ -16,4 +17,5 @@ export {
   ImageGallery,
   ProductSection,
   ProductBanner,
+  SimilarProducts,
 };

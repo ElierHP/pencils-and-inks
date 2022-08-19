@@ -7,10 +7,10 @@ import { BASE_URL } from "../../../utils/api";
 import { formatCategory, formatTags } from "../../../utils/formatText";
 import {
   ProductImages,
-  ProductRow,
   ProductNav,
   ProductInfo,
   ImageGallery,
+  SimilarProducts,
 } from "../../../components/products";
 import { useQuery } from "react-query";
 import { getSimilarProducts } from "../../../utils/api/products";
@@ -95,7 +95,7 @@ function Index({ product }) {
               <section>
                 <Title>You May Also Like</Title>
                 <HandleAsync isLoading={isLoading} isError={isError}>
-                  <ProductRow products={products} />
+                  <SimilarProducts products={products} />
                 </HandleAsync>
               </section>
 
