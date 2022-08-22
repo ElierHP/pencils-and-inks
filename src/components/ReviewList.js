@@ -8,6 +8,7 @@ import { IoClose } from "react-icons/io5";
 import { BsHandThumbsDownFill } from "react-icons/bs";
 import { User } from "../context/UserProvider";
 import { deleteReview } from "../utils/api/reviews";
+import { formatName } from "../utils/formatText";
 
 export default function ReviewList({ data, isLoading, isError, product_id }) {
   const [user] = useContext(User);
@@ -34,6 +35,11 @@ export default function ReviewList({ data, isLoading, isError, product_id }) {
       <Ul>
         {reviewsArray().map((review) => (
           <Li key={review.id}>
+            <p>
+              {`User: ${formatName(review.first_name)} ${formatName(
+                review.last_name
+              )}`}
+            </p>
             <Score>
               <RatingContainer>
                 <Ratings rating={review.rating} mobileSize={"20px"} />
@@ -59,6 +65,7 @@ export default function ReviewList({ data, isLoading, isError, product_id }) {
                 </Recommended>
               )}
             </Score>
+
             <h4>{review.title}</h4>
             <CommentText>{review.comment}</CommentText>
             {user && review.user_id === user.id && (

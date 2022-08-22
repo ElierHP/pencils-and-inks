@@ -15,3 +15,7 @@ export const formatTags = (tag) => {
 // Format category. First letter is uppercase || Used for product nav
 export const formatCategory = (category) =>
   `${category.charAt(0).toUpperCase() + category.slice(1)}`;
+
+// Format names
+export const formatName = (string) =>
+  `${string.charAt(0).toUpperCase() + string.slice(1)}`;
