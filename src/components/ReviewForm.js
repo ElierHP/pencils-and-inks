@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { FormButton, RatingInput } from "./ui";
+import { useContext, useState } from "react";
+import { ErrorMessage, FormButton, RatingInput } from "./ui";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "@emotion/styled";
@@ -11,6 +11,7 @@ import { createReview } from "../utils/api/reviews";
 
 export default function ReviewForm({ setIsCommenting, product_id }) {
   const [user] = useContext(User);
+  const [isError, setIsError] = useState({ status: false, message: "" });
 
   // Get Request
   const {
@@ -22,16 +23,24 @@ export default function ReviewForm({ setIsCommenting, product_id }) {
   });
 
   const onSubmit = async (data) => {
-    await createReview({
-      ...data,
-      product_id: product_id,
-      user_id: user.id,
-    });
-    window.location.reload();
+    try {
+      await createReview({
+        ...data,
+        product_id: product_id,
+        user_id: user.id,
+      });
+      window.location.reload();
+    } catch (error) {
+      setIsError({ status: true, message: error.response.data.error });
+    }
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
+      {/* Show error msg if user already reviewed this product. */}
+      {isError.status && (
+        <ErrorMessage align="left">{isError.message}</ErrorMessage>
+      )}
       {/* Rating Input */}
       <Wrapper>
         <QuestionContainer>

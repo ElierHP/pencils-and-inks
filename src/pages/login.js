@@ -1,6 +1,6 @@
 import Layout from "../components/layout/Layout";
 import { Container, FormButton, Spinner } from "../components/ui";
-import { userSchema } from "../validations/user";
+import { userLoginSchema } from "../validations/user";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "@emotion/styled";
@@ -17,7 +17,7 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(userSchema),
+    resolver: yupResolver(userLoginSchema),
   });
 
   const onSubmit = (data) => login(data, "login");
@@ -65,7 +65,7 @@ export default function Login() {
                   )}
                 </InputContainer>
                 {/* Submit Button */}
-                <FormButton type="submit" text="Sign in" />
+                <FormButton text="Sign in" />
                 {/* Links to Register and Password Recovery. */}
                 <Links>
                   <Link href="/register">

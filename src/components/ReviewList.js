@@ -34,7 +34,6 @@ export default function ReviewList({ data, isLoading, isError, product_id }) {
       <Ul>
         {reviewsArray().map((review) => (
           <Li key={review.id}>
-            <p>{review.product_id}</p>
             <Score>
               <RatingContainer>
                 <Ratings rating={review.rating} mobileSize={"20px"} />

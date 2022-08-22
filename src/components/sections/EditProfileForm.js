@@ -43,6 +43,41 @@ export default function EditProfileForm({ setIsEditing }) {
               Server Error: Email already exists or password is invalid.
             </EditErrorMsg>
           )}
+
+          <NameContainer>
+            {/* First Name Input */}
+            <InputContainer>
+              <Input
+                type="text"
+                placeholder="First Name"
+                autoComplete="given-name"
+                defaultValue={user.first_name}
+                {...register("first_name")}
+              />
+
+              {/* First Name Error Message */}
+              {errors.first_name && (
+                <ErrorMsg>{formatErrorMessage(errors.first_name)}</ErrorMsg>
+              )}
+            </InputContainer>
+
+            {/* Last Name Input */}
+            <InputContainer>
+              <Input
+                type="text"
+                placeholder="Last Name"
+                autoComplete="family-name"
+                defaultValue={user.last_name}
+                {...register("last_name")}
+              />
+
+              {/* Email Error Message */}
+              {errors.last_name && (
+                <ErrorMsg>{formatErrorMessage(errors.last_name)}</ErrorMsg>
+              )}
+            </InputContainer>
+          </NameContainer>
+
           {/* Email Input */}
           <InputContainer>
             <Input
@@ -113,9 +148,20 @@ const Form = styled.form`
   max-width: 500px;
 `;
 
+const NameContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 3rem;
+  ${theme.mq()[0]} {
+    flex-direction: row;
+  }
+`;
+
 const InputContainer = styled.div`
   position: relative;
   height: 50px;
+  width: 100%;
 `;
 
 const EditErrorMsg = styled.p`

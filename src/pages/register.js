@@ -36,6 +36,42 @@ export default function Register() {
               <Spinner />
             ) : (
               <>
+                <NameContainer>
+                  {/* First Name Input */}
+                  <InputContainer>
+                    <Input
+                      type="text"
+                      placeholder="First Name"
+                      autoComplete="given-name"
+                      {...register("first_name")}
+                    />
+
+                    {/* First Name Error Message */}
+                    {errors.first_name && (
+                      <ErrorMsg>
+                        {formatErrorMessage(errors.first_name)}
+                      </ErrorMsg>
+                    )}
+                  </InputContainer>
+
+                  {/* Last Name Input */}
+                  <InputContainer>
+                    <Input
+                      type="text"
+                      placeholder="Last Name"
+                      autoComplete="family-name"
+                      {...register("last_name")}
+                    />
+
+                    {/* Email Error Message */}
+                    {errors.last_name && (
+                      <ErrorMsg>
+                        {formatErrorMessage(errors.last_name)}
+                      </ErrorMsg>
+                    )}
+                  </InputContainer>
+                </NameContainer>
+
                 {/* Email Input */}
                 <InputContainer>
                   <Input
@@ -81,7 +117,7 @@ export default function Register() {
                   )}
                 </InputContainer>
                 {/* Submit Button */}
-                <FormButton type="submit" text="Create Account" />
+                <FormButton text="Create Account" />
                 {/* Links to Register and Password Recovery. */}
                 <Links>
                   <Link href="/login">
@@ -120,9 +156,21 @@ const Form = styled.form`
   max-width: 500px;
 `;
 
+const NameContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 3rem;
+  ${theme.mq()[0]} {
+    justify-content: center;
+    flex-direction: row;
+  }
+`;
+
 const InputContainer = styled.div`
   position: relative;
   height: 50px;
+  width: 100%;
 `;
 
 const Input = styled.input`
