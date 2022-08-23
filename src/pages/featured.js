@@ -13,6 +13,9 @@ import {
 import useCheckbox from "../hooks/useCheckbox";
 
 export default function Featured() {
+  // Shows & hides the filters in mobile view.
+  const [showFilters, setShowFilters] = useState(false);
+
   // Fetch query, changing this will refetch with new url.
   const [query, setQuery] = useState("/products?tags=featured");
 
@@ -57,7 +60,13 @@ export default function Featured() {
 
         <ProductSection>
           {/* Filter Settings */}
-          <Filter checkboxes={checkboxes} setQuery={setQuery} category="all" />
+          <Filter
+            checkboxes={checkboxes}
+            setQuery={setQuery}
+            category="all"
+            showFilters={showFilters}
+            setShowFilters={setShowFilters}
+          />
 
           {/* Display Product List & Handle Errors/Loading */}
           <HandleAsync isLoading={isLoading} isError={isError}>

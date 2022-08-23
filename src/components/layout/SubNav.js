@@ -5,9 +5,12 @@ import Link from "next/link";
 import { logout } from "../../utils/api/users";
 import { useRouter } from "next/router";
 import { User } from "../../context/UserProvider";
+import { Cart } from "../../context/CartProvider";
 
 export default function SubNav({ showNav, data }) {
   const [, setUser] = useContext(User);
+  const [, setCart] = useContext(Cart);
+
   const router = useRouter();
 
   return (
@@ -19,7 +22,7 @@ export default function SubNav({ showNav, data }) {
               <a>{item.name}</a>
             </Link>
           ) : (
-            <a onClick={() => logout(setUser, router)}>Logout</a>
+            <a onClick={() => logout(setUser, setCart, router)}>Logout</a>
           )}
         </li>
       ))}

@@ -19,7 +19,6 @@ export const CartProvider = ({ children }) => {
         setIsLoading(false);
       }
     };
-
     serverRequest();
   }, []);
 

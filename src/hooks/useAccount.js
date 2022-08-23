@@ -3,6 +3,7 @@ import axios from "axios";
 import { BASE_URL } from "../utils/api";
 import { useRouter } from "next/router";
 import { User } from "../context/UserProvider";
+import { Cart } from "../context/CartProvider";
 
 axios.defaults.withCredentials = true;
 
@@ -16,6 +17,7 @@ const useAccount = () => {
   const [loading, setLoading] = useState(false);
 
   const [user, setUser] = useContext(User);
+  const [, setCart] = useContext(Cart);
 
   const router = useRouter();
 
@@ -38,6 +40,7 @@ const useAccount = () => {
       // Redirect to home page if successful
       if (res.status === 200 || res.status === 201) {
         setUser(res.data);
+        setCart([]);
         await router.push("/");
         setLoading(false);
       }

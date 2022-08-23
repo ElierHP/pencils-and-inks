@@ -14,10 +14,13 @@ export const getUser = async (setUser) => {
 };
 
 // Logout
-export const logout = async (setUser, router) => {
+export const logout = async (setUser, setCart, router) => {
   const res = await axios.delete(`${BASE_URL}/logout`);
   if (res.status === 204) {
+    // Reset user and cart to default.
     setUser(null);
+    setCart([]);
+    // Re-route to home page.
     router.push("/");
   }
 };

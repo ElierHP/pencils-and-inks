@@ -18,7 +18,6 @@ export default function Cart() {
       <PageContainer>
         {!isCheckout ? (
           <>
-            {" "}
             <h1>Your Cart</h1>
             <Section>
               {!isError ? (

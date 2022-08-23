@@ -9,23 +9,19 @@ export default function QuantityInput({ initialQuantity = 1, id }) {
 
   const [, setCart, , , , setIsError] = useContext(Cart);
 
-  useEffect(() => {
-    const serverReq = async () => {
-      try {
-        await updateCart(id, parseInt(quantity));
-        const res = await getCart();
-        setCart(res);
-      } catch (error) {
-        setIsError(true);
-      }
-    };
-
-    serverReq();
-  }, [quantity, id, setCart, setIsError]);
-
   const handleChange = async (e) => {
     // Value can't be below 0.
-    e.target.value < 0 ? setQuantity(0) : setQuantity(e.target.value);
+    let currentQuantity = e.target.value < 0 ? 0 : e.target.value;
+
+    setQuantity(currentQuantity);
+
+    try {
+      await updateCart(id, parseInt(currentQuantity));
+      const res = await getCart();
+      setCart(res);
+    } catch (error) {
+      setIsError(true);
+    }
   };
 
   return (
