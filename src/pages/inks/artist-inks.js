@@ -17,6 +17,9 @@ export default function ArtistInks() {
   // Shows & hides the filters in mobile view.
   const [showFilters, setShowFilters] = useState(false);
 
+  // Tracks the current sorting state.
+  const [sortValue, setSortValue] = useState("default");
+
   // Fetch query, changing this will refetch with new url.
   const [query, setQuery] = useState(
     "/products?category=inks&tags=artist-inks"
@@ -56,6 +59,7 @@ export default function ArtistInks() {
             category="inks"
             showFilters={showFilters}
             setShowFilters={setShowFilters}
+            sortValue={sortValue}
           />
           <div>
             {/* Sort products */}
@@ -64,6 +68,7 @@ export default function ArtistInks() {
               setShowFilters={setShowFilters}
               query={query}
               setQuery={setQuery}
+              setSortValue={setSortValue}
             />
             {/* Display Product List & Handle Errors/Loading */}
             <HandleAsync isLoading={isLoading} isError={isError}>

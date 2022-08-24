@@ -17,6 +17,9 @@ export default function Products() {
   // Shows & hides the filters in mobile view.
   const [showFilters, setShowFilters] = useState(false);
 
+  // Tracks the current sorting state.
+  const [sortValue, setSortValue] = useState("default");
+
   // Fetch query, changing this will refetch with new url.
   const [query, setQuery] = useState("/products");
 
@@ -67,6 +70,7 @@ export default function Products() {
             showFilters={showFilters}
             setShowFilters={setShowFilters}
             category="all"
+            sortValue={sortValue}
           />
           <div>
             <Sort
@@ -75,6 +79,7 @@ export default function Products() {
               query={query}
               setQuery={setQuery}
               category="all"
+              setSortValue={setSortValue}
             />
             {/* Display Product List & Handle Errors/Loading */}
             <HandleAsync isLoading={isLoading} isError={isError}>

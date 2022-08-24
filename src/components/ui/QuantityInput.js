@@ -1,26 +1,26 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import { getCart, updateCart } from "../../utils/api/cart";
 import { Cart } from "../../context/CartProvider";
 
-export default function QuantityInput({ initialQuantity = 1, id }) {
-  const [quantity, setQuantity] = useState(initialQuantity);
-
+export default function QuantityInput({ quantity, setQuantity, id, type }) {
   const [, setCart, , , , setIsError] = useContext(Cart);
 
   const handleChange = async (e) => {
     // Value can't be below 0.
     let currentQuantity = e.target.value < 0 ? 0 : e.target.value;
-
     setQuantity(currentQuantity);
 
-    try {
-      await updateCart(id, parseInt(currentQuantity));
-      const res = await getCart();
-      setCart(res);
-    } catch (error) {
-      setIsError(true);
+    // Send update request when quantity changes in cart page.
+    if (type === "cart") {
+      try {
+        await updateCart(id, parseInt(currentQuantity));
+        const res = await getCart();
+        setCart(res);
+      } catch (error) {
+        setIsError(true);
+      }
     }
   };
 

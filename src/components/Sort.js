@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import theme from "../styles/theme";
 
@@ -8,13 +8,12 @@ export default function Sort({
   query,
   setQuery,
   category = "",
+  setSortValue,
 }) {
-  // Save the initial query to a state, used for "default" sort.
-  const [initialQuery] = useState(query);
-
   const handleSort = (e) => {
     // value refers to the current option value in the select.
     let value = e.target.value;
+    setSortValue(value);
 
     // find index of the word "sort" in the query
     let index = query.search("sort");
@@ -29,10 +28,10 @@ export default function Sort({
 
     // If value is set to default, use the initial query that was saved.
     if (value === "default") {
-      setQuery(initialQuery);
+      setQuery(sanitizedQuery);
     } else {
       // Else add the sort params to the query
-      category === "all"
+      category === "all" && !sanitizedQuery.includes("?")
         ? setQuery(sanitizedQuery + `?sort=${value}`)
         : setQuery(sanitizedQuery + `&sort=${value}`);
     }

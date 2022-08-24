@@ -17,6 +17,9 @@ export default function Pencils() {
   // Shows & hides the filters in mobile view.
   const [showFilters, setShowFilters] = useState(false);
 
+  // Tracks the current sorting state.
+  const [sortValue, setSortValue] = useState("default");
+
   // Fetch query, changing this will refetch with new url.
   const [query, setQuery] = useState("/products?category=papers");
 
@@ -58,6 +61,7 @@ export default function Pencils() {
             category="papers"
             showFilters={showFilters}
             setShowFilters={setShowFilters}
+            sortValue={sortValue}
           />
           <div>
             {/* Sort products */}
@@ -66,6 +70,7 @@ export default function Pencils() {
               setShowFilters={setShowFilters}
               query={query}
               setQuery={setQuery}
+              setSortValue={setSortValue}
             />
 
             {/* Display Product List & Handle Errors/Loading */}

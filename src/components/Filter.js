@@ -10,10 +10,11 @@ export default function Filter({
   category,
   showFilters,
   setShowFilters,
+  sortValue,
 }) {
   // useFilter custom hook
   const [minNum, setMinNum, maxNum, setMaxNum, handleSubmit, resetFilters] =
-    useFilter(checkboxes, setQuery, category, setShowFilters);
+    useFilter(checkboxes, setQuery, category, setShowFilters, sortValue);
 
   return (
     <FilterForm showFilters={showFilters} handleSubmit={handleSubmit}>

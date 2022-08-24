@@ -4,7 +4,8 @@ export default function useFilter(
   checkboxes,
   setQuery,
   category,
-  setShowFilters
+  setShowFilters,
+  sortValue
 ) {
   // Price input values
   const [minNum, setMinNum] = useState(0);
@@ -28,18 +29,24 @@ export default function useFilter(
       priceQuery = `&price=${minNum},${maxNum}`;
     }
 
+    // If user changes sort input, add this query to the GET request.
+    let sortQuery = "";
+    if (sortValue !== "default") {
+      sortQuery = `&sort=${sortValue}`;
+    }
+
     // If category is "all", search by tags only.
     if (category === "all") {
-      setQuery(`/products?tags=${tags.slice(0, -1)}${priceQuery}`);
+      setQuery(`/products?tags=${tags.slice(0, -1)}${priceQuery}${sortQuery}`);
     } else {
       // Else if there's a category, search by category.
       tags === ""
-        ? setQuery(`/products?category=${category}${priceQuery}`)
+        ? setQuery(`/products?category=${category}${priceQuery}${sortQuery}`)
         : setQuery(
             `/products?category=${category}&tags=${tags.slice(
               0,
               -1
-            )}${priceQuery}`
+            )}${priceQuery}${sortQuery}`
           );
     }
   };

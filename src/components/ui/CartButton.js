@@ -4,14 +4,14 @@ import { Cart } from "../../context/CartProvider";
 import { User } from "../../context/UserProvider";
 import Button from "./Button";
 
-export default function CartButton({ id }) {
+export default function CartButton({ id, quantity }) {
   const [, setCart, , , , setIsError] = useContext(Cart);
   const [, , setLoading] = useContext(User);
 
   const handleClick = async (id) => {
     setLoading(true);
     try {
-      await postCart(id);
+      await postCart(id, quantity);
       const res = await getCart();
       setCart(res);
     } catch (error) {

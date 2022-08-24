@@ -11,10 +11,14 @@ import {
   ProductBanner,
 } from "../components/products";
 import useCheckbox from "../hooks/useCheckbox";
+import Sort from "../components/Sort";
 
 export default function Featured() {
   // Shows & hides the filters in mobile view.
   const [showFilters, setShowFilters] = useState(false);
+
+  // Tracks the current sorting state.
+  const [sortValue, setSortValue] = useState("default");
 
   // Fetch query, changing this will refetch with new url.
   const [query, setQuery] = useState("/products?tags=featured");
@@ -66,12 +70,22 @@ export default function Featured() {
             category="all"
             showFilters={showFilters}
             setShowFilters={setShowFilters}
+            sortValue={sortValue}
           />
-
-          {/* Display Product List & Handle Errors/Loading */}
-          <HandleAsync isLoading={isLoading} isError={isError}>
-            <ProductList products={products} />
-          </HandleAsync>
+          <div>
+            <Sort
+              showFilters={showFilters}
+              setShowFilters={setShowFilters}
+              query={query}
+              setQuery={setQuery}
+              category="all"
+              setSortValue={setSortValue}
+            />
+            {/* Display Product List & Handle Errors/Loading */}
+            <HandleAsync isLoading={isLoading} isError={isError}>
+              <ProductList products={products} />
+            </HandleAsync>
+          </div>
         </ProductSection>
       </PageContainer>
     </Layout>

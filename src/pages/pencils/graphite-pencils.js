@@ -17,6 +17,9 @@ export default function GraphitePencils() {
   // Shows & hides the filters in mobile view.
   const [showFilters, setShowFilters] = useState(false);
 
+  // Tracks the current sorting state.
+  const [sortValue, setSortValue] = useState("default");
+
   // Fetch query, changing this will refetch with new url.
   const [query, setQuery] = useState(
     "/products?category=pencils&tags=graphite-pencil"
@@ -59,6 +62,7 @@ export default function GraphitePencils() {
             category="pencils"
             showFilters={showFilters}
             setShowFilters={setShowFilters}
+            sortValue={sortValue}
           />
           <div>
             {/* Sort products */}
@@ -67,6 +71,7 @@ export default function GraphitePencils() {
               setShowFilters={setShowFilters}
               query={query}
               setQuery={setQuery}
+              setSortValue={setSortValue}
             />
             {/* Display Product List & Handle Errors/Loading */}
             <HandleAsync isLoading={isLoading} isError={isError}>

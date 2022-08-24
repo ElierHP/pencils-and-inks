@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, CartButton, Ratings, QuantityInput } from "../ui";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import useWishlist from "../../hooks/useWishlist";
 
 export default function ProductInfo({ title, sku, price, rating, id }) {
+  const [quantity, setQuantity] = useState(1);
+
   const addToWishlist = useWishlist(id);
 
   return (
@@ -28,11 +30,15 @@ export default function ProductInfo({ title, sku, price, rating, id }) {
         {/* Add to Cart Section */}
         <InputContainer>
           {/* Cart Quantity Input */}
-          <QuantityInput />
+          <QuantityInput
+            type="product-info"
+            quantity={quantity}
+            setQuantity={setQuantity}
+          />
 
           {/* Add to Cart Button */}
           <BtnContainer>
-            <CartButton id={id} />
+            <CartButton id={id} quantity={quantity} />
           </BtnContainer>
         </InputContainer>
       </Buttons>

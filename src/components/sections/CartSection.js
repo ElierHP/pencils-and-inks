@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { QuantityInput } from "../ui";
 import { IoClose } from "react-icons/io5";
 import Image from "next/image";
@@ -7,6 +7,8 @@ import theme from "../../styles/theme";
 import Link from "next/link";
 
 export default function CartSection({ products, isLoading, handleDelete }) {
+  const [, setQuantity] = useState(1);
+
   return (
     <MainCart>
       {/* Check that cart isn't empty. */}
@@ -35,7 +37,9 @@ export default function CartSection({ products, isLoading, handleDelete }) {
 
               <QuantityInput
                 id={product.id}
-                initialQuantity={product.quantity}
+                quantity={product.quantity}
+                setQuantity={setQuantity}
+                type="cart"
               />
 
               {/* Subtotal Calculation */}
