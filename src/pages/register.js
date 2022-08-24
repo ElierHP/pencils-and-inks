@@ -20,7 +20,7 @@ export default function Register() {
     resolver: yupResolver(userSchema),
   });
 
-  const onSubmit = (data) => registerUser({ ...data, role: "member" });
+  const onSubmit = (data) => registerUser(data);
 
   return (
     <Layout>
