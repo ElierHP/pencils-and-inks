@@ -45,8 +45,8 @@ export default function InkingPens() {
 
         <ProductBanner
           title="Inking Pens"
-          src="/flower-drawing.jpg"
-          alt="flower-drawing"
+          src="/landscape-1.png"
+          alt="landscape-1"
         />
 
         <ProductSection>

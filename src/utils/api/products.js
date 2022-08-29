@@ -33,7 +33,7 @@ export const getSimilarProducts = async (category, tags, sku) => {
   }
 
   // Filter out the product with the same as SKU as the show page.
-  const products = res.filter((product) => product.sku !== sku);
+  const products = res.filter((product) => product.sku !== sku).slice(0, 4);
 
   return products;
 };

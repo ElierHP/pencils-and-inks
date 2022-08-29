@@ -50,8 +50,8 @@ export default function MechanicalPencils() {
 
         <ProductBanner
           title="Mechanical Pencils"
-          src="/flower-drawing.jpg"
-          alt="flower-drawing"
+          src="/landscape-3-1.png"
+          alt="landscape-3-1"
         />
 
         <ProductSection>

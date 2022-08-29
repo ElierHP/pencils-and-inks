@@ -50,8 +50,8 @@ export default function Sketchbooks() {
 
         <ProductBanner
           title="Sketchbooks"
-          src="/flower-drawing.jpg"
-          alt="flower-drawing"
+          src="/landscape-2-2.png"
+          alt="landscape-2-2"
         />
 
         <ProductSection>

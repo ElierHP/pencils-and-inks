@@ -50,8 +50,8 @@ export default function SketchPaper() {
 
         <ProductBanner
           title="Sketch Papers"
-          src="/flower-drawing.jpg"
-          alt="flower-drawing"
+          src="/landscape-2-1.png"
+          alt="landscape-2-1"
         />
 
         <ProductSection>

@@ -10,7 +10,7 @@ const categoryData = [
   {
     title: "Featured",
     url: "/featured",
-    img: "https://images.ctfassets.net/f1fikihmjtrp/daEveLcumJzS5BXPLXoNj/9a17feb6cb64d46d77e6e0eaf311cf4f/20852-group-3ww-l.jpg?q=80&w=400",
+    img: "https://cdn.shopify.com/s/files/1/1903/8473/products/professional-colored-pencils-set-of-120_I1SauiIg_1478x1477.jpg?v=1652891151",
     key: uuidv4(),
   },
   {

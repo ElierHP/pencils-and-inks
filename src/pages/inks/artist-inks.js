@@ -47,8 +47,8 @@ export default function ArtistInks() {
 
         <ProductBanner
           title="Artist Inks"
-          src="/flower-drawing.jpg"
-          alt="flower-drawing"
+          src="/landscape-3-2.png"
+          alt="landscape-3-2"
         />
 
         <ProductSection>

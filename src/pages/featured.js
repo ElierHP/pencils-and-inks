@@ -58,8 +58,8 @@ export default function Featured() {
 
         <ProductBanner
           title="Featured Products"
-          src="/bird-drawing.jpg"
-          alt="bird-drawing"
+          src="/landscape-4-1.png"
+          alt="landscape-4-1"
         />
 
         <ProductSection>
