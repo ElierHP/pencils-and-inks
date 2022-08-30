@@ -26,7 +26,10 @@ export default function ArtistInks() {
   );
 
   // Array of objects with all the checkbox states, gets passed to the <Filter /> component.
-  const checkboxes = useCheckbox(["Arist Ink", "Featured", "Inking Pen"], true);
+  const checkboxes = useCheckbox(
+    ["Artist Ink", "Featured", "Inking Pen"],
+    true
+  );
 
   const {
     data: products,

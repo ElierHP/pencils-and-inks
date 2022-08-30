@@ -15,7 +15,8 @@ export default function ProductInfo({ title, sku, price, rating, id }) {
         <h2>{title}</h2>
         <SkuText>SKU: {sku}</SkuText>
         <RatingContainer>
-          <Ratings rating={rating} /> <ReviewCount>{rating} Stars</ReviewCount>
+          <Ratings rating={rating} />
+          <ReviewCount>{rating} Stars</ReviewCount>
         </RatingContainer>
       </div>
       <p>

@@ -84,17 +84,19 @@ export default function useCart() {
 
   // Handles the order checkout
   const handleCheckout = async (isCheckout, setIsCheckout) => {
-    try {
-      // Delete cart session
-      await deleteCartSession();
-      // Get the new empty session and change global cart state to it.
-      const res = await getCart();
-      setCart(res);
+    if (cart.length !== 0) {
+      try {
+        // Delete cart session
+        await deleteCartSession();
+        // Get the new empty session and change global cart state to it.
+        const res = await getCart();
+        setCart(res);
 
-      // Change checkout display state
-      setIsCheckout(!isCheckout);
-    } catch (error) {
-      setIsError(true);
+        // Change checkout display state
+        setIsCheckout(!isCheckout);
+      } catch (error) {
+        setIsError(true);
+      }
     }
   };
 

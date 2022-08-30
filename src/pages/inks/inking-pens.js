@@ -24,7 +24,10 @@ export default function InkingPens() {
   const [query, setQuery] = useState("/products?category=inks&tags=inking-pen");
 
   // Array of objects with all the checkbox states, gets passed to the <Filter /> component.
-  const checkboxes = useCheckbox(["Inking Pen", "Featured", "Arist Ink"], true);
+  const checkboxes = useCheckbox(
+    ["Inking Pen", "Featured", "Artist Ink"],
+    true
+  );
 
   const {
     data: products,

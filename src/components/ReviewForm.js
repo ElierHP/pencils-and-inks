@@ -113,7 +113,7 @@ export default function ReviewForm({ setIsCommenting, product_id }) {
           text="Submit"
           color={theme.colors.secondary}
         />
-        <CancelButton onClick={() => setIsCommenting(false)}>
+        <CancelButton type="button" onClick={() => setIsCommenting(false)}>
           Cancel
         </CancelButton>
       </BtnContainer>

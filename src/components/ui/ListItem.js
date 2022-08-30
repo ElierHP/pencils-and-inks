@@ -13,6 +13,8 @@ const Li = styled.li`
   flex-direction: column;
   justify-content: space-between;
   width: 130px;
+  cursor: pointer;
+
   ${theme.mq()[0]} {
     width: 150px;
   }

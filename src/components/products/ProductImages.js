@@ -40,6 +40,7 @@ export default function ProductImages({
           height={100}
           objectFit="cover"
           quality={100}
+          priority={true}
         />
       </MainImage>
     </ImageContainer>

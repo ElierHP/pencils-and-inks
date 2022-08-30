@@ -2,7 +2,6 @@ import React from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import { Ratings, ListItem, CartButton } from "../../components/ui";
-import Link from "next/link";
 import Image from "next/image";
 
 export default function ProductList({ products }) {
@@ -12,24 +11,22 @@ export default function ProductList({ products }) {
         {products.map((product) => (
           <ListItem key={product.id}>
             {/* Clicking links to product page. */}
-            <Link href={`/products/${product.id}`}>
-              <a>
-                <Image
-                  alt={product.title}
-                  src={product.images.split(",")[0]}
-                  layout="responsive"
-                  objectFit="cover"
-                  height={100}
-                  width={100}
-                />
+            <a href={`/products/${product.id}`}>
+              <Image
+                alt={product.title}
+                src={product.images.split(",")[0]}
+                layout="responsive"
+                objectFit="cover"
+                height={100}
+                width={100}
+              />
 
-                <ProductTitle>{product.title}</ProductTitle>
-                <PriceContainer>
-                  <Price>${product.price}</Price>
-                  <Ratings rating={product.rating} />
-                </PriceContainer>
-              </a>
-            </Link>
+              <ProductTitle>{product.title}</ProductTitle>
+              <PriceContainer>
+                <Price>${product.price}</Price>
+                <Ratings rating={product.rating} />
+              </PriceContainer>
+            </a>
 
             {/* Button - Clicking adds to shopping cart. */}
             <BtnContainer>
@@ -48,12 +45,11 @@ const List = styled.ul`
   @media only screen and (max-width: 350px) {
     grid-template-columns: 1fr;
   }
-
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 3rem;
   justify-items: center;
-  cursor: pointer;
+
   ${theme.mq()[0]} {
     grid-template-columns: repeat(3, 1fr);
     justify-items: left;

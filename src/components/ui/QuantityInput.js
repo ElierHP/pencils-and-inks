@@ -9,7 +9,7 @@ export default function QuantityInput({ quantity, setQuantity, id, type }) {
 
   const handleChange = async (e) => {
     // Value can't be below 0.
-    let currentQuantity = e.target.value < 0 ? 0 : e.target.value;
+    let currentQuantity = Math.floor(e.target.value < 0 ? 0 : e.target.value);
     setQuantity(currentQuantity);
 
     // Send update request when quantity changes in cart page.

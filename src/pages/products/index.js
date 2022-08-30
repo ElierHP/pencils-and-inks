@@ -38,9 +38,9 @@ export default function Products() {
       "Colored Pencil",
       "Mechanical Pencil",
       "Sketch Paper",
-      "Sketchbooks",
-      "Artist Inks",
-      "Inking Pens",
+      "Sketchbook",
+      "Artist Ink",
+      "Inking Pen",
     ],
     true,
     true
