@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Layout from "../../../components/layout/Layout";
 import { HandleAsync, PageContainer } from "../../../components/ui";
 import styled from "@emotion/styled";
@@ -16,7 +16,6 @@ import { useQuery } from "react-query";
 import { getSimilarProducts } from "../../../utils/api/products";
 import { v4 as uuidv4 } from "uuid";
 import Reviews from "../../../components/Reviews";
-import { useRouter } from "next/router";
 
 function Index({ product }) {
   // Destructure all product data.
@@ -38,17 +37,6 @@ function Index({ product }) {
     isLoading,
     isError,
   } = useQuery("products", () => getSimilarProducts(category, tags, sku));
-
-  // Refresh props
-  const router = useRouter();
-
-  const refreshData = () => {
-    router.replace(router.asPath);
-  };
-
-  useEffect(() => {
-    refreshData();
-  }, []);
 
   return (
     <>
@@ -161,33 +149,17 @@ const Title = styled.h2`
 `;
 
 // NEXT JS FUNCTIONS
-// This function gets called at build time
-export async function getStaticProps(context) {
+// This function gets called at runtime
+export async function getServerSideProps(context) {
   // Call an external API endpoint to get products
   const res = await fetch(`${BASE_URL}/products/${context.params.id}`);
   const product = await res.json();
 
   // By returning { props: { product } }, the index component
-  // will receive `product` as a prop at build time
+  // will receive `product` as a prop at runtime
   return {
     props: {
       product,
     },
   };
-}
-
-// This function gets called at build time
-export async function getStaticPaths() {
-  // Call an external API endpoint to get posts
-  const res = await fetch(`${BASE_URL}/products`);
-  const products = await res.json();
-
-  // Get the paths we want to pre-render based on products
-  const paths = products.map((product) => ({
-    params: { id: product.id.toString() },
-  }));
-
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: false };
 }

@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 import theme from "../../styles/theme";
 import { List, Ratings, ListItem, CartButton } from "../ui";
+import Link from "next/link";
 
 export default function ProductRow({ products }) {
   return (
@@ -10,23 +11,24 @@ export default function ProductRow({ products }) {
       {products.map((product) => (
         <ListItem key={product.id}>
           {/* Clicking links to product page. */}
-          <a href={`/products/${product.id}`}>
-            <Image
-              alt={product.title}
-              src={product.images.split(",")[0]}
-              layout="responsive"
-              objectFit="cover"
-              height={100}
-              width={100}
-            />
+          <Link href={`/products/${product.id}`}>
+            <a>
+              <Image
+                alt={product.title}
+                src={product.images.split(",")[0]}
+                layout="responsive"
+                objectFit="cover"
+                height={100}
+                width={100}
+              />
 
-            <ProductTitle>{product.title}</ProductTitle>
-            <PriceContainer>
-              <Price>${product.price}</Price>
-              <Ratings rating={product.rating} />
-            </PriceContainer>
-          </a>
-
+              <ProductTitle>{product.title}</ProductTitle>
+              <PriceContainer>
+                <Price>${product.price}</Price>
+                <Ratings rating={product.rating} />
+              </PriceContainer>
+            </a>
+          </Link>
           {/* Button - Clicking adds to shopping cart. */}
           <BtnContainer>
             <CartButton id={product.id} />
