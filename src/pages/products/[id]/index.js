@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../../components/layout/Layout";
 import { HandleAsync, PageContainer } from "../../../components/ui";
 import styled from "@emotion/styled";
@@ -16,6 +16,7 @@ import { useQuery } from "react-query";
 import { getSimilarProducts } from "../../../utils/api/products";
 import { v4 as uuidv4 } from "uuid";
 import Reviews from "../../../components/Reviews";
+import { useRouter } from "next/router";
 
 function Index({ product }) {
   // Destructure all product data.
@@ -37,6 +38,17 @@ function Index({ product }) {
     isLoading,
     isError,
   } = useQuery("products", () => getSimilarProducts(category, tags, sku));
+
+  // Refresh props
+  const router = useRouter();
+
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+
+  useEffect(() => {
+    refreshData();
+  }, []);
 
   return (
     <>
