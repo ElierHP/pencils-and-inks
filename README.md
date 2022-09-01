@@ -47,6 +47,7 @@ The backend codebase can be viewed on the github repo below. :arrow_down:
 
    ```bash
    bundle install
+   rails db:migrate
    ```
 
 3. Run development server
